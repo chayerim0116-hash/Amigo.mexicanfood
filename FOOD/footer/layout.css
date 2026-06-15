@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* NanumSquareNeo 웹폰트 */
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-aLt.woff2') format('woff2');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-cBd.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-dEb.woff2') format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-eHv.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  font-family: 'NanumSquareNeo', 'Noto Sans KR', sans-serif;
+}
+
+/* ─── Footer ─── */
+.footer {
+  width: 100%;
+  background-color: #191919;
+  padding: 34px 48px;
+}
+
+.footer-inner {
+  width: 100%;
+  min-height: 92px;          /* 160px 전체 - 위아래 패딩 68px = 내용 영역 92px */
+  display: grid;
+  grid-template-columns: 220px 1fr auto;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ─── 왼쪽: 로고 ─── */
+.footer-logo {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo img {
+  width: 190px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  opacity: 0.55;
+}
+
+/* ─── 가운데: 회사 정보 ─── */
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-align: left;
+}
+
+.footer-info p {
+  font-family: 'NanumSquareNeo', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #7f7f7f;
+  line-height: 1.75;
+  white-space: nowrap;
+}
+
+/* 3번째 줄 저작권: 더 흐리게 */
+.footer-info p.footer-copyright {
+  color: #5f5f5f;
+  font-size: 13px;
+}
+
+/* 구분선 | */
+.footer-info .sep {
+  margin: 0 6px;
+  color: #555555;
+  font-weight: 400;
+}
+
+/* 링크: 개인정보취급방침, 이용약관 */
+.footer-info a.footer-link {
+  color: #9a9a9a;
+  transition: color 0.2s ease;
+}
+.footer-info a.footer-link:hover {
+  color: #c8c8c8;
+}
+
+/* 강조: 대표전화 번호 */
+.footer-info .highlight {
+  color: #f97316;
+}
+
+/* ─── 오른쪽: 아이콘 ─── */
+.footer-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.footer-icon-btn:hover {
+  opacity: 1;
+}
+
+.footer-icon-btn img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  display: block;
+  /* SVG를 밝은 회색/흰색 계열로 보이게 */
+  filter: brightness(0) invert(1);
+}
+
+/* ─── 태블릿 (1024px 이하) ─── */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 30px 32px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 170px 1fr auto;
+    gap: 20px;
+  }
+
+  .footer-logo img {
+    width: 160px;
+  }
+
+  .footer-info p {
+    font-size: 13px;
+    white-space: normal;
+    word-break: keep-all;
+    line-height: 1.8;
+  }
+}
+
+/* ─── 모바일 (768px 이하) ─── */
+@media (max-width: 768px) {
+  .footer {
+    padding: 28px 24px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .footer-logo img {
+    width: 140px;
+  }
+
+  .footer-info p {
+    font-size: 12px;
+    white-space: normal;
+    word-break: keep-all;
+    line-height: 1.9;
+  }
+
+  .footer-icons {
+    gap: 14px;
+  }
+
+  .footer-icon-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .footer-icon-btn img {
+    width: 30px;
+    height: 30px;
+  }
+}

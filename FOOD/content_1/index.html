@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMIGO</title>
+
+  <link rel="stylesheet" href="../header/layout.css">
+
+  <style>
+    /* ─── Banner ─── */
+    .main-banner {
+      width: 100%;
+      height: calc(100vh - 96px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-track {
+      display: flex;
+      width: 200%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .banner-slide {
+      width: 50%;
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    .banner-slide img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .banner-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.75);
+      color: #1f2933;
+      font-size: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .banner-arrow:hover {
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .banner-prev { left: 32px; }
+    .banner-next { right: 32px; }
+
+    .banner-indicators {
+      position: absolute;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .banner-indicators button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.75);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .banner-indicators button.active {
+      background: #f97316;
+      transform: scale(1.2);
+    }
+
+    /* ─── Signature Menu Section ─── */
+    .signatures-section {
+      width: 100%;
+      padding: 100px 0;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .signatures-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 타이틀 */
+    .signatures-title {
+      text-align: center;
+      font-size: 54px;
+      font-weight: 800;
+      color: #ef3f2d;
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+
+    .signatures-sub {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+      color: #ef3f2d;
+      margin-top: 16px;
+    }
+
+    /* 캐러셀 래퍼 */
+    .menu-carousel-wrap {
+      position: relative;
+      margin-top: 50px;
+    }
+
+    .menu-carousel {
+      position: relative;
+      height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 개별 메뉴 아이템 */
+    .menu-item {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.5s ease, opacity 0.5s ease, left 0.5s ease;
+      will-change: transform, opacity;
+      user-select: none;
+    }
+
+    .menu-item .menu-img-wrap {
+      width: 300px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .menu-item .menu-name-ko {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f2933;
+      text-align: center;
+      transition: font-size 0.5s ease, opacity 0.5s ease;
+    }
+
+    .menu-item .menu-name-en {
+      margin-top: 6px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #888;
+      text-align: center;
+      transition: opacity 0.5s ease;
+    }
+
+    /* 포지션별 스타일 */
+    .menu-item[data-pos="0"] {
+      transform: translateX(0) scale(1.15);
+      opacity: 1;
+      z-index: 5;
+    }
+
+    .menu-item[data-pos="0"] .menu-img-wrap { width: 420px; height: 420px; }
+    .menu-item[data-pos="0"] .menu-name-ko { font-size: 32px; }
+    .menu-item[data-pos="0"] .menu-name-en { font-size: 18px; opacity: 1; }
+
+    .menu-item[data-pos="1"],
+    .menu-item[data-pos="-1"] {
+      transform: scale(0.75);
+      opacity: 0.7;
+      z-index: 3;
+    }
+
+    .menu-item[data-pos="1"] .menu-name-en,
+    .menu-item[data-pos="-1"] .menu-name-en { opacity: 0; }
+
+    .menu-item[data-pos="2"],
+    .menu-item[data-pos="-2"] {
+      transform: scale(0.6);
+      opacity: 0.4;
+      z-index: 2;
+    }
+
+    .menu-item[data-pos="2"] .menu-name-ko,
+    .menu-item[data-pos="-2"] .menu-name-ko { opacity: 0; }
+
+    .menu-item[data-pos="2"] .menu-name-en,
+    .menu-item[data-pos="-2"] .menu-name-en { opacity: 0; }
+
+    .menu-item[data-pos="hide"] {
+      opacity: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* 화살표 */
+    .menu-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #ef3f2d;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      font-size: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .menu-arrow:hover {
+      transform: translateY(-50%) scale(1.1);
+      background: #d4321f;
+    }
+
+    .menu-prev { left: 40px; }
+    .menu-next { right: 40px; }
+
+    /* Indicator */
+    .menu-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 48px;
+    }
+
+    .menu-indicators button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: #d9d9d9;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .menu-indicators button.active {
+      background: #f97316;
+      transform: scale(1.3);
+    }
+
+    /* 전체 메뉴 버튼 */
+    .menu-all-btn-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 36px;
+    }
+
+    .menu-all-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: #ef3f2d;
+      color: #ffffff;
+      font-family: 'NanumSquareNeo', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .menu-all-btn:hover {
+      transform: scale(1.05);
+      background: #d4321f;
+    }
+
+    .menu-all-btn .arrow-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* ─── 반응형 ─── */
+    @media (max-width: 1024px) {
+      .signatures-title { font-size: 40px; }
+      .signatures-sub { font-size: 18px; }
+
+      .menu-carousel { height: 420px; }
+      .menu-item[data-pos="0"] .menu-img-wrap { width: 320px; height: 320px; }
+      .menu-item[data-pos="0"] .menu-name-ko { font-size: 26px; }
+      .menu-item .menu-img-wrap { width: 220px; height: 220px; }
+    }
+
+    @media (max-width: 768px) {
+      .signatures-title { font-size: 28px; }
+      .signatures-sub { font-size: 16px; }
+
+      .menu-carousel { height: 360px; }
+      .menu-item[data-pos="0"] .menu-img-wrap { width: 240px; height: 240px; }
+      .menu-item[data-pos="0"] .menu-name-ko { font-size: 22px; }
+      .menu-item .menu-img-wrap { width: 160px; height: 160px; }
+
+      .menu-arrow { width: 44px; height: 44px; font-size: 20px; }
+      .menu-prev { left: 8px; }
+      .menu-next { right: 8px; }
+
+      .menu-item[data-pos="2"],
+      .menu-item[data-pos="-2"] { opacity: 0; pointer-events: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Header ─── -->
+  <header class="header">
+    <div class="header-inner">
+
+      <h1 class="logo">
+        <a href="#">
+          <img src="../header/logo.final.png" alt="AMIGO 로고">
+        </a>
+      </h1>
+
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="#">브랜드</a>
+            <ul class="dropdown">
+              <li><a href="#">브랜드 스토리</a></li>
+              <li><a href="#">AMIGO 소개</a></li>
+              <li><a href="#">캐릭터 소개</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">메뉴</a>
+            <ul class="dropdown">
+              <li><a href="#">타코</a></li>
+              <li><a href="#">퀘사디아</a></li>
+              <li><a href="#">나초</a></li>
+              <li><a href="#">세트메뉴</a></li>
+              <li><a href="#">음료</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">이벤트/프로모션</a>
+            <ul class="dropdown">
+              <li><a href="#">진행중 이벤트</a></li>
+              <li><a href="#">쿠폰</a></li>
+              <li><a href="#">신메뉴</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">멤버십</a>
+            <ul class="dropdown">
+              <li><a href="#">멤버십 혜택</a></li>
+              <li><a href="#">포인트 적립</a></li>
+              <li><a href="#">쿠폰함</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">매장안내</a>
+            <ul class="dropdown">
+              <li><a href="#">매장찾기</a></li>
+              <li><a href="#">오시는 길</a></li>
+            </ul>
+          </li>
+          <li><a href="#">케이터링</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-icons">
+        <a href="#" class="icon-btn" data-tooltip="마이페이지" aria-label="마이페이지">
+          <img src="../header/icon1.svg" alt="마이페이지">
+        </a>
+        <a href="#" class="icon-btn" data-tooltip="인스타그램" aria-label="인스타그램">
+          <img src="../header/icon2.svg" alt="인스타그램">
+        </a>
+        <a href="#" class="icon-btn" data-tooltip="고객센터" aria-label="고객센터">
+          <img src="../header/icon3.svg" alt="고객센터">
+        </a>
+      </div>
+
+      <button class="hamburger" type="button">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ─── Main Banner ─── -->
+  <section class="main-banner">
+    <div class="banner-track" id="bannerTrack">
+      <div class="banner-slide">
+        <img src="../banner/banner1.png" alt="AMIGO 배너 1">
+      </div>
+      <div class="banner-slide">
+        <img src="../banner/banner2.png" alt="AMIGO 배너 2">
+      </div>
+    </div>
+
+    <button class="banner-arrow banner-prev" type="button" aria-label="이전 배너">&#8249;</button>
+    <button class="banner-arrow banner-next" type="button" aria-label="다음 배너">&#8250;</button>
+
+    <div class="banner-indicators" id="bannerIndicators">
+      <button class="active" type="button" aria-label="1번 배너"></button>
+      <button type="button" aria-label="2번 배너"></button>
+    </div>
+  </section>
+
+  <!-- ─── Signature Menu Section ─── -->
+  <section class="signatures-section">
+    <div class="signatures-inner">
+
+      <h2 class="signatures-title">AMIGO SIGNATURES</h2>
+      <p class="signatures-sub">아미고만의 특별한 시그니처 메뉴</p>
+
+      <div class="menu-carousel-wrap">
+
+        <button class="menu-arrow menu-prev" type="button" aria-label="이전 메뉴">&#8249;</button>
+        <button class="menu-arrow menu-next" type="button" aria-label="다음 메뉴">&#8250;</button>
+
+        <div class="menu-carousel" id="menuCarousel"></div>
+
+      </div>
+
+      <div class="menu-indicators" id="menuIndicators"></div>
+
+      <div class="menu-all-btn-wrap">
+        <a href="#" class="menu-all-btn">
+          전체 메뉴 보기
+          <span class="arrow-icon">&#8250;</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    /* ─── 배너 슬라이더 ─── */
+    (function () {
+      const track = document.getElementById('bannerTrack');
+      const indicators = document.querySelectorAll('#bannerIndicators button');
+      const TOTAL = 2;
+      let current = 0;
+
+      function bannerGoTo(index) {
+        current = (index + TOTAL) % TOTAL;
+        track.style.transform = `translateX(-${current * 50}%)`;
+        indicators.forEach((dot, i) => dot.classList.toggle('active', i === current));
+      }
+
+      document.querySelector('.banner-prev').addEventListener('click', () => bannerGoTo(current - 1));
+      document.querySelector('.banner-next').addEventListener('click', () => bannerGoTo(current + 1));
+      indicators.forEach((dot, i) => dot.addEventListener('click', () => bannerGoTo(i)));
+    })();
+
+    /* ─── 시그니처 메뉴 캐러셀 ─── */
+    (function () {
+      const menus = [
+        { img: './menu_img/main_menu01.png', ko: '콰트로 플레터', en: 'Quattro Platter' },
+        { img: './menu_img/main_menu02.png', ko: '코로나리타', en: 'Coronarita' },
+        { img: './menu_img/main_menu03.png', ko: '타코 샐러드', en: 'Taco Salad' },
+        { img: './menu_img/main_menu04.png', ko: '마가리타', en: 'Magarita' },
+        { img: './menu_img/main_menu05.png', ko: '더블 스텍 클럽 퀘사디아', en: 'Double Stacked Club Quesadillas' },
+        { img: './menu_img/main_menu06.png', ko: '구아카몰 라이브', en: 'Guacamole Live' },
+      ];
+
+      const TOTAL = menus.length;
+      let activeIndex = 0;
+      let isAnimating = false;
+
+      const carousel = document.getElementById('menuCarousel');
+      const indicatorsWrap = document.getElementById('menuIndicators');
+
+      /* 아이템 생성 */
+      const items = menus.map((m, i) => {
+        const el = document.createElement('div');
+        el.className = 'menu-item';
+        el.innerHTML = `
+          <div class="menu-img-wrap">
+            <img src="${m.img}" alt="${m.ko}">
+          </div>
+          <p class="menu-name-ko">${m.ko}</p>
+          <p class="menu-name-en">${m.en}</p>
+        `;
+        el.addEventListener('click', () => { if (!isAnimating) goTo(i); });
+        carousel.appendChild(el);
+        return el;
+      });
+
+      /* 인디케이터 생성 */
+      const dots = menus.map((_, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', `${i + 1}번 메뉴`);
+        btn.addEventListener('click', () => { if (!isAnimating) goTo(i); });
+        indicatorsWrap.appendChild(btn);
+        return btn;
+      });
+
+      /* 좌우 오프셋 (px) — 포지션별 */
+      const OFFSETS = { '-2': -560, '-1': -300, '0': 0, '1': 300, '2': 560 };
+
+      function render() {
+        items.forEach((el, i) => {
+          let diff = (i - activeIndex + TOTAL) % TOTAL;
+          if (diff > TOTAL / 2) diff -= TOTAL;
+
+          const key = String(Math.max(-2, Math.min(2, diff)));
+          const offset = OFFSETS[key] ?? null;
+
+          if (Math.abs(diff) > 2) {
+            el.dataset.pos = 'hide';
+            el.style.left = '50%';
+            el.style.marginLeft = '0';
+          } else {
+            el.dataset.pos = key;
+            el.style.left = '50%';
+            el.style.marginLeft = (offset - 150) + 'px'; /* 150 = half of base item */
+          }
+        });
+
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
+      }
+
+      function goTo(index) {
+        isAnimating = true;
+        activeIndex = (index + TOTAL) % TOTAL;
+        render();
+        setTimeout(() => { isAnimating = false; }, 520);
+      }
+
+      document.querySelector('.menu-prev').addEventListener('click', () => {
+        if (!isAnimating) goTo(activeIndex - 1);
+      });
+      document.querySelector('.menu-next').addEventListener('click', () => {
+        if (!isAnimating) goTo(activeIndex + 1);
+      });
+
+      render();
+    })();
+  </script>
+
+</body>
+</html>

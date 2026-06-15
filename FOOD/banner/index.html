@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMIGO</title>
+
+  <link rel="stylesheet" href="../header/layout.css">
+
+  <style>
+    /* ─── Main Banner ─── */
+    .main-banner {
+      width: 100%;
+      height: calc(100vh - 96px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-track {
+      display: flex;
+      width: 200%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .banner-slide {
+      width: 50%;
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    .banner-slide img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    /* ─── Arrows ─── */
+    .banner-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.75);
+      color: #1f2933;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .banner-arrow:hover {
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .banner-prev {
+      left: 32px;
+    }
+
+    .banner-next {
+      right: 32px;
+    }
+
+    /* ─── Indicators ─── */
+    .banner-indicators {
+      position: absolute;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .banner-indicators button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.75);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .banner-indicators button.active {
+      background: #f97316;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Header ─── -->
+  <header class="header">
+    <div class="header-inner">
+
+      <h1 class="logo">
+        <a href="#">
+          <img src="../header/logo.final.png" alt="AMIGO 로고">
+        </a>
+      </h1>
+
+      <nav class="nav">
+        <ul>
+
+          <li>
+            <a href="#">브랜드</a>
+            <ul class="dropdown">
+              <li><a href="#">브랜드 스토리</a></li>
+              <li><a href="#">AMIGO 소개</a></li>
+              <li><a href="#">캐릭터 소개</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#">메뉴</a>
+            <ul class="dropdown">
+              <li><a href="#">타코</a></li>
+              <li><a href="#">퀘사디아</a></li>
+              <li><a href="#">나초</a></li>
+              <li><a href="#">세트메뉴</a></li>
+              <li><a href="#">음료</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#">이벤트/프로모션</a>
+            <ul class="dropdown">
+              <li><a href="#">진행중 이벤트</a></li>
+              <li><a href="#">쿠폰</a></li>
+              <li><a href="#">신메뉴</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#">멤버십</a>
+            <ul class="dropdown">
+              <li><a href="#">멤버십 혜택</a></li>
+              <li><a href="#">포인트 적립</a></li>
+              <li><a href="#">쿠폰함</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#">매장안내</a>
+            <ul class="dropdown">
+              <li><a href="#">매장찾기</a></li>
+              <li><a href="#">오시는 길</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#">케이터링</a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <div class="header-icons">
+
+        <a href="#" class="icon-btn" data-tooltip="마이페이지" aria-label="마이페이지">
+          <img src="../header/icon1.svg" alt="마이페이지">
+        </a>
+
+        <a href="#" class="icon-btn" data-tooltip="인스타그램" aria-label="인스타그램">
+          <img src="../header/icon2.svg" alt="인스타그램">
+        </a>
+
+        <a href="#" class="icon-btn" data-tooltip="고객센터" aria-label="고객센터">
+          <img src="../header/icon3.svg" alt="고객센터">
+        </a>
+
+      </div>
+
+      <button class="hamburger" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ─── Main Banner ─── -->
+  <section class="main-banner">
+    <div class="banner-track">
+      <div class="banner-slide">
+        <img src="banner1.png" alt="AMIGO 배너 1">
+      </div>
+      <div class="banner-slide">
+        <img src="banner2.png" alt="AMIGO 배너 2">
+      </div>
+    </div>
+
+    <button class="banner-arrow banner-prev" type="button" aria-label="이전 배너">&#8249;</button>
+    <button class="banner-arrow banner-next" type="button" aria-label="다음 배너">&#8250;</button>
+
+    <div class="banner-indicators">
+      <button class="active" type="button" aria-label="1번 배너"></button>
+      <button type="button" aria-label="2번 배너"></button>
+    </div>
+  </section>
+
+  <script>
+    const track = document.querySelector('.banner-track');
+    const indicators = document.querySelectorAll('.banner-indicators button');
+    const prevBtn = document.querySelector('.banner-prev');
+    const nextBtn = document.querySelector('.banner-next');
+    const TOTAL = 2;
+    let current = 0;
+
+    function goTo(index) {
+      current = (index + TOTAL) % TOTAL;
+      track.style.transform = `translateX(-${current * 50}%)`;
+      indicators.forEach((dot, i) => {
+        dot.classList.toggle('active', i === current);
+      });
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    indicators.forEach((dot, i) => {
+      dot.addEventListener('click', () => goTo(i));
+    });
+  </script>
+
+</body>
+</html>
