@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MY CLOTHES — EASE FIT</title>
+<style>
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --surface-alt: #f2f1ee;
+  --border: #e5e5e5;
+  --text: #111111;
+  --muted: #777777;
+  --light: #aaaaaa;
+  --radius: 20px;
+  --font: Inter, Pretendard, -apple-system, sans-serif;
+  --font-brand: Georgia, "Times New Roman", serif;
+  --header-h: 64px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font:inherit;border:none;background:none}
+ul{list-style:none}
+
+/* ── HEADER ── */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;height:var(--header-h);
+  padding:0 40px;
+  background:rgba(247,247,245,.96);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+}
+.header-left{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.header-center a{font-family:var(--font-brand);font-size:22px;letter-spacing:.04em}
+.header-right{display:flex;justify-content:flex-end;gap:6px}
+.header-right button{
+  padding:0 14px;height:36px;
+  border:1px solid var(--border);
+  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  transition:border-color .18s,color .18s;
+}
+.header-right button:hover{border-color:#999;color:var(--text)}
+.header-right button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+
+/* ── PAGE CONTAINER ── */
+.page-wrap{max-width:1360px;margin:0 auto;padding:0 40px}
+
+.page-grid{
+  display:grid;
+  grid-template-columns:280px 1fr 288px;
+  gap:24px;
+  padding:32px 0 40px;
+  align-items:start;
+}
+
+/* ── LEFT PANEL ── */
+.left-panel{display:flex;flex-direction:column;gap:20px}
+
+.page-title-block h1{
+  font-family:var(--font-brand);font-size:34px;font-weight:400;
+  letter-spacing:.02em;margin-bottom:10px;
+}
+.page-title-block p{font-size:13px;color:var(--muted);line-height:1.7}
+.page-title-block p+p{margin-top:2px;font-size:12px;color:var(--light)}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+
+.card-label{
+  font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:12px;
+}
+
+.current-size-text{font-size:13px;margin-bottom:14px;color:var(--text)}
+.current-size-text strong{font-weight:700}
+
+.size-grid{display:flex;flex-wrap:wrap;gap:6px}
+.sz-btn{
+  min-width:42px;height:36px;padding:0 8px;
+  border:1px solid var(--border);
+  background:var(--surface);color:var(--text);
+  font-size:11px;font-weight:700;letter-spacing:.04em;
+  border-radius:6px;
+  transition:border-color .15s,background .15s,color .15s;
+}
+.sz-btn:hover{border-color:#999}
+.sz-btn.active{border-color:var(--text);background:var(--text);color:#fff}
+.sz-btn:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+
+/* ── CENTER PANEL ── */
+.center-panel{}
+
+.preview-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:32px 24px 24px;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+  display:flex;flex-direction:column;align-items:center;
+  min-height:560px;
+}
+
+.fit-stage{
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;
+}
+
+/* SVG silhouette */
+.fit-svg{
+  display:block;width:160px;height:auto;
+  transform-origin:50% 28%;
+  transition:transform .42s cubic-bezier(.22,1,.36,1);
+}
+
+.fit-stage.body-size-xs  .fit-svg{transform:scaleX(.78)}
+.fit-stage.body-size-s   .fit-svg{transform:scaleX(.86)}
+.fit-stage.body-size-m   .fit-svg{transform:scaleX(.92)}
+.fit-stage.body-size-l   .fit-svg{transform:scaleX(1)}
+.fit-stage.body-size-xl  .fit-svg{transform:scaleX(1.08)}
+.fit-stage.body-size-2xl .fit-svg{transform:scaleX(1.18)}
+.fit-stage.body-size-3xl .fit-svg{transform:scaleX(1.28)}
+.fit-stage.body-size-all .fit-svg{transform:scaleX(1)}
+
+.size-tag{
+  margin-top:12px;
+  font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--light);
+}
+
+.preview-combo{
+  margin-top:20px;width:100%;
+  border-top:1px solid var(--border);padding-top:16px;
+  display:flex;flex-direction:column;gap:6px;
+}
+.preview-combo-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:12px}
+.combo-key{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--light);flex-shrink:0}
+
+/* ── RIGHT PANEL ── */
+.right-panel{}
+
+.current-fit-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px 24px;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+  display:flex;flex-direction:column;gap:0;
+}
+.cf-title{font-family:var(--font-brand);font-size:20px;font-weight:400;margin-bottom:14px}
+.cf-size{font-size:13px;color:var(--text);margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.cf-size strong{font-weight:700}
+
+.cf-item{margin-bottom:18px}
+.cf-item-type{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--light);margin-bottom:5px}
+.cf-item-name{font-size:14px;font-weight:600;margin-bottom:3px;line-height:1.35}
+.cf-item-meta{font-size:12px;color:var(--muted)}
+
+.cart-combo-btn{
+  width:100%;height:50px;margin-top:4px;
+  background:var(--text);color:#fff;
+  border:1px solid var(--text);
+  font-size:13px;font-weight:600;letter-spacing:.03em;
+  border-radius:10px;
+  transition:background .2s,border-color .2s;
+}
+.cart-combo-btn:hover{background:#333;border-color:#333}
+.cart-combo-btn:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+
+.first-fit-note{
+  margin-top:12px;
+  font-size:11px;color:var(--light);text-align:center;line-height:1.6;
+}
+
+/* ── BOTTOM: ON MY CLOSET ── */
+.closet-section{
+  border-top:1px solid var(--border);
+  padding:48px 0 64px;
+}
+.closet-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:24px;
+}
+.closet-title h2{font-family:var(--font-brand);font-size:24px;font-weight:400;margin-bottom:4px}
+.closet-title p{font-size:13px;color:var(--muted)}
+
+.closet-tabs{display:flex;gap:0;border-bottom:1px solid var(--border)}
+.tab-btn{
+  padding:0 18px;height:40px;
+  font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--light);
+  border-bottom:2px solid transparent;
+  transition:color .18s,border-color .18s;
+}
+.tab-btn.tab-active{color:var(--text);border-bottom-color:var(--text)}
+.tab-btn:focus-visible{outline:2px solid var(--text);outline-offset:-2px}
+
+.product-carousel{
+  display:flex;gap:12px;
+  overflow-x:auto;padding-bottom:12px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+.product-carousel::-webkit-scrollbar{height:4px}
+.product-carousel::-webkit-scrollbar-track{background:transparent}
+.product-carousel::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* ── PRODUCT CARD ── */
+.pcard{
+  flex:0 0 176px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s;
+  position:relative;
+}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.pcard:hover .pcard-thumb{filter:brightness(.95)}
+.pcard.is-active{border:2px solid var(--text)}
+.pcard:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+
+.pcard-thumb{
+  height:190px;
+  display:flex;align-items:center;justify-content:center;
+  transition:filter .18s;
+}
+.pcard-thumb-label{font-size:9px;font-weight:800;letter-spacing:.1em;opacity:.55}
+
+.pcard-body{padding:12px 14px}
+.pcard-name{font-size:12px;font-weight:600;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcard-type{
+  display:inline-block;
+  font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 7px;border:1px solid var(--border);border-radius:20px;
+  color:var(--muted);margin-bottom:6px;
+}
+.pcard-meta{font-size:11px;color:var(--muted)}
+
+/* Wish button on card */
+.pcard-wish{
+  position:absolute;top:10px;right:10px;
+  width:30px;height:30px;
+  background:rgba(255,255,255,.85);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--muted);
+  transition:color .18s,background .18s;
+  border:none;
+  backdrop-filter:blur(4px);
+}
+.pcard-wish:hover{color:var(--text)}
+.pcard-wish.wishlisted{color:var(--text)}
+.pcard-wish:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+
+/* Empty state */
+.empty-state{
+  padding:32px 0;font-size:13px;color:var(--light);
+  min-width:200px;
+}
+
+/* Cart entry in tab */
+.cart-entry{
+  flex:0 0 200px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  display:flex;flex-direction:column;gap:4px;
+}
+.cart-entry-num{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:4px}
+.cart-entry-names{font-size:12px;font-weight:600;line-height:1.5}
+.cart-entry-size{font-size:11px;color:var(--muted)}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(12px);
+  background:var(--text);color:#fff;
+  padding:13px 22px;
+  font-size:13px;font-weight:500;
+  opacity:0;pointer-events:none;
+  transition:opacity .28s,transform .28s;
+  z-index:9999;white-space:nowrap;
+  border-radius:8px;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1000px){
+  .page-wrap{padding:0 20px}
+  .site-header{padding:0 20px}
+  .page-grid{grid-template-columns:1fr;gap:16px;padding:20px 0 32px}
+
+  /* Mobile order */
+  .left-panel{order:1}
+  .center-panel{order:2}
+  .right-panel{order:3}
+
+  .page-title-block h1{font-size:26px}
+
+  /* horizontal scroll for size buttons on narrow screens */
+  .size-grid{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+  .sz-btn{flex-shrink:0}
+
+  .site-header{grid-template-columns:auto 1fr auto}
+  .header-left{display:none}
+
+  .closet-header{flex-direction:column;align-items:flex-start;gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-left">MY CLOTHES</div>
+  <div class="header-center"><a href="#">EASE FIT</a></div>
+  <div class="header-right">
+    <button type="button">My Fit</button>
+    <button type="button">Wishlist</button>
+    <button type="button">Bag</button>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <div class="page-grid">
+
+    <!-- ── LEFT ── -->
+    <aside class="left-panel">
+      <div class="page-title-block">
+        <h1>MY CLOTHES</h1>
+        <p>최근 본 옷과 찜한 옷을 모아봤어요.</p>
+        <p>내 기준 사이즈로 상의와 하의를 조합해보세요.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label">My Fit View</div>
+        <p class="current-size-text">현재 기준: <strong id="currentSizeLabel">XL</strong></p>
+        <div class="size-grid" role="group" aria-label="사이즈 선택">
+          <button class="sz-btn" data-size="XS"  type="button">XS</button>
+          <button class="sz-btn" data-size="S"   type="button">S</button>
+          <button class="sz-btn" data-size="M"   type="button">M</button>
+          <button class="sz-btn" data-size="L"   type="button">L</button>
+          <button class="sz-btn" data-size="XL"  type="button">XL</button>
+          <button class="sz-btn" data-size="2XL" type="button">2XL</button>
+          <button class="sz-btn" data-size="3XL" type="button">3XL</button>
+          <button class="sz-btn" data-size="ALL" type="button">전체</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── CENTER ── -->
+    <main class="center-panel">
+      <div class="preview-card">
+        <div class="fit-stage body-size-xl" id="fitStage">
+
+          <!-- SVG silhouette: draw body first, overlays second, head+neck last so they stay on top -->
+          <svg class="fit-svg" viewBox="0 0 100 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+
+            <!-- TORSO (body base) -->
+            <path d="M50 44 C38 44 18 52 11 65 C4 78 6 135 9 170 C11 184 14 192 50 196 C86 192 89 184 91 170 C94 135 96 78 89 65 C82 52 62 44 50 44 Z" fill="#cac5be"/>
+
+            <!-- HIPS -->
+            <path d="M9 170 C4 182 2 200 3 216 C13 210 30 207 50 207 C70 207 87 210 97 216 C98 200 96 182 91 170 C85 180 70 187 50 187 C30 187 15 180 9 170 Z" fill="#cac5be"/>
+
+            <!-- LEFT LEG -->
+            <path d="M3 213 L30 213 L28 326 L5 326 Z" fill="#cac5be"/>
+
+            <!-- RIGHT LEG -->
+            <path d="M70 213 L97 213 L95 326 L72 326 Z" fill="#cac5be"/>
+
+            <!-- TOP GARMENT OVERLAY -->
+            <path id="svgTop"
+              d="M50 44 C38 44 18 52 11 65 C4 78 6 135 9 165 C11 178 14 186 50 190 C86 186 89 178 91 165 C94 135 96 78 89 65 C82 52 62 44 50 44 Z"
+              fill="transparent"
+              style="transition:fill .32s ease;"/>
+
+            <!-- BOTTOM GARMENT OVERLAY (hip area + both legs as compound path) -->
+            <path id="svgBottom"
+              d="M9 165 C4 178 2 198 3 215 C13 208 30 206 50 206 C70 206 87 208 97 215 C98 198 96 178 91 165 C85 176 70 184 50 184 C30 184 15 176 9 165 Z
+                 M3 212 L30 212 L28 326 L5 326 Z
+                 M70 212 L97 212 L95 326 L72 326 Z"
+              fill="transparent"
+              style="transition:fill .32s ease;"/>
+
+            <!-- NECK — drawn after overlays so always visible -->
+            <rect x="44" y="36" width="12" height="12" fill="#cac5be"/>
+
+            <!-- HEAD — drawn last, always on top -->
+            <ellipse cx="50" cy="22" rx="14" ry="18" fill="#cac5be"/>
+
+          </svg>
+
+          <p class="size-tag" id="sizeBadge" aria-live="polite">XL</p>
+        </div>
+
+        <div class="preview-combo" aria-live="polite">
+          <div class="preview-combo-row">
+            <span class="combo-key">상의</span>
+            <span id="previewTop">—</span>
+          </div>
+          <div class="preview-combo-row">
+            <span class="combo-key">하의</span>
+            <span id="previewBottom">—</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ── RIGHT ── -->
+    <aside class="right-panel">
+      <div class="current-fit-card card">
+        <p class="cf-title">Current Fit</p>
+        <p class="cf-size">현재 기준: <strong id="cfSizeText">XL</strong></p>
+
+        <div class="cf-item">
+          <p class="cf-item-type">상의</p>
+          <p class="cf-item-name" id="cfTopName">Relax Cotton Shirt</p>
+          <p class="cf-item-meta" id="cfTopMeta">Size XL · Color White</p>
+        </div>
+
+        <div class="cf-item">
+          <p class="cf-item-type">하의</p>
+          <p class="cf-item-name" id="cfBottomName">Wide Banding Pants</p>
+          <p class="cf-item-meta" id="cfBottomMeta">Size XL · Color Cream</p>
+        </div>
+
+        <button class="cart-combo-btn" id="cartComboBtn" type="button">조합 장바구니 담기</button>
+        <p class="first-fit-note">첫 주문이라면 입어보고 결정하세요.</p>
+      </div>
+    </aside>
+
+  </div><!-- /.page-grid -->
+
+  <!-- ── BOTTOM: ON MY CLOSET ── -->
+  <section class="closet-section" aria-label="내 옷장">
+    <div class="closet-header">
+      <div class="closet-title">
+        <h2>On My Closet</h2>
+        <p>찜한 상품과 최근 본 상품을 조합해보세요.</p>
+      </div>
+      <div class="closet-tabs" role="tablist" aria-label="상품 목록 탭">
+        <button class="tab-btn tab-active" role="tab" aria-selected="true"  data-tab="recent"   type="button">최근 본 상품</button>
+        <button class="tab-btn"            role="tab" aria-selected="false" data-tab="wishlist" type="button">찜한 상품</button>
+        <button class="tab-btn"            role="tab" aria-selected="false" data-tab="cart"     type="button">장바구니</button>
+      </div>
+    </div>
+    <ul class="product-carousel" id="productCarousel" aria-label="상품 목록"></ul>
+  </section>
+
+</div><!-- /.page-wrap -->
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ── PRODUCTS ──
+const PRODUCTS = [
+  { id:"top01",    type:"top",    name:"Relax Cotton Shirt", price:"39,000원", size:"XL", color:"White", vc:"#ede8df", label:"SHIRT"  },
+  { id:"top02",    type:"top",    name:"Classic Stripe Tee", price:"29,000원", size:"XL", color:"Navy",  vc:"#2c3a52", label:"TEE"    },
+  { id:"top03",    type:"top",    name:"Loose Fit Knit",     price:"49,000원", size:"XL", color:"Gray",  vc:"#8c8c8c", label:"KNIT"   },
+  { id:"top04",    type:"top",    name:"Basic Oxford Shirt", price:"42,000원", size:"XL", color:"Blue",  vc:"#5678a0", label:"SHIRT"  },
+  { id:"bottom01", type:"bottom", name:"Wide Banding Pants", price:"49,000원", size:"XL", color:"Cream", vc:"#e0d8c0", label:"PANTS"  },
+  { id:"bottom02", type:"bottom", name:"Straight Denim",     price:"59,000원", size:"XL", color:"Blue",  vc:"#364e70", label:"DENIM"  },
+  { id:"bottom03", type:"bottom", name:"Relax Slacks",       price:"54,000원", size:"XL", color:"Black", vc:"#202020", label:"SLACKS" },
+  { id:"bottom04", type:"bottom", name:"Cotton Skirt",       price:"39,000원", size:"XL", color:"Beige", vc:"#d0c0a8", label:"SKIRT"  },
+];
+
+// ── STATE ──
+const S = {
+  size:     "XL",
+  topId:    null,
+  bottomId: null,
+  wishlist: [],
+  recent:   [],
+  cart:     [],
+  tab:      "recent",
+};
+
+const SIZE_CLASS = {
+  XS:"body-size-xs", S:"body-size-s", M:"body-size-m", L:"body-size-l",
+  XL:"body-size-xl", "2XL":"body-size-2xl", "3XL":"body-size-3xl", ALL:"body-size-all"
+};
+
+// ── STORAGE ──
+function load() {
+  try {
+    S.size     = ls("preferredSize")              || "XL";
+    S.topId    = ls("myClothes_top")              || null;
+    S.bottomId = ls("myClothes_bottom")           || null;
+    S.wishlist = JSON.parse(ls("myClothes_wishlist")       || "[]");
+    S.recent   = JSON.parse(ls("myClothes_recentlyViewed") || "[]");
+    S.cart     = JSON.parse(ls("myClothes_cart")           || "[]");
+    if (S.recent.length === 0) {
+      S.recent = ["top01","bottom01","top02","bottom02","top03","bottom03"];
+      save("myClothes_recentlyViewed", S.recent);
+    }
+    if (!S.topId)    { S.topId    = "top01";    save("myClothes_top",    "top01");    }
+    if (!S.bottomId) { S.bottomId = "bottom01"; save("myClothes_bottom", "bottom01"); }
+  } catch(_) {}
+}
+function ls(k) { try { return localStorage.getItem(k); } catch(_) { return null; } }
+function save(k, v) { try { localStorage.setItem(k, typeof v === "string" ? v : JSON.stringify(v)); } catch(_) {} }
+function getP(id) { return PRODUCTS.find(p => p.id === id) || null; }
+
+// ── DOM ──
+const fitStage   = document.getElementById("fitStage");
+const svgTop     = document.getElementById("svgTop");
+const svgBottom  = document.getElementById("svgBottom");
+const sizeBadge  = document.getElementById("sizeBadge");
+const curSzLabel = document.getElementById("currentSizeLabel");
+const cfSzText   = document.getElementById("cfSizeText");
+const previewTop    = document.getElementById("previewTop");
+const previewBottom = document.getElementById("previewBottom");
+const cfTopName  = document.getElementById("cfTopName");
+const cfTopMeta  = document.getElementById("cfTopMeta");
+const cfBtmName  = document.getElementById("cfBottomName");
+const cfBtmMeta  = document.getElementById("cfBottomMeta");
+const carousel   = document.getElementById("productCarousel");
+const toast      = document.getElementById("toast");
+const cartBtn    = document.getElementById("cartComboBtn");
+
+// ── APPLY SIZE ──
+function applySize(sz) {
+  S.size = sz;
+  save("preferredSize", sz);
+  Object.values(SIZE_CLASS).forEach(c => fitStage.classList.remove(c));
+  fitStage.classList.add(SIZE_CLASS[sz] || "body-size-l");
+  const label = sz === "ALL" ? "전체" : sz;
+  sizeBadge.textContent  = label;
+  curSzLabel.textContent = label;
+  cfSzText.textContent   = label;
+  document.querySelectorAll(".sz-btn").forEach(b => {
+    const on = b.dataset.size === sz;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-pressed", on);
+  });
+}
+
+// ── APPLY GARMENT ──
+function applyTop(id) {
+  const p = getP(id);
+  svgTop.setAttribute("fill", p ? p.vc : "transparent");
+  previewTop.textContent = p ? p.name : "—";
+  cfTopName.textContent  = p ? p.name : "—";
+  cfTopMeta.textContent  = p ? `Size ${p.size} · Color ${p.color}` : "—";
+}
+function applyBottom(id) {
+  const p = getP(id);
+  svgBottom.setAttribute("fill", p ? p.vc : "transparent");
+  previewBottom.textContent = p ? p.name : "—";
+  cfBtmName.textContent     = p ? p.name : "—";
+  cfBtmMeta.textContent     = p ? `Size ${p.size} · Color ${p.color}` : "—";
+}
+
+// ── SELECT PRODUCT ──
+function selectProduct(id, type) {
+  if (type === "top") {
+    S.topId = id; save("myClothes_top", id); applyTop(id);
+  } else {
+    S.bottomId = id; save("myClothes_bottom", id); applyBottom(id);
+  }
+  renderCarousel();
+}
+
+// ── WISHLIST TOGGLE ──
+function toggleWish(id, e) {
+  e.stopPropagation();
+  const i = S.wishlist.indexOf(id);
+  if (i === -1) S.wishlist.push(id); else S.wishlist.splice(i, 1);
+  save("myClothes_wishlist", S.wishlist);
+  renderCarousel();
+}
+
+// ── CART COMBO ──
+cartBtn.addEventListener("click", () => {
+  if (!S.topId || !S.bottomId) {
+    showToast("상의와 하의를 모두 선택해주세요.");
+    return;
+  }
+  S.cart.push({ top: S.topId, bottom: S.bottomId, size: S.size });
+  save("myClothes_cart", S.cart);
+  if (S.tab === "cart") renderCarousel();
+  showToast("현재 조합을 장바구니에 담았습니다.");
+});
+
+// ── RENDER CAROUSEL ──
+function renderCarousel() {
+  carousel.innerHTML = "";
+
+  if (S.tab === "cart") {
+    if (S.cart.length === 0) return emptyState("장바구니에 담긴 상품이 없습니다.");
+    S.cart.forEach((entry, i) => {
+      const tp = getP(entry.top), bt = getP(entry.bottom);
+      const li = document.createElement("li");
+      li.className = "cart-entry";
+      li.innerHTML = `
+        <p class="cart-entry-num">조합 ${i + 1}</p>
+        <p class="cart-entry-names">${tp ? tp.name : "—"}<br>${bt ? bt.name : "—"}</p>
+        <p class="cart-entry-size">기준 사이즈: ${entry.size === "ALL" ? "전체" : entry.size}</p>`;
+      carousel.appendChild(li);
+    });
+    return;
+  }
+
+  const ids = S.tab === "recent" ? S.recent : S.wishlist;
+  const emptyMsg = S.tab === "recent" ? "최근 본 상품이 없습니다." : "아직 찜한 상품이 없습니다.";
+  if (ids.length === 0) return emptyState(emptyMsg);
+
+  ids.forEach(id => {
+    const p = getP(id);
+    if (!p) return;
+    const isActive   = (p.type === "top" && S.topId === id) || (p.type === "bottom" && S.bottomId === id);
+    const isWished   = S.wishlist.includes(id);
+    const textColor  = luminance(p.vc) > 0.35 ? "#333" : "#eee";
+
+    const li = document.createElement("li");
+    li.className = `pcard${isActive ? " is-active" : ""}`;
+    li.setAttribute("role", "button");
+    li.setAttribute("tabindex", "0");
+    li.setAttribute("aria-label", `${p.name} 선택`);
+    li.setAttribute("aria-pressed", isActive ? "true" : "false");
+
+    li.innerHTML = `
+      <div class="pcard-thumb" style="background:${p.vc};" aria-hidden="true">
+        <span class="pcard-thumb-label" style="color:${textColor}">${p.label}</span>
+      </div>
+      <button class="pcard-wish${isWished ? " wishlisted" : ""}"
+        type="button"
+        aria-label="${isWished ? "찜 해제" : "찜하기"}"
+        aria-pressed="${isWished}"
+        data-id="${id}"
+      >${isWished ? "♥" : "♡"}</button>
+      <div class="pcard-body">
+        <p class="pcard-name">${p.name}</p>
+        <span class="pcard-type">${p.type === "top" ? "상의" : "하의"}</span>
+        <p class="pcard-meta">${p.size} · ${p.color} · ${p.price}</p>
+      </div>`;
+
+    li.addEventListener("click", e => { if (!e.target.closest(".pcard-wish")) selectProduct(id, p.type); });
+    li.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectProduct(id, p.type); } });
+    li.querySelector(".pcard-wish").addEventListener("click", e => toggleWish(id, e));
+
+    carousel.appendChild(li);
+  });
+}
+
+function emptyState(msg) {
+  const li = document.createElement("li");
+  li.className = "empty-state";
+  li.textContent = msg;
+  carousel.appendChild(li);
+}
+
+// simple luminance estimate (0–1) for text contrast
+function luminance(hex) {
+  if (!hex || hex.length < 7) return 0.5;
+  const r = parseInt(hex.slice(1,3),16)/255;
+  const g = parseInt(hex.slice(3,5),16)/255;
+  const b = parseInt(hex.slice(5,7),16)/255;
+  return 0.2126*r + 0.7152*g + 0.0722*b;
+}
+
+// ── TOAST ──
+let toastT;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(toastT);
+  toastT = setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+// ── TABS ──
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    S.tab = btn.dataset.tab;
+    document.querySelectorAll(".tab-btn").forEach(b => {
+      const on = b.dataset.tab === S.tab;
+      b.classList.toggle("tab-active", on);
+      b.setAttribute("aria-selected", on);
+    });
+    renderCarousel();
+  });
+});
+
+// ── SIZE BUTTONS ──
+document.querySelectorAll(".sz-btn").forEach(btn => {
+  btn.addEventListener("click", () => applySize(btn.dataset.size));
+});
+
+// ── INIT ──
+load();
+applySize(S.size);
+applyTop(S.topId);
+applyBottom(S.bottomId);
+renderCarousel();
+</script>
+</body>
+</html>

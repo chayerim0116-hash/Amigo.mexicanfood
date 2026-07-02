@@ -1,0 +1,2337 @@
+
+
+[원본 1페이지]
+5. 콘텐츠 내용 (메인페이지) 
+ 
+한글 폰트 : Pretendard 
+영문 폰트 : Cormorant Garamond 
+포인트 컬러 : #FF5757 (지정한 곳 외에 사용금지) 
+5-1. 헤더 
+구조 
+① 최상단 top banner 
+② header 
+1) Top Banner 
+페이지 최상단에 검정색 프로모션 바를 넣어줘. 
+h스타일 
+- 높이: 40px 
+- 배경색: #111 
+- 글자색: #ﬀf 
+- 글자 크기: 13px 
+- 가운데 정렬 
+- 문구는 2개가 위아래로 부드럽게 슬라이드되는 느낌 
+h문구: 
+첫 번째: FIRST FITTING SERVICE / 첫 주문 고객 한정 1회 무료 반품 
+두 번째: SUMMER ESSENTIALS / 최대 20% 특별 핏 컬렉션 진행 중 
+h동작 
+- 세로 방향으로 자동 슬라이드되게 해줘. 
+- 너무 빠르지 않게 5초 정도 주기로 자연스럽게 움직이게 해줘. 
+2) Main Header 
+Top Banner 아래에 sticky header를 만들어줘. 
+h스타일 
+- position: sticky 
+- top: 0 
+- z-index: 100 
+- height: 72px 
+- background: rgba(255, 255, 255, 0.94) 
+- backdrop-ﬁlter: blur(14px) 
+
+
+[원본 2페이지]
+- border-bottom: 1px solid rgba(17, 17, 17, 0.08) 
+- 전체 너비를 쓰되 내부 콘텐츠는 max-width 1400px 안에 정렬 
+- 좌우 padding은 데스크톱 기준 76px 
+hHeader 내부 구조 
+왼쪽: 로고 
+가운데: 네비게이션 메뉴 
+오른쪽: 아이콘 메뉴 
+3) Logo 
+로고는 텍스트로 만들지 말고 반드시 이미지로 넣어줘. 
+h사용 이미지 
+./img/header/logo.png 
+h스타일 
+- 로고 영역 width: 158px 
+- 실제 이미지 width: 132px 
+- header 높이 72px 안에서 세로 가운데 정렬 
+4) Navigation 
+로고 오른쪽에 메뉴를 배치해줘. 
+h메뉴 
+여성 / 베스트 / 신상 / 세일 / 매거진 / 이벤트 
+h스타일 
+- 로고와 메뉴 사이 간격: 52px 
+- 메뉴 글자 크기: 15px 
+- font-weight: 400 
+- color: #111 계열 
+- 메뉴 사이 gap: 10px 
+- 각 메뉴는 height 72px 안에서 세로 가운데 정렬 
+- hover 또는 focus 시 font-weight를 600으로 바꿔줘 
+- 과한 underline이나 배경 효과는 넣지 말아줘 
+5) 여성 메뉴 Dropdown 
+“여성” 메뉴에만 드롭다운을 넣어줘. 
+h드롭다운 스타일 
+- header 바로 아래에 full-width로 펼쳐지게 해줘. 
+- position: ﬁxed 
+- top: 72px 
+- left: 0 
+- width: 100% 
+
+
+[원본 3페이지]
+- background: #ﬀf 
+- border-top: 1px solid rgba(17, 17, 17, 0.08) 
+- border-bottom: 1px solid rgba(17, 17, 17, 0.12) 
+- 처음에는 opacity 0, pointer-events none, translateY(-8px) 
+- hover/focus 시 opacity 1, pointer-events auto, translateY(0) 
+- transition은 180ms 정도로 자연스럽게 
+h드롭다운 내부 
+- 내부 max-width: 1400px 
+- min-height: 300px 
+- padding-top: 30px 
+- padding-bottom: 38px 
+- 왼쪽 시작 위치는 여성 메뉴 시작 위치와 맞춰줘. 
+- 3개 컬럼으로 구성해줘. 
+h컬럼 1: 
+전체상품 
+BEST 
+ESSENTIAL 
+아우터 
+니트 
+티셔츠 
+h컬럼 2: 
+셔츠·블라우스 
+원피스 
+팬츠 
+스커트 
+ACC 
+h컬럼 3: 
+Fit Guide 
+체형별 착용컷 
+핵심 실측 보기 
+First Fitting Service 
+h컬럼 3 스타일 
+- 왼쪽에 얇은 구분선 
+- padding-left: 40px 
+- Fit Guide는 strong으로 표시 
+- 전체적으로 고급스럽고 여백 있는 느낌 
+h드롭다운 링크 스타일: 
+- font-size: 14px 
+
+
+[원본 4페이지]
+- color: #555 
+- line-height: 1.4 
+- min-height: 32px 
+- hover 시 color: #111, font-weight: 500 
+6) Header Icons 
+오른쪽에는 아이콘 4개를 넣어줘. 
+h아이콘 순서: 검색 / 마이페이지 / 위시리스트 / 장바구니 
+h사용 이미지: 
+검색: ./img/header/icon1.png 
+마이페이지: ./img/header/icon2_mypage.png 
+위시리스트: ./img/header/icon3_heart.png 
+장바구니: ./img/header/icon4_bag.png 
+h링크: 
+검색: # 
+마이페이지: ./login.html 
+위시리스트: ./wishlist.html 
+장바구니: ./cart.html 
+h스타일: 
+- 아이콘 버튼 크기: 40px x 40px 
+- 실제 아이콘 이미지: 24px x 24px 
+- 아이콘 간격: 4px 
+- 전체 아이콘 묶음은 margin-left: auto로 오른쪽 정렬 
+7) Cart Count 
+장바구니 아이콘 오른쪽 위에 작은 숫자 배지를 넣어줘. 
+h스타일 
+- position: absolute 
+- top: 5px 
+- right: 3px 
+- min-width: 16px 
+- height: 16px 
+- border-radius: 999px 
+- background: #111 
+- color: #ﬀf 
+- font-size: 10px 
+- font-weight: 500 
+- 기본 숫자는 0 
+위시리스트 count는 화면에 보이지 않게 숨겨줘. 
+
+
+[원본 5페이지]
+※주의사항 
+- header가 hero/banner 영역을 밀거나 깨뜨리면 안 됨. 
+- 드롭다운은 header 아래에 자연스럽게 겹쳐서 떠야 함. 
+- 로고는 반드시 이미지 사용. 
+- 전체 스타일은 흰색 배경, 검정 텍스트 중심의 미니멀 여성 패션몰 느낌. 
+- 불필요한 그림자, 과한 애니메이션, 진한 색상 포인트는 넣지 말아줘. 
+※절대 하지 말 것 
+- 요청하지 않은 underline 추가 금지 
+- 요청하지 않은 hover 효과 추가 금지 
+- 아이콘 hover 배경 추가 금지 
+- 임의로 색상 변경 금지 
+- 임의로 폰트 굵기 변경 금지 
+ 
+  
+5-2. Hero Banner 
+Hero 배너는 메인 페이지의 헤더 아래에 위치한다. 
+메인 페이지의 헤더 바로 아래에 가로로 긴 Hero 배너 영역을 만들어줘. 
+이 배너는 화면 전체 높이를 꽉 채우는 풀스크린 Hero가 아니라 쇼핑몰 메인 페이지 상단에 들
+어가는 와이드한 메인 비주얼 배너야. 전체 분위기는 깔끔하고 차분한 여성 패션 쇼핑몰 느낌
+으로 만들어줘. 
+hHero 배너는 총 3장의 이미지로 구성해줘. 
+사용 이미지: 
+./img/banner/banner1.png 
+./img/banner/banner2.png 
+./img/banner/banner3.png 
+각 이미지는 하나의 슬라이드로 배치하고 슬라이드 전체를 감싸는 track 요소를 가로 방향으
+로 움직여서 다음 배너로 전환해줘. 
+h구조는 아래처럼 만들어줘 
+main-visual: 전체 Hero 배너 영역 
+visual-track: 3개의 슬라이드를 가로로 나열하는 영역 
+visual-slide: 각각의 배너 이미지와 텍스트가 들어가는 개별 슬라이드 
+visual-indicator: 배너 아래에 들어가는 진행 바와 현재 순서 표시 영역 
+hHero 배너 전체 영역은 이렇게 잡아줘. 
+main-visual은 position: relative로 두고 높이는 40.3vw로 설정해줘. 최소 높이는 360px로 
+유지하고 넘치는 영역은 보이지 않게 overﬂow: hidden 처리해줘. 배경색은 #f4f1ed로 해줘.
+슬라이드 이미지는 배너 영역을 꽉 채우게 보여줘. 현재 결과와 동일하게 이미지가 배너 프레
+임 안을 가득 채우는 방식이어야 하므로 object-ﬁt은 cover를 사용해줘. 이미지 위치는 중앙 
+기준으로 맞춰줘. 
+
+
+[원본 6페이지]
+h이미지 스타일: 
+- display: block 
+- width: 100% 
+- height: 100% 
+- object-ﬁt: cover 
+- object-position: center 
+visual-track은 가로 슬라이드가 되도록 만들어줘. 
+hvisual-track 스타일 
+- display: ﬂex 
+- width: 100% 
+- height: 100% 
+- transform: translateX(0) 
+- transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1) 
+- will-change: transform 
+각 visual-slide는 한 화면을 꽉 차지하게 만들어줘. 
+hvisual-slide 스타일 
+- position: relative 
+- ﬂex: 0 0 100% 
+- width: 100% 
+- height: 100% 
+- overﬂow: hidden 
+각 슬라이드 위에는 텍스트 가독성을 위해 검정색 반투명 오버레이를 얇게 깔아줘. 
+h오버레이 스타일: 
+- position: absolute 
+- inset: 0 
+- z-index: 1 
+- background: rgba(0, 0, 0, 0.22) 
+- pointer-events: none 
+h각 배너에는 중앙 텍스트를 넣어줘. 텍스트는 이미지의 정중앙에 배치하고 흰색으로 보여줘. 
+- 첫 번째 배너: 
+이미지: ./img/banner/banner1.png 
+큰 문구: EVERY BODY, EVERY FIT 
+작은 문구: 체형에 구애받지 않고 나답게 편안한 핏 
+링크 문구: SHOP 
+링크 이동: #best-ﬁt-title 
+- 두 번째 배너: 
+이미지: ./img/banner/banner2.png 
+
+
+[원본 7페이지]
+큰 문구: LIGHT AND EASE 
+작은 문구: 산뜻하게 입고 탄탄하게 오래 입는 이즈핏 티셔츠 
+링크 문구: SHOP 
+링크 이동: #new-arrival-title 
+- 세 번째 배너: 
+이미지: ./img/banner/banner3.pn 
+큰 문구: FIND YOUR BLUE 
+작은 문구: 내 몸에 자연스럽게 맞는 데님 핏을 만나보세요 
+링크 문구: SHOP 
+링크 이동: #best-ﬁt-title 
+텍스트 영역은 배너 중앙에 오게 해줘. 
+h텍스트 영역 스타일: 
+- position: absolute 
+- top: 50% 
+- left: 50% 
+- transform: translate(-50%, -50%) 
+- z-index: 2 
+- width: 100% 
+- max-width: 1400px 
+- padding: 0 76px 
+- text-align: center 
+- color: #ﬀf 
+h큰 영문 문구는 고급스러운 세리프 폰트 느낌으로 보여줘. Cormorant Garamond를 사용해
+줘. 
+큰 문구 스타일 
+- font-family: "Cormorant Garamond", serif 
+- font-size: 56px 
+- font-weight: 600 
+- line-height: 1.08 
+- letter-spacing: -0.01em 
+- color: #ﬀf 
+- white-space: nowrap 
+h작은 한글 문구 스타일 
+- margin-top: 18px 
+- font-size: 18px 
+- font-weight: 400 
+- line-height: 1.5 
+- color: rgba(255, 255, 255, 0.94) 
+- word-break: keep-all 
+
+
+[원본 8페이지]
+hSHOP 링크는 박스 버튼이 아니라 흰색 텍스트 아래에 밑줄이 있는 링크처럼 만들어줘. 
+SHOP 링크 스타일 
+- display: inline-block 
+- margin-top: 34px 
+- padding-bottom: 5px 
+- border-bottom: 2px solid #ﬀf 
+- color: #ﬀf 
+- font-size: 16px 
+- font-weight: 500 
+- hover 시 opacity: 0.72 
+h 배너 아래에는 진행 상태를 보여주는 visual-indicator를 넣어줘. 
+visual-indicator는 배너 이미지 안쪽 오른쪽 하단이 아니라, 배너 아래 별도 영역에 배치해줘. 
+전체 max-width는 1400px이고 가운데 정렬되며 좌우 padding은 76px로 맞춰줘. 
+visual-indicator 스타일: 
+- position: relative 
+- display: ﬂex 
+- align-items: center 
+- justify-content: ﬂex-start 
+- gap: 24px 
+- width: 100% 
+- max-width: 1400px 
+- height: 24px 
+- margin: 18px auto 0 
+- padding: 0 76px 
+h진행 바는 얇은 2px 라인으로 만들어줘. 
+전체 진행 바 
+- width: 100% 
+- height: 2px 
+- background: rgba(17, 17, 17, 0.16) 
+채워지는 진행 바 
+- width: 33.3333% 
+- height: 100% 
+- background: #111 
+- 현재 슬라이드에 따라 translateX로 이동 
+- transition은 배너와 동일하게 700ms cubic-bezier(0.22, 1, 0.36, 1) 
+오른쪽에는 페이지 표시와 이전/다음 버튼을 넣어줘. 
+표시 형태: < 1 | 3 > 
+
+
+[원본 9페이지]
+페이지 영역 스타일 
+- position: absolute 
+- top: 50% 
+- right: 76px 
+- transform: translateY(-50%) 
+- display: ﬂex 
+- align-items: center 
+- gap: 8px 
+- height: 18px 
+- padding-left: 24px 
+- background: #ﬀf 
+- color: #111 
+- font-size: 12px 
+- line-height: 18px 
+- letter-spacing: -0.5px 
+h동작: 페이지가 처음 로드되면 첫 번째 배너가 보이고 현재 숫자는 1, 전체 숫자는 3으로 표시
+해줘. 배너는 약 4.2초마다 자동으로 다음 슬라이드로 넘어가게 해줘. 
+오른쪽 버튼을 누르면 다음 배너로 이동하고 왼쪽 버튼을 누르면 이전 배너로 이동하게 해줘
+버튼을 누른 뒤에는 자동 전환 타이머를 다시 시작해줘. 마지막 배너 다음에는 첫 번째 배너로 
+자연스럽게 이어져야 해. 첫 번째와 마지막 슬라이드를 복제해서 무한 루프처럼 보이게 처리
+해줘. 애니메이션 중에 버튼을 빠르게 여러 번 눌러도 슬라이드가 깨지지 않도록 전환 중에는 
+중복 실행을 막아줘. 
+transitionend가 제대로 실행되지 않는 경우를 대비해서 약 800ms 후 애니메이션 잠금을 풀
+어주는 fallback도 넣어줘. 
+h주의: 
+Hero 배너 이미지는 3장이다. 총 페이지 수는 3으로 표시해야 한다. 현재 결과 기준 object-ﬁt
+은 contain이 아니라 cover다. 
+인디케이터는 이미지 오른쪽 하단이 아니라 배너 아래의 얇은 진행 바와 함께 표시된다. 중앙 
+텍스트, 어두운 오버레이 SHOP 링크가 포함되어야 한다. 
+5-3. 카테고리 영역 
+ 
+Hero 배너와 배너 진행 바 아래에 카테고리 바로가기 영역을 만들어줘. 
+이 영역은 사용자가 상품 카테고리를 빠르게 볼 수 있는 가로형 아이콘 메뉴야. 전체적으로 흰
+색 배경 위에 동그란 이미지 아이콘들이 일정한 간격으로 나열되는 깔끔한 쇼핑몰 카테고리 
+메뉴처럼 만들어줘. 
+
+
+[원본 10페이지]
+ 
+구조는 아래처럼 잡아줘. 
+hcategory-shortcut: 카테고리 영역 전체 
+hcategory-inner: 카테고리 목록을 감싸는 내부 컨테이너 
+hcategory-list: 카테고리 아이템들이 가로로 나열되는 영역 
+hcategory-item: 각 카테고리 하나 
+hcategory-img-box: 동그란 카테고리 이미지 박스 
+hcategory-name: 카테고리 이름 텍스트 
+카테고리 영역 전체는 흰색 배경으로 만들고 위쪽 여백은 40px, 아래쪽 여백은 30px로 잡아
+줘. 내부 컨테이너는 최대 너비 1400px 안에 들어오게 하고 가운데 정렬해줘. 좌우 여백은 데
+스크톱 기준 76px로 맞춰줘. 
+카테고리 목록은 가로 ﬂex로 배치해줘. 각 아이템은 왼쪽부터 오른쪽까지 일정하게 퍼져 보여
+야 하므로 justify-content: space-between을 사용해줘. 세로 정렬은 위쪽 기준으로 맞춰줘. 
+카테고리는 총 9개야. 
+h카테고리 순서와 이미지 경로: 
+1. 티셔츠 - ./img/category/tshirt.jpeg 
+2. 셔츠 - ./img/category/shirt.jpeg 
+3. 니트 - ./img/category/knit.jpeg 
+4. 에센셜 - ./img/category/esential.jpeg 
+5. 팬츠 - ./img/category/pants.jpeg 
+6. 스커트 - ./img/category/skirt.jpeg 
+7. 원피스 - ./img/category/dress.jpeg 
+8. 아우터 - ./img/category/outer.jpeg 
+9. ACC - ./img/category/acc.jpeg 
+각 카테고리 아이템은 이미지와 텍스트가 세로로 쌓이는 구조로 만들어줘. 이미지는 위, 카테
+고리 이름은 아래에 위치해야 해. 
+h카테고리 이미지 박스는 원형으로 만들어줘. 
+이미지 박스 스타일 
+- width: 92px 
+- height: 92px 
+- border-radius: 50% 
+- background: #f3f3f3 
+- display: ﬂex 
+- align-items: center 
+- justify-content: center 
+- overﬂow: hidden 
+
+
+[원본 11페이지]
+h이미지는 박스 안에 꽉 들어가되 잘리지 않게 보여줘. 
+이미지 스타일 
+- width: 100% 
+- height: 100% 
+- object-ﬁt: contain 
+- display: block 
+- mix-blend-mode: multiply 
+h카테고리 이름은 이미지 아래에 배치해줘. 
+텍스트 스타일 
+- margin-top: 14px 
+- font-size: 15px 
+- color: #555 
+- text-align: center 
+- white-space: nowrap 
+- line-height: 1 
+각 카테고리 아이템은 클릭 가능한 링크처럼 만들어줘. 기본 링크 밑줄은 없애고 마우스를 올
+렸을 때 커서가 pointer로 보여야 해. 첫 번째 카테고리인 티셔츠에는 active 클래스를 기본으
+로 붙여줘. 
+h동작: 카테고리를 클릭하면 페이지 이동은 하지 않고 클릭한 카테고리에만 active 클래스가 
+붙게 해줘. 기존 active는 제거해줘. 
+※주의: 
+카테고리 이미지는 원형 안에서 잘리지 않아야 하므로 object-ﬁt: contain을 사용해줘. 
+카테고리 목록은 9개가 한 줄에 정돈되어 보여야 해. 
+영역 배경은 흰색이고 Hero 배너보다 조용하고 정돈된 느낌이어야 해. 
+이미지 파일명은 모두 소문자 기준으로 사용해줘. 특히 shirt.jpeg, knit.jpeg, acc.jpeg처럼 작
+성해줘. 
+5-4. 메인 콘텐츠 첫번째  : Best Fit Items 
+카테고리 바로가기 영역 아래에 첫 번째 메인 상품 섹션을 만들어줘. 
+
+
+[원본 12페이지]
+이 섹션은 EASE FIT 메인 페이지에서 가장 먼저 보이는 상품 리스트 영역이야. 제목은 “Best 
+Fit Items”이고, 지금 가장 인기 있는 상품을 4개 카드로 보여주는 구조로 만들어줘. 
+전체 섹션은 화면 가운데 정렬된 컨테이너 안에 들어가야 해. 
+h섹션 전체 구조:  
+content-section product-section: Best Fit Items 전체 영역 
+section-heading: 섹션 제목과 설명 영역 
+product-grid: 상품 카드 4개가 들어가는 그리드 
+product-card: 상품 하나를 감싸는 카드 
+product-image: 상품 이미지 박스 
+product-info: 상품 정보 영역 
+h섹션 컨테이너 
+- width: 100% 
+- max-width: 1400px 
+- margin: 0 auto 
+- padding-left: 76px 
+- padding-right: 76px 
+h섹션 위쪽 여백 
+- padding-top: 92px 
+h섹션 제목 영역 
+- text-align: center 
+- margin-bottom: 36px 
+h제목: Best Fit Items 
+h설명: 지금 가장 인기 있는 상품 
+h제목 스타일 
+- margin: 0 
+- color: #111 
+- font-size: 32px 
+- font-weight: 600 
+- line-height: 1.2 
+- letter-spacing: 0 
+h설명 스타일 
+- margin-top: 10px 
+- color: #9a9a9a 
+- font-size: 15px 
+
+
+[원본 13페이지]
+- font-weight: 400 
+- line-height: 1.4 
+- letter-spacing: 0 
+h상품 그리드는 4열로 만들어줘. 
+product-grid 스타일 
+- display: grid 
+- grid-template-columns: repeat(4, minmax(0, 1fr)) 
+- column-gap: 2px 
+- row-gap: 72px 
+상품 카드 하나의 크기 기준: 
+상품 카드의 width는 고정 px로 지정하지 마. 
+전체 1400px 컨테이너 안에서 좌우 padding 76px을 뺀 공간을 4등분해서 자동으로 계산되
+게 해줘. 즉 상품 카드 하나는 grid의 1fr 칸 하나를 그대로 사용해야 해. 
+h상품 카드 스타일 
+- min-width: 0 
+- cursor: pointer 
+- width 고정값 없음 
+h상품 카드 하나의 실제 구조: 
+카드 전체 너비 = product-grid의 4등분 칸 너비 
+이미지 박스 너비 = 카드 너비 100% 
+이미지 박스 높이 = aspect-ratio 3 / 4에 따라 자동 계산 
+정보 영역 너비 = 카드 너비 100% 
+정보 영역 padding = 16px 8px 0 
+h상품 이미지 영역은 세로로 긴 3:4 비율로 만들어줘. 
+product-image 스타일 
+- position: relative 
+- display: block 
+- width: 100% 
+- aspect-ratio: 3 / 4 
+- overﬂow: hidden 
+- background: #f5f5f5 
+h상품 이미지는 이미지 박스를 꽉 채우게 해줘. 
+상품 이미지 스타일 
+- display: block 
+- width: 100% 
+
+
+[원본 14페이지]
+- height: 100% 
+- object-ﬁt: cover 
+h위시리스트 버튼은 상품 이미지 오른쪽 위에 올려줘. 
+위시리스트 버튼 스타일 
+- position: absolute 
+- top: 14px 
+- right: 14px 
+- display: ﬂex 
+- align-items: center 
+- justify-content: center 
+- width: 32px 
+- height: 32px 
+- padding: 0 
+- border: 0 
+- background: transparent 
+- color: rgba(17, 17, 17, 0.22) 
+- font-size: 24px 
+- font-weight: 300 
+- line-height: 1 
+- cursor: pointer 
+- z-index: 5 
+h하트 아이콘 
+- 기본 상태: ♡ 
+- active 상태: ♥ 
+- 기본 색상: #d8d8d8 
+- active 색상: #ﬀ3b6b 
+- active 상태에서는 transform: scale(1.08) 
+h상품 정보 영역: 
+- padding: 16px 8px 0 
+h색상칩 영역: 
+- display: ﬂex 
+- align-items: center 
+- gap: 6px 
+h색상칩 하나: 
+- width: 14px 
+- height: 14px 
+- border-radius: 50% 
+- border: 1px solid rgba(17, 17, 17, 0.08) 
+
+
+[원본 15페이지]
+h 색상칩 색상값: 
+- ivory: #e7e3dd 
+- red: #f43a3d 
+- black: #0f0d0d 
+- denim: #87a8c6 
+- gray: #b8b8b4 
+- white: #ﬀf 
+- blue: #7496bd 
+- pink: #edc2cf 
+h상품 카테고리 스타일 
+- margin: 0 0 2px 
+- color: #111 
+- font-size: 14px 
+- font-weight: 600 
+- line-height: 1.2 
+h상품명 스타일 
+- margin: 0 0 8px 
+- color: #111 
+- font-size: 14px 
+- font-weight: 400 
+- line-height: 1.4 
+- 최대 2줄까지만 표시 
+- 넘치는 텍스트는 숨김 
+h가격 영역 
+- display: ﬂex 
+- ﬂex-wrap: wrap 
+- align-items: baseline 
+- column-gap: 4px 
+- row-gap: 1px 
+정가는 한 줄 위에 회색 취소선으로 보이고 할인율과 판매가는 아래쪽에 함께 보여야 해. 
+h정가 스타일 
+- ﬂex: 0 0 100% 
+- order: 1 
+- color: #969696 
+- font-size: 13px 
+- font-weight: 400 
+- line-height: 1.5 
+- text-decoration: line-through 
+ 
+
+
+[원본 16페이지]
+h할인율 스타일 
+- order: 2 
+- color: #ﬀ5757 
+- font-size: 16px 
+- font-weight: 600 
+- line-height: 1.5 
+h판매가 스타일 
+- order: 3 
+- color: #111 
+- font-size: 16px 
+- font-weight: 600 
+- line-height: 1 
+h리뷰 영역 
+- display: ﬂex 
+- align-items: center 
+- gap: 3px 
+- height: 18px 
+- margin-top: 8px 
+- color: #b0b0b0 
+- font-size: 11px 
+- font-weight: 400 
+- line-height: 1 
+h리뷰 아이콘 
+- width: 12px 
+- height: 12px 
+- 별 아이콘 경로: ./img/common/star-ﬁll-gray.svg 
+- 좋아요 아이콘 경로: ./img/common/like-ﬁll-gray.svg 
+h상품 데이터는 아래 4개로 만들어줘. 
+상품 1: 
+id: EF001 
+이미지: ./content_img_ex/SHOT_44_1595.jpeg 
+카테고리: TOP 
+상품명: 꼬나시 데님 원피스 
+판매가: 15,900 
+정가: 25,900 
+할인율: 38% 
+색상칩: ivory, red, black 
+리뷰: 5(10) 좋아요: 1,269 
+
+
+[원본 17페이지]
+상품 2: 
+id: EF002 
+이미지: ./content_img_ex/SHOT_47_023.jpeg 
+카테고리: BOTTOM 
+상품명: 릴랙스 와이드 데님 팬츠 
+판매가: 29,900 
+정가: 39,900 
+할인율: 25% 
+색상칩: denim, gray, black 
+리뷰: 5(10) 좋아요: 842 
+상품 3: 
+id: EF003 
+이미지: ./content_img_ex/SHOT_52_1816.jpeg 
+카테고리: SHIRT 
+상품명: 소프트 미니멀 셔츠 
+판매가: 32,900 
+정가: 45,900 
+할인율: 28% 
+색상칩: white, blue, black 
+리뷰: 5(10) 좋아요: 608 
+상품 4: 
+id: EF004 
+이미지: ./content_img_ex/SHOT_56_1899.jpeg 
+카테고리: TOP 
+상품명: 데일리 라운드 티셔츠 
+판매가: 19,900 
+정가: 29,900 
+할인율: 33% 
+색상칩: white, pink, black 
+리뷰: 5(10) 
+좋아요: 1,104 
+h동작: 
+상품 카드 전체를 클릭하면 상세 페이지로 이동하게 해줘. 이동 주소는 product-
+detail.html?id=상품ID 형식으로 만들어줘. 
+
+
+[원본 18페이지]
+예: EF001 상품 클릭 시 product-detail.html?id=EF001 단, 하트 버튼이나 색상칩을 클릭했을 
+때는 상세 페이지로 이동하지 않게 해줘. 
+하트 버튼을 클릭하면 위시리스트 상태가 토글되게 해줘. 기본은 ♡ 이고,※ 클릭하면 ♥ 로 바
+뀌어야 해. 다시 클릭하면 ♡ 로 돌아와야 해. 
+※주의: 
+이 섹션은 카테고리 바로가기 다음에 나오는 첫 번째 상품 섹션이다. 
+상품은 반드시 4개만 한 줄에 보여줘. 
+상품 카드 width는 고정하지 말고 grid 안에서 자동 계산되게 해줘. 
+상품 이미지 비율은 반드시 3:4로 유지해줘. 
+5-5. 메인 콘텐츠 두번째 : Essential Line  
+Best Fit Items 상품 섹션 아래에 두 번째 메인 콘텐츠 영역을 만들어줘. 
+이 영역은 “Essential Line” 섹션이야. 상품을 일반 카드처럼 나열하는 영역이 아니라 EASE FIT
+의 핵심 라인을 크게 보여주는 3개의 비주얼 카드 영역으로 만들어줘. 
+전체 분위기는 깔끔하고 차분한 여성 패션 쇼핑몰 느낌이야. 흰 배경 위에 큰 이미지 카드 3개
+가 가로로 배치되고 각 카드 하단에는 흰색 텍스트가 이미지 위에 올라가야 해. 
+h섹션 전체 구조는 아래처럼 만들어줘. 
+content-section essential-section: Essential Line 전체 영역 
+section-heading: 섹션 제목과 설명 영역 
+essential-grid: 3개의 비주얼 카드를 감싸는 그리드 영역 
+essential-card: 각각의 Essential Line 카드 
+primary-img: 기본 상태에서 보이는 이미지 
+hover-img: 마우스를 올렸을 때 나타나는 이미지 
+essential-copy: 카드 하단에 올라가는 텍스트 묶음 
+essential-label: 카드의 영문 라벨 
+essential-desc: 카드의 한글 설명 
+h섹션 전체는 화면 가운데 정렬된 컨테이너 안에 들어가야 해. 
+섹션 컨테이너 
+- width: 100% 
+- max-width: 1400px 
+- margin: 0 auto 
+- padding-left: 76px 
+- padding-right: 76px 
+
+
+[원본 19페이지]
+h섹션 위쪽 여백: 
+- padding-top: 140px 
+h섹션 제목 영역은 가운데 정렬해줘. 
+제목: Essential Line 
+설명: 언제어디서나 어떤 체형에도 편안한 핏으로 
+h제목 영역 스타일: 
+- text-align: center 
+- margin-bottom: 36px 
+h제목 스타일: 
+- margin: 0 
+- color: #111 
+- font-size: 32px 
+- font-weight: 600 
+- line-height: 1.2 
+- letter-spacing: 0 
+h설명 스타일: 
+- margin-top: 10px 
+- color: #9a9a9a 
+- font-size: 15px 
+- font-weight: 400 
+- line-height: 1.4 
+- letter-spacing: 0 
+hEssential 카드 영역은 3열 그리드로 만들어줘. 
+essential-grid 스타일: 
+- display: grid 
+- grid-template-columns: repeat(3, minmax(0, 1fr)) 
+- gap: 52px 
+- margin: 0 auto 
+h카드 하나의 크기 기준: 
+카드 width는 고정 px로 지정하지 마. 
+전체 1400px 컨테이너 안에서 좌우 padding 76px을 뺀 공간을 3등분하고 카드 사이 간격 
+52px을 반영해서 자동으로 계산되게 해줘. 즉 카드 하나는 essential-grid의 1fr 칸 하나를 그
+대로 사용해야 해. 
+각 카드의 세로 비율은 3:4로 만들어줘. 
+
+
+[원본 20페이지]
+essential-card 스타일: 
+- position: relative 
+- display: block 
+- aspect-ratio: 3 / 4 
+- overﬂow: hidden 
+- background: #c9c9c9 
+- text-decoration: none 
+각 카드는 클릭 가능한 링크 형태로 만들어줘. 링크 주소는 일단 #으로 둬. 각 카드에는 이미지
+가 2장씩 들어가야 해. 
+첫 번째 이미지는 기본 상태에서 보이는 이미지이고 두 번째 이미지는 hover 상태에서 보이
+는 이미지야. 두 이미지는 카드 안에서 같은 위치에 겹쳐져 있어야 해. 
+공통 이미지 스타일: 
+- position: absolute 
+- inset: 0 
+- display: block 
+- width: 100% 
+- height: 100% 
+- transition: opacity 320ms ease, transform 520ms ease 
+h기본 이미지 스타일: 
+- opacity: 1 
+- object-ﬁt: contain 
+- object-position: center 
+hhover 이미지 스타일: 
+- opacity: 0 
+- object-ﬁt: cover 
+- object-position: center 
+hhover 동작: 카드에 마우스를 올리면 기본 이미지는 opacity 0이 되고 hover 이미지는 
+opacity 1이 되게 해줘. hover 이미지는 나타나면서 transform: scale(1.05)로 살짝 확대되게 
+해줘. 전환은 부드럽게 보여야 해. 
+첫 번째 카드 hover 이미지: - object-position: center 56% 
+두 번째 카드 hover 이미지: - object-position: center 48% 
+세 번째 카드 hover 이미지: - object-position: center 52% 
+h각 카드 하단에는 텍스트가 잘 보이도록 어두운 그라데이션을 깔아줘. 
+카드 그라데이션: 
+
+
+[원본 21페이지]
+- 카드 하단에만 적용 
+- position: absolute 
+- right: 0 
+- bottom: 0 
+- left: 0 
+- height: 34% 
+- background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)) 
+h텍스트 묶음은 카드 하단 왼쪽에 배치해줘. 
+essential-copy 스타일: 
+- position: absolute 
+- left: 24px 
+- right: 24px 
+- bottom: 56px 
+- z-index: 1 
+- display: ﬂex 
+- ﬂex-direction: column 
+- gap: 2px 
+h영문 라벨 스타일: 
+- color: #ﬀf 
+- font-size: 22px 
+- font-weight: 500 
+- line-height: 1.3 
+- letter-spacing: 0 
+h한글 설명 스타일: 
+- color: rgba(255, 255, 255, 0.9) 
+- font-size: 14px 
+- font-weight: 400 
+- line-height: 1.6 
+- letter-spacing: 0 
+h카드 데이터는 아래 3개로 만들어줘. 
+카드 1: 
+기본 이미지: ./img/main_content2/essential_jeans.png 
+hover 이미지: ./img/main_content2/hover1.png 
+이미지 alt: Everyday Jeans 
+영문 라벨: Everyday Jeans 
+한글 설명: 여유 있게 떨어지는 데일리 세미와이드 핏 
+카드 2: 
+기본 이미지: ./img/main_content2/essential_shirt.png 
+
+
+[원본 22페이지]
+hover 이미지: ./img/main_content2/hover2.png 
+이미지 alt: Relaxed Shirt 
+영문 라벨: Relaxed Shirt 
+한글 설명: 가볍게 걸쳐지는 루즈 실루엣 
+카드 3: 
+기본 이미지: ./img/main_content2/essential_slacks.png 
+hover 이미지: ./img/main_content2/hover3.png 
+이미지 alt: Easy Slacks 
+영문 라벨: Easy Slacks 
+한글 설명: 편안하게 정돈되는 스트레이트 핏 
+5-6. 메인 콘텐츠 세번째 : Essential Line  
+Essential Line 영역 아래에 세 번째 메인 콘텐츠 영역을 만들어줘. 이 영역은 “New arrival” 
+상품 섹션이야. 새로 들어온 상품을 4열 상품 그리드로 보여주는 영역이고 총 8개의 상품 카드
+가 들어가야 해. 첫 번째 줄에 4개 두 번째 줄에 4개가 보이도록 만들어줘. 
+섹션 전체 구조는 아래처럼 만들어줘. 
+content-section product-section new-section: New arrival 전체 영역 
+section-heading: 섹션 제목과 설명 영역 
+product-grid: 상품 카드 8개가 들어가는 그리드 
+product-card: 상품 하나를 감싸는 카드 
+product-image: 상품 이미지 박스 
+product-info: 상품 정보 영역 
+more-area: 상품 더보기 버튼을 감싸는 영역 
+more-button: 상품 더보기 버튼 
+h섹션 전체는 화면 가운데 정렬된 컨테이너 안에 들어가야 해. 
+섹션 컨테이너: 
+- width: 100% 
+- max-width: 1400px 
+- margin: 0 auto 
+- padding-left: 76px 
+- padding-right: 76px 
+섹션 여백: 
+- padding-top: 140px 
+- padding-bottom: 140px 
+섹션 제목 영역은 가운데 정렬해줘. 
+
+
+[원본 23페이지]
+제목: New arrival 
+설명: 매일 입기 좋은 새로운 핏을 만나보세요 
+제목 영역 스타일: 
+- text-align: center 
+- margin-bottom: 36px 
+제목 스타일: 
+- margin: 0 
+- color: #111 
+- font-size: 32px 
+- font-weight: 600 
+- line-height: 1.2 
+- letter-spacing: 0 
+설명 스타일: 
+- margin-top: 10px 
+- color: #9a9a9a 
+- font-size: 15px 
+- font-weight: 400 
+- line-height: 1.4 
+- letter-spacing: 0 
+상품 그리드는 4열로 만들어줘. 
+product-grid 스타일: 
+- display: grid 
+- grid-template-columns: repeat(4, minmax(0, 1fr)) 
+- column-gap: 2px 
+- row-gap: 72px 
+상품 카드 하나의 크기 기준: 
+상품 카드 width는 고정 px로 지정하지 마. 
+전체 1400px 컨테이너 안에서 좌우 padding 76px을 뺀 공간을 4등분해서 자동 계산되게 해
+줘. 상품 간 가로 간격은 2px만 둬서 거의 붙어 보이게 해줘. 
+상품 카드 스타일 
+- min-width: 0 
+- cursor: pointer 
+- width 고정값 없음 
+상품 이미지 영역은 세로로 긴 3:4 비율로 만들어줘. 
+
+
+[원본 24페이지]
+product-image 스타일: 
+- position: relative 
+- display: block 
+- width: 100% 
+- aspect-ratio: 3 / 4 
+- overﬂow: hidden 
+- background: #f5f5f5 
+상품 이미지 스타일: 
+- display: block 
+- width: 100% 
+- height: 100% 
+- object-ﬁt: cover 
+상품 정보 영역:- padding: 16px 8px 0 
+위시리스트 버튼은 상품 이미지 오른쪽 위에 올려줘. 
+위시리스트 버튼 스타일: 
+- position: absolute 
+- top: 14px 
+- right: 14px 
+- display: ﬂex 
+- align-items: center 
+- justify-content: center 
+- width: 32px 
+- height: 32px 
+- padding: 0 
+- border: 0 
+- background: transparent 
+- color: rgba(17, 17, 17, 0.22) 
+- font-size: 24px 
+- font-weight: 300 
+- line-height: 1 
+- cursor: pointer 
+- z-index: 5 
+하트 아이콘: 
+- 기본 상태: ♡ 
+- active 상태: ♥ 
+- 기본 색상: #d8d8d8 
+- active 색상: #ﬀ3b6b 
+- active 상태에서는 transform: scale(1.08) 
+
+
+[원본 25페이지]
+색상칩 영역: 
+- display: ﬂex 
+- align-items: center 
+- gap: 6px 
+- margin-bottom: 10px 
+색상칩 하나: 
+- width: 14px 
+- height: 14px 
+- border-radius: 50% 
+- border: 1px solid rgba(17, 17, 17, 0.08) 
+색상칩 색상값: 
+- ivory: #e7e3dd 
+- red: #f43a3d 
+- black: #0f0d0d 
+- denim: #87a8c6 
+- gray: #b8b8b4 
+- white: #ﬀf 
+- blue: #7496bd 
+- pink: #edc2cf 
+- beige: #c9b8a1 
+- brown: #7b4e35 
+상품 카테고리 스타일: 
+- margin: 0 0 2px 
+- color: #111 
+- font-size: 14px 
+- font-weight: 600 
+- line-height: 1.2 
+상품명 스타일: 
+- margin: 0 0 8px 
+- color: #111 
+- font-size: 14px 
+- font-weight: 400 
+- line-height: 1.4 
+- 최대 2줄까지만 표시 
+- 넘치는 텍스트는 숨김 
+가격 영역: 
+- display: ﬂex 
+- ﬂex-wrap: wrap 
+- align-items: baseline 
+- column-gap: 4px 
+- row-gap: 1px 
+
+
+[원본 26페이지]
+정가는 한 줄 위에 회색 취소선으로 보이고, 할인율과 판매가는 아래쪽에 함께 보여야 해. 
+정가 스타일: 
+- ﬂex: 0 0 100% 
+- order: 1 
+- color: #969696 
+- font-size: 13px 
+- font-weight: 400 
+- line-height: 1.5 
+- text-decoration: line-through 
+할인율 스타일: 
+- order: 2 
+- color: #ﬀ5757 
+- font-size: 16px 
+- font-weight: 600 
+- line-height: 1.5 
+판매가 스타일: 
+- order: 3 
+- color: #111 
+- font-size: 16px 
+- font-weight: 600 
+- line-height: 1 
+리뷰 영역: 
+- display: ﬂex 
+- align-items: center 
+- gap: 3px 
+- height: 18px 
+- margin-top: 8px 
+- color: #b0b0b0 
+- font-size: 11px 
+- font-weight: 400 
+- line-height: 1 
+리뷰 아이콘: 
+- 별 아이콘 경로: ./img/common/star-ﬁll-gray.svg 
+- 좋아요 아이콘 경로: ./img/common/like-ﬁll-gray.svg 
+- 아이콘 크기: 12px x 12px 
+상품 데이터는 아래 8개로 만들어줘. 
+
+
+[원본 27페이지]
+상품 1: 
+id: EF005 
+이미지: ./content_img_ex/SHOT_19_006_cf202ad6-efe6-4120-b3b2-8fa83e7a7e47.jpeg 
+카테고리: TOP 
+상품명: 슬림핏 코튼 셔츠 
+판매가: 24,900 
+정가: 34,900 
+할인율: 29% 
+색상칩: white, gray, black 
+리뷰: 5(10) 좋아요: 318 
+상품 2: 
+id: EF006 
+이미지: ./content_img_ex/SHOT_32_009.jpeg 
+카테고리: BOTTOM 
+상품명: 에센셜 와이드 슬랙스 
+판매가: 39,900 
+정가: 49,900 
+할인율: 20% 
+색상칩: beige, brown, black 
+리뷰: 5(10) 
+좋아요: 527 
+상품 3: 
+id: EF007 
+이미지: ./content_img_ex/SHOT_35_069.jpeg 
+카테고리: KNIT 
+상품명: 미니멀 니트 탑 
+판매가: 27,900 
+정가: 35,900 
+할인율: 22% 
+색상칩: ivory, pink, black 
+리뷰: 5(10) 좋아요: 284 
+상품 4: 
+id: EF008 
+이미지: ./content_img_ex/SHOT_44_1599.jpeg 
+카테고리: DENIM 
+상품명: 릴랙스 핏 데님 
+판매가: 34,900 
+
+
+[원본 28페이지]
+정가: 44,900 
+할인율: 22% 
+색상칩: denim, blue, black 
+리뷰: 5(10) 좋아요: 739 
+상품 5: 
+id: EF009 
+이미지: ./content_img_ex/SHOT_47_031.jpeg 
+카테고리: OUTER 
+상품명: 오버핏 셔츠 자켓 
+판매가: 45,900 
+정가: 59,900 
+할인율: 23% 
+색상칩: white, blue, gray 
+리뷰: 5(10) 좋아요: 196 
+상품 6: 
+id: EF010 
+이미지: ./content_img_ex/SHOT_52_1822.jpeg 
+카테고리: TOP 
+상품명: 베이직 하프 티셔츠 
+판매가: 15,900 
+정가: 22,900 
+할인율: 31% 
+색상칩: white, red, black 
+리뷰: 5(10) 좋아요: 1,022 
+상품 7: 
+id: EF011 
+이미지: ./content_img_ex/SHOT_56_1906.jpeg 
+카테고리: BOTTOM 
+상품명: 컴포트 밴딩 팬츠 
+판매가: 31,900 
+정가: 42,900 
+할인율: 26% 
+색상칩: gray, beige, black 
+리뷰: 5(10) 좋아요: 433 
+
+
+[원본 29페이지]
+상품 8: 
+id: EF012 
+이미지: ./content_img_ex/SHOT_61_014.jpeg 
+카테고리: KNIT 
+상품명: 소프트 골지 니트 
+판매가: 28,900 
+정가: 36,900 
+할인율: 22% 
+색상칩: ivory, brown, black 
+리뷰: 5(10) 좋아요: 377 
+상품 그리드 아래에는 “상품 더보기” 버튼을 가운데 배치해줘. 
+more-area 스타일: 
+- display: ﬂex 
+- justify-content: center 
+- margin-top: 64px 
+more-button 스타일: 
+- display: inline-ﬂex 
+- align-items: center 
+- justify-content: center 
+- min-width: 210px 
+- height: 42px 
+- border: 1px solid #111 
+- color: #111 
+- background: #ﬀf 
+- font-size: 14px 
+- font-weight: 400 
+- line-height: 1 
+- cursor: pointer 
+- text-decoration: none 
+동작: 
+상품 카드 전체를 클릭하면 상세 페이지로 이동하게 해줘. 
+이동 주소는 product-detail.html?id=상품ID 형식으로 만들어줘. 
+예: EF005 상품 클릭 시 product-detail.html?id=EF005| 
+단, 하트 버튼이나 색상칩을 클릭했을 때는 상세 페이지로 이동하지 않게 해줘. 
+하트 버튼을 클릭하면 위시리스트 상태가 토글되게 해줘. 기본은 ♡ 이고, 클릭하면 ♥ 로 바뀌
+어야 해. 다시 클릭하면 ♡ 로 돌아와야 해. 
+
+
+[원본 30페이지]
+5-7. 푸터  
+메인 페이지의 가장 아래에 Footer 영역을 만들어줘. 
+Footer 전체 구조는 아래처럼 만들어줘. 
+h footer: 푸터 전체 영역 
+footer-inner: 푸터 내용을 감싸는 내부 컨테이너 
+footer-nav: 푸터 상단 메뉴 링크 영역 
+footer-info: 고객센터와 사업자 정보 영역 
+footer-bottom: 저작권 문구와 SNS 링크를 감싸는 하단 영역 
+footer-copy: 저작권 문구 
+sns-list: SNS 아이콘 리스트 
+hFooter 전체 스타일: 
+- width: 100% 
+- background: #f1f1f1 
+- color: #555 
+- padding: 65px 0 
+- font-size: 14px 
+hFooter 내부 컨테이너: 
+- max-width: 1400px 
+- margin: 0 auto 
+- padding-left: 76px 
+- padding-right: 76px 
+h푸터 상단에는 메뉴 링크를 가로로 배치해줘. 
+Footer 메뉴: 
+BRAND 
+LOOKBOOK 
+REVIEW 
+MEMBERSHIP 
+STORE 
+FAQ 
+hfooter-nav 스타일: 
+- display: ﬂex 
+- ﬂex-wrap: wrap 
+- gap: 24px 
+- margin-bottom: 48px 
+
+
+[원본 31페이지]
+hfooter-nav 링크 스타일: 
+- color: #555 
+- font-size: 14px 
+- font-weight: 500 
+- text-transform: uppercase 
+- text-decoration: none 
+- hover 시 color: #111 
+h메뉴 아래에는 회사 정보와 고객센터 정보를 넣어줘. 
+footer-info 스타일: 
+- margin-bottom: 60px 
+- color: #666 
+- font-size: 13px 
+- line-height: 2 
+footer-info 안의 p 태그: margin: 0 
+h회사 정보 문구는 아래 3줄로 넣어줘. 
+1줄: 
+고객센터 : 1599-0007  |  e-mail : help@easeﬁt.co.kr  |  운영시간 : 10:00 ~ 17:00 (점심 
+12:00 ~ 13:00 / 주말 및 공휴일 휴무) 
+2줄: 
+상호명 : EASE FIT  |  사업자등록번호 : 123-45-67890  |  통신판매업신고 : 2026-서울강
+남-0000 
+3줄: 
+대표이사 : 차예림  |  주소 : 인천광역시 해운대 123  |  개인정보관리책임자 : 차예림 
+Footer 하단에는 왼쪽에 저작권 문구 오른쪽에 SNS 아이콘 2개를 배치해줘. 
+footer-bottom 스타일: 
+- display: ﬂex 
+- justify-content: space-between 
+- align-items: center 
+
+
+[원본 32페이지]
+저작권 문구: 
+Copyright by EASE FIT. All Rights Reserved. 
+footer-copy 스타일: 
+- margin: 0 
+- color: #777 
+- font-size: 13px 
+SNS 리스트는 오른쪽에 가로로 배치해줘. 
+sns-list 스타일: 
+- display: ﬂex 
+- gap: 12px 
+- margin: 0 
+- padding: 0 
+- list-style: none 
+SNS는 Instagram, YouTube 2개를 넣어줘. 
+각 SNS는 원형 아이콘 버튼처럼 보여야 해. 
+SNS 링크 스타일: 
+- width: 28px 
+- height: 28px 
+- border: 1px solid #ccc 
+- border-radius: 50% 
+- display: ﬂex 
+- align-items: center 
+- justify-content: center 
+- color: #555 
+- font-size: 12px 
+- text-decoration: none 
+- hover 시 color: #111 
+- hover 시 border-color: #999 
+SNS 아이콘은 텍스트가 아니라 간단한 SVG 아이콘으로 넣어줘. 
+Instagram은 카메라 모양 아이콘 YouTube는 재생 버튼이 들어간 영상 아이콘 느낌으로 만들
+어줘. 아이콘 크기는 약 14px 정도로 맞춰줘. 
+※주의: 
+Footer는 메인 콘텐츠가 끝난 뒤 가장 아래에 위치해야 해. 
+배경은 #f1f1f1 밝은 회색이어야 해. 
+푸터 내부는 최대 1400px 컨테이너 기준으로 정렬해야 해. 
+메뉴, 회사 정보, 저작권/SNS 순서로 구성해야 해. 
+
+
+[원본 33페이지]
+문구는 위에 적은 내용 그대로 사용해줘. 
+전체적으로 조용하고 정돈된 쇼핑몰 하단 정보 영역처럼 보여야 해. 
+5-8. 퀵메뉴 
+메인 페이지 오른쪽 하단에 고정형 Quick Menu를 만들어줘. 
+Quick Menu는 페이지를 스크롤해도 항상 화면 오른쪽 아래에 고정되어 있어야 해. 최근 본 
+상품, 카카오톡 상담, 맨 위로 이동 버튼으로 구성해줘. 
+구조는 아래처럼 만들어줘. 
+quick-menu: 전체 퀵메뉴 영역 
+recent-panel: 최근 본 상품 패널 
+quick-menu-group: 최근 본 상품 버튼과 카카오톡 상담 버튼을 묶는 박스 
+quick-menu-button: 퀵메뉴 안의 각 버튼 
+quick-scroll-top: 맨 위로 이동 버튼 
+hQuick Menu 전체 스타일 
+- position: ﬁxed 
+- right: 32px 
+- bottom: 40px 
+- z-index: 110 
+- display: ﬂex 
+- ﬂex-direction: column 
+- gap: 8px 
+hquick-menu-group 스타일 
+- width: 52px 
+- overﬂow: hidden 
+- background: #ﬀf 
+- border: 1px solid rgba(17, 17, 17, 0.08) 
+- border-radius: 6px 
+- box-shadow: 0 4px 14px rgba(17, 17, 17, 0.08) 
+h퀵메뉴 버튼 공통 스타일 
+- width: 52px 
+- height: 52px 
+- display: ﬂex 
+- align-items: center 
+- justify-content: center 
+- padding: 0 
+
+
+[원본 34페이지]
+- border: 0 
+- background: #ﬀf 
+- color: #111 
+- cursor: pointer 
+hquick-menu-group 안에서 두 번째 버튼부터는 위쪽에 구분선을 넣어줘. 
+- border-top: 1px solid rgba(17, 17, 17, 0.08) 
+첫 번째 버튼은 최근 본 상품 버튼이야. 시계/히스토리 느낌의 SVG 아이콘을 넣어줘. 아이콘 
+크기는 22px 정도로 맞춰줘. stroke는 currentColor, stroke-width는 1.5 정도로 해줘. 
+두 번째 버튼은 카카오톡 상담 버튼이야. 이미지 경로는 아래를 사용해줘. 
+./img/quick_menu/kakao-talk.png 
+카카오톡 아이콘 스타일: 
+- width: 24px 
+- height: 24px 
+- object-ﬁt: contain 
+quick-menu-group 아래에는 맨 위로 이동 버튼을 따로 배치해줘. 
+이 버튼도 52px x 52px이고, 흰색 배경, 얇은 테두리, border-radius 6px, 은은한 그림자를 사
+용해줘. 
+맨 위로 이동 버튼은 처음부터 보이지 않게 해줘. 페이지가 40px 이상 스크롤되면 보이게 해
+줘. 
+hquick-scroll-top 기본 
+- display: none 
+- border: 1px solid rgba(17, 17, 17, 0.08) 
+- border-radius: 6px 
+- box-shadow: 0 4px 14px rgba(17, 17, 17, 0.08) 
+quick-scroll-top.is-visible: 
+- display: ﬂex 
+맨 위로 이동 버튼을 클릭하면 페이지 최상단으로 부드럽게 이동해야 해. 
+window.scrollTo({ top: 0, behavior: "smooth" }) 방식으로 처리해줘. 
+최근 본 상품 패널은 Quick Menu 왼쪽으로 펼쳐지는 흰색 패널로 만들어줘. 
+hrecent-panel 스타일: 
+- position: absolute 
+- right: 64px 
+- bottom: 0 
+
+
+[원본 35페이지]
+- width: 360px 
+- max-height: calc(100vh - 120px) 
+- background: #ﬀf 
+- border: 1px solid #e0e0e0 
+- box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) 
+- display: ﬂex 
+- ﬂex-direction: column 
+- opacity: 0 
+- pointer-events: none 
+- transform: translateX(12px) 
+- transition: opacity 200ms ease, transform 200ms ease 
+- z-index: 900 
+recent-panel에 is-open 클래스가 붙으면 패널이 열리게 해줘. 
+recent-panel.is-open 
+- opacity: 1 
+- pointer-events: auto 
+- transform: translateX(0) 
+최근 본 상품 패널 상단에는 제목과 닫기 버튼을 넣어줘. 
+제목: 최근 본 상품 
+hrecent-panel-header 스타일 
+- display: ﬂex 
+- align-items: center 
+- justify-content: space-between 
+- padding: 20px 20px 16px 
+- border-bottom: 1px solid #eee 
+hrecent-panel-title 스타일 
+- margin: 0 
+- font-size: 15px 
+- font-weight: 600 
+- color: #111 
+- letter-spacing: -0.2px 
+h닫기 버튼은 X 아이콘 SVG로 만들어줘. 
+닫기 버튼 스타일: 
+- width: 28px 
+- height: 28px 
+- border: none 
+- background: transparent 
+- color: #888 
+
+
+[원본 36페이지]
+- cursor: pointer 
+- hover 시 color: #111 
+패널 본문은 최근 본 상품 리스트가 들어가는 영역이야. 
+hrecent-panel-body 스타일: 
+- ﬂex: 1 
+- overﬂow-y: auto 
+- padding: 12px 0 
+최근 본 상품이 없으면 아래 문구를 가운데 보여줘. 
+최근 본 상품이 없습니다. 
+h빈 상태 문구 스타일: 
+- height: 120px 
+- display: ﬂex 
+- align-items: center 
+- justify-content: center 
+- margin: 0 
+- font-size: 13px 
+- color: #bbb 
+최근 본 상품이 있으면 상품 아이템을 세로 리스트로 보여줘. 
+recent-item 스타일: 
+- display: ﬂex 
+- align-items: center 
+- gap: 12px 
+- padding: 10px 20px 
+- text-decoration: none 
+- color: inherit 
+- hover 시 background: #f7f7f7 
+최근 본 상품 이미지 박스: 
+- width: 64px 
+- height: 80px 
+- ﬂex-shrink: 0 
+- background: #f0f0f0 
+- overﬂow: hidden 
+최근 본 상품 이미지: 
+- width: 100% 
+- height: 100% 
+
+
+[원본 37페이지]
+- object-ﬁt: cover 
+- object-position: center top 
+최근 본 상품 정보: 브랜드, 상품명, 가격 순서로 보여줘. 
+브랜드: 
+- font-size: 11px 
+- color: #999 
+- margin-bottom: 4px 
+- font-weight: 400 
+상품명: 
+- font-size: 13px 
+- font-weight: 500 
+- color: #222 
+- line-height: 1.4 
+- 최대 2줄까지만 표시 
+가격: 
+- font-size: 13px 
+- font-weight: 600 
+- color: #111 
+- margin-top: 6px 
+패널 하단에는 전체 삭제 버튼을 넣어줘. 
+hrecent-panel-footer 스타일 
+- padding: 12px 20px 
+- border-top: 1px solid #eee 
+- display: ﬂex 
+- justify-content: ﬂex-end 
+전체 삭제 버튼: 
+- 텍스트: 전체 삭제 
+- border: none 
+- background: transparent 
+- font-size: 12px 
+- color: #aaa 
+- cursor: pointer 
+- hover 시 color: #555 
+h동작 
+최근 본 상품 버튼을 클릭하면 recent-panel이 열리고 닫히게 해줘. 
+패널이 열릴 때는 최근 본 상품 목록을 다시 렌더링해줘. 
+닫기 버튼을 누르면 패널이 닫혀야 해. 
+
+
+[원본 38페이지]
+패널 바깥을 클릭하면 패널이 닫혀야 해. 
+ESC 키를 눌러도 패널이 닫혀야 해. 
+패널 내부를 클릭했을 때는 바깥 클릭 이벤트로 닫히지 않게 해줘. 
+최근 본 상품은 localStorage에 저장해줘. 
+key 이름은 recentViewedProducts를 사용해줘. 
+같은 상품이 다시 저장되면 중복으로 쌓지 말고 기존 항목을 제거한 뒤 맨 앞에 다시 넣어줘. 
+최근 본 상품은 최대 5개까지만 저장해줘. 
+저장되는 상품 데이터는 아래 형태로 생각하면 돼. 
+id 
+brand 
+title 
+price 
+image 
+url 
+전체 삭제 버튼을 클릭하면 localStorage의 recentViewedProducts를 삭제하고 빈 상태 문구
+를 다시 보여줘. 
+※주의: 
+Quick Menu는 footer 아래가 아니라 화면 오른쪽 하단에 ﬁxed로 떠 있어야 해. 
+최근 본 상품 패널은 퀵메뉴 왼쪽으로 펼쳐져야 해. 
+카카오톡 버튼 이미지는 ./img/quick_menu/kakao-talk.png를 사용해줘. 
+맨 위로 이동 버튼은 스크롤이 40px 이상 내려갔을 때만 보이게 해줘. 
+ 
+
+
+[원본 39페이지]
+6. 콘텐츠 내용 (서브페이지) 
+6-1. 상품 상세 페이지 - product-detail 
+상품 상세 페이지를 만들어줘. 이 페이지는 메인 상품 카드를 클릭했을 때 이동하는 페이지이
+고 URL의 id 값을 기준으로 상품 정보를 바꿔서 보여줘. 
+예: 
+product-detail.html?id=EF001 
+product-detail.html?id=EF005 
+공통 header, top-banner, footer, quick-menu는 메인 페이지와 같은 구조를 사용해줘. 
+페이지 전체는 흰색 배경이고 header 아래에 상품 상세 콘텐츠가 들어가야 해. 
+h전체 구조: 
+product-detail-page 
+product-detail-container 
+product-detail-inner 
+product-detail-layout 
+상품 상세 전체 레이아웃은 2단 grid로 만들어줘. 
+왼쪽: 상품 이미지, 세로 썸네일, 상세정보/사이즈/리뷰 탭 콘텐츠 
+오른쪽: 상품명, 가격, 위시리스트, 컬러 선택, 사이즈 선택, 핏 정보, 장바구니/구매 버튼 
+h전체 컨테이너 
+- max-width: 1400px 
+- margin: 0 auto 
+- padding: 80px 76px 140px 
+h2단 레이아웃 
+- display: grid 
+- grid-template-columns: 1.7fr 1fr 
+- gap: 56px 
+- align-items: start 
+왼쪽 상품 이미지 영역은 세로 썸네일과 대표 이미지가 가로로 나란히 있어야 해. 
+hproduct-media 
+- display: ﬂex 
+
+
+[원본 40페이지]
+- align-items: ﬂex-start 
+- gap: 24px 
+h세로 썸네일 리스트 
+- width: 96px 
+- ﬂex-direction: column 
+- gap: 16px 
+썸네일 하나 
+- width: 96px 
+- height: 120px 
+- background: #f5f5f5 
+- border: 1px solid transparent 
+- overﬂow: hidden 
+- active 상태 border-color: #111 
+h대표 이미지 박스 
+- ﬂex: 1 
+- height: 697px 
+- background: #f7f7f7 
+- overﬂow: hidden 
+- position: relative 
+h대표 이미지: 
+- width: 100% 
+- height: 100% 
+- object-ﬁt: cover 
+- object-position: center center 
+h대표 이미지 오른쪽 아래에는 모델 착용 배지를 올려줘. 
+- 예: 165cm · L 착용 
+- position: absolute 
+- right: 20px 
+- bottom: 20px 
+- background: rgba(0,0,0,0.72) 
+- color: #ﬀf 
+- font-size: 12px 
+- padding: 8px 12px 
+h오른쪽 상품 정보 영역: 
+- max-width: 540px 
+- min-height: 697px 
+- position: relative 
+
+
+[원본 41페이지]
+h상품 기본 정보: 
+- 상품 코드: EF001 같은 코드 
+- 상품명 
+- 가격 
+- 위시리스트 하트 버튼 
+h상품 코드 스타일: 
+- font-size: 12px 
+- color: #999 
+- margin-bottom: 10px 
+h상품명: 
+- font-size: 26px 
+- font-weight: 500 
+- color: #111 
+- margin-bottom: 14px 
+h가격: 
+- font-size: 26px 
+- font-weight: 600 
+- color: #111 
+h위시리스트 버튼: 
+- 34px x 34px 
+- 기본 ♡ 
+- active 상태 ♥ 
+- active 색상 #ﬀ3b6b 
+h상품명 아래에는 First Fitting 안내 바를 넣어줘. 
+문구: First Fitting 적용 첫 주문 무료 반품 가능 
+hFirst Fitting 바: 
+- height: 44px 
+- border-top: 1px solid #eee 
+- border-bottom: 1px solid #eee 
+- display: ﬂex 
+- justify-content: space-between 
+- font-size: 13px 
+
+
+[원본 42페이지]
+- font-weight: 600 
+- color: #555 
+- margin-bottom: 36px 
+h구매 옵션 영역은 sticky로 만들어줘. 
+- position: sticky 
+- top: 96px 
+- background: #ﬀf 
+- z-index: 20 
+h컬러 선택: 
+h컬러명은 오른쪽에 표시하고 컬러칩은 JS로 생성해줘. 
+컬러칩 크기는 36px 원형이고 active 상태에서는 검정 outline이 보여야 해. 
+h컬러칩: 
+- width: 36px 
+- height: 36px 
+- border-radius: 50% 
+- border: 1.5px solid #ddd 
+- active: border-color #111, outline 2px solid #111 
+h사이즈 선택: 
+XS, S, M, L, XL, 2XL, 3XL 버튼을 보여줘. 
+단, 기본 선택은 하지 말고 사용자가 직접 선택해야 해. 
+사이즈 버튼: 
+- width: 52px 
+- height: 42px 
+- border: 1px solid #ddd 
+- background: #ﬀf 
+- font-size: 14px 
+- font-weight: 600 
+- active 상태: background #111, color #ﬀf 
+사이즈 선택 시 아래 핏 정보가 바뀌어야 해. 
+핏 정보 박스: 
+- 3칸 grid 
+- 가슴둘레 / 어깨 / 총장 
+- 각 칸 padding: 18px 14px 
+- border: 1px solid #eee 
+
+
+[원본 43페이지]
+사이즈별 실측: XS: 가슴둘레 96cm / 어깨 40cm / 총장 62cm / 몸에 자연스럽게 맞는 정핏
+에 가까운 실루엣입니다. 
+S: 100cm / 41cm / 64cm / 가볍게 여유가 있는 기본 핏입니다. 
+M: 104cm / 42cm / 66cm / 데일리로 입기 좋은 편안한 기본 핏입니다. 
+L: 112cm / 45cm / 68cm / 전체적으로 여유가 느껴지는 릴랙스핏입니다. 
+XL: 120cm / 48cm / 70cm / 가슴과 팔 부분이 답답하지 않은 여유핏입니다. 
+2XL: 128cm / 51cm / 72cm / 상체 라인을 편안하게 커버하는 넉넉한 핏입니다. 
+3XL: 136cm / 54cm / 74cm / 여유 있는 실루엣으로 편안하게 착용할 수 있는 커버핏입니다. 
+전체 사이즈 가이드 보기 버튼을 넣어줘. 
+처음에는 접혀 있고, 클릭하면 사이즈 표가 열려야 해. 
+버튼 문구: 
++ 전체 사이즈 가이드 보기 
+열렸을 때: 
+- 전체 사이즈 가이드 접기 
+장바구니/구매 버튼: 
+- 두 버튼을 가로로 배치 
+- gap: 8px 
+- margin-top: 32px 
+- height: 64px 
+- 장바구니 담기: 검정 배경, 흰 글자 
+- 구매하기: 흰 배경, 검정 테두리 
+장바구니 담기 동작: 
+사이즈를 선택하지 않으면 “옵션을 선택해 주세요.” 모달을 띄워줘. 
+컬러와 사이즈가 모두 선택되면 cartItems localStorage에 상품을 저장해줘. 
+같은 상품 + 같은 컬러 + 같은 사이즈가 이미 있으면 수량만 1 증가시켜줘. 
+담기 성공 시 “상품을 장바구니에 담았어요.” 모달을 띄워줘. 
+이미 있던 상품이면 “이미 담긴 상품의 수량이 추가되었어요.”라고 보여줘. 
+구매하기 버튼: 
+클릭 시 alert로 “구매 기능은 준비 중입니다.”를 보여줘. 
+왼쪽 이미지 아래에는 sticky 탭을 만들어줘. 
+탭: 상세정보 / 사이즈 / 리뷰 
+
+
+[원본 44페이지]
+탭 스타일: 
+- position: sticky 
+- top: 72px 
+- height: 48px 
+- grid-template-columns: repeat(3, 1fr) 
+- border-bottom: 1px solid #e5e5e5 
+- active 탭은 color #111 
+- active 탭 아래 2px 검정 라인 
+탭 클릭 시 해당 섹션으로 부드럽게 스크롤해줘. 
+스크롤 위치에 따라 active 탭도 자동으로 바뀌게 해줘. 
+상세정보 섹션: 상품번호 : SS26 / PF6627O131 
+제목: 상세정보 
+본문: 
+기본 플리츠 소재보다 두껍고 탄탄한 소재로 제작된 하의 시리즈의 스커트입니다. 
+중간 부분의 주름을 느슨하게 펴 풍성한 느낌을 연출했으며, 다양한 상의에 매치하여 
+편안하게 착용하기 좋습니다. 뒷면 포켓 디테일이 실용적이면서도 귀여운 느낌을 자아냅니다. 
+안내문: 모델 착용 이미지보다 제품컷 이미지의 컬러가 정확합니다. 
+정보표: 
+모델사이즈: 170cm , 46kg , 22인치 
+모델착용: 상의003 / 하의003 
+소재정보: 겉감: 폴리에스터 100%. 소재정보 자세히보기 
+상세 정보 더보기 버튼을 넣어줘. 
+클릭하면 숨겨진 추가 설명, COLOR INFO, 상세 이미지 3장이 펼쳐지고 버튼 문구는 “상세 정
+보 접기”로 바뀌어야 해. 
+상세 이미지: 
+./content_img_ex/USTO1945_001_Light_As_Air_Boy_Tee_Black_002_024.jpeg 
+./content_img_ex/USTO1945_001_Light_As_Air_Boy_Tee_Black_001_040.jpeg 
+./content_img_ex/Burnout_Tee_Rex_US10013B_001_002_001.jpeg 
+사이즈 섹션: 제목: SIZE INFO 
+
+
+[원본 45페이지]
+상단에 평소 구매 사이즈 select를 넣어줘. 
+옵션: XS, S, M, L, XL, 2XL, 3XL 
+기본 선택: M 
+문구: 
+평소 [select] 사이즈를 구매하시는 고객님은 이렇게 구매했어요. 
+TIP 다른 고객님이 구매한 상품의 사이즈를 바탕으로 제안드려요. 
+선택한 평소 사이즈에 따라 구매 경향 bar를 보여줘. 
+예: M 선택 시 M 72%, L 20%, S 8% 
+사이즈 측정 이미지: ./img/clothes_size.jpeg 
+사이즈 표: 
+SIZE(cm), 총장, 허리, 엉덩이, 밑단 
+XS 82 60 88 108 
+S 84 64 92 112 
+M 86 68 96 116 
+L 88 72 100 120 
+XL 90 78 106 126 
+2XL 92 84 112 132 
+3XL 94 90 118 138 
+하단 문구: 
+* 상세 사이즈의 치수는 측정 방법에 따라 1~3cm 오차가 발생할 수 있습니다. 
+리뷰 섹션: 
+제목: 리뷰 
+왼쪽에는 고객 총 평점 카드를 보여줘. 
+- 고객 총 평점 
+- 4.8 
+- ★★★★★ 
+
+
+[원본 46페이지]
+- 평점 비율 
+- 5,4,3,2,1 라벨 
+- 총 리뷰 수 19 
+오른쪽에는 리뷰 포인트 탭을 만들어줘. 
+탭: 사이즈 / 핏 / 비침 / 색상 / 길이 
+기본 active는 사이즈. 
+각 탭 클릭 시 TIP 문구와 bar 데이터가 바뀌어야 해. 
+h리뷰 포인트 데이터: 
+사이즈: 100%의 유저가 잘맞아요를 선택했어요 / 작아요 0명 0%, 잘맞아요 20명 100%, 커
+요 0명 0% 
+핏: 55%의 유저가 레귤러핏을 선택했어요 / 슬림핏 0명 0%, 레귤러핏 11명 55%, 오버핏 9명 
+45% 
+비침: 75%의 유저가 안비쳐요를 선택했어요 / 약간 비쳐요 0명 0%, 보통이에요 5명 25%, 안
+비쳐요 15명 75% 
+색상: 89%의 유저가 화면과 같아요를 선택했어요 / 어두워요 0명 0%, 화면과 같아요 17명 
+89%, 밝아요 2명 11% 
+길이: 44%의 유저가 골반위를 선택했어요 / 크롭 0명 0%, 허리 3명 33%, 골반 2명 22%, 골
+반위 4명 44%, 골반아래 0명 0% 
+h리뷰 하단에는 포토/영상 리뷰 박스를 만들고 아래 문구를 보여줘. 
+포토/영상 리뷰 
+리뷰 준비중입니다. 
+h상품 데이터: 
+URL id가 없으면 EF001을 기본으로 보여줘. 
+
+
+[원본 47페이지]
+상품 데이터는 EF001부터 EF012까지 사용해줘. 
+각 상품은 code, name, price, modelInfo, defaultColor, defaultSize, colors, sizes를 가져야 
+해. 
+colors 안에는 id, name, swatch, images 배열을 넣어줘. 
+색상 선택 시 대표 이미지와 썸네일 이미지 4장이 해당 컬러 이미지로 바뀌어야 해. 
+EF001: 
+이름 꼬나시 데님 원피스 / 가격 15,900원 / 모델 165cm · L 착용 / 기본컬러 ivory / 기본사
+이즈 L 
+컬러: 아이보리 #e7e3dd, 레드 #f43a3d, 블랙 #0f0d0d 
+EF002: 
+릴랙스 와이드 데님 팬츠 / 29,900원 / 163cm · M 착용 / denim / M 
+컬러: 데님 #87a8c6, 그레이 #b8b8b4, 블랙 #0f0d0d 
+EF003: 
+소프트 미니멀 셔츠 / 32,900원 / 165cm · XL 착용 / white / XL 
+컬러: 화이트 #f0eeeb, 블루 #7496bd, 블랙 #0f0d0d 
+EF004: 
+데일리 라운드 티셔츠 / 19,900원 / 162cm · S 착용 / white / S 
+컬러: 화이트 #f0eeeb, 핑크 #edc2cf, 블랙 #0f0d0d 
+EF005: 
+슬림핏 코튼 셔츠 / 24,900원 / 165cm · M 착용 / white / M 
+컬러: 화이트 #f0eeeb, 그레이 #b8b8b4, 블랙 #0f0d0d 
+EF006: 
+에센셜 와이드 슬랙스 / 39,900원 / 164cm · L 착용 / beige / L 
+컬러: 베이지 #c9b8a1, 브라운 #7b4e35, 블랙 #0f0d0d 
+EF007: 
+미니멀 니트 탑 / 27,900원 / 163cm · S 착용 / ivory / S 
+컬러: 아이보리 #e7e3dd, 핑크 #edc2cf, 블랙 #0f0d0d 
+EF008: 
+릴랙스 핏 데님 / 34,900원 / 165cm · L 착용 / denim / L 
+컬러: 데님 #87a8c6, 블루 #7496bd, 블랙 #0f0d0d 
+
+
+[원본 48페이지]
+EF009: 
+오버핏 셔츠 자켓 / 45,900원 / 165cm · XL 착용 / white / XL 
+컬러: 화이트 #f0eeeb, 블루 #7496bd, 그레이 #b8b8b4 
+EF010: 
+베이직 하프 티셔츠 / 15,900원 / 162cm · S 착용 / white / S 
+컬러: 화이트 #f0eeeb, 레드 #f43a3d, 블랙 #0f0d0d 
+EF011: 
+컴포트 밴딩 팬츠 / 31,900원 / 164cm · M 착용 / gray / M 
+컬러: 그레이 #b8b8b4, 베이지 #c9b8a1, 블랙 #0f0d0d 
+EF012: 
+소프트 골지 니트 / 28,900원 / 163cm · S 착용 / ivory /  
+컬러: 아이보리 #e7e3dd, 브라운 #7b4e35, 블랙 #0f0d0d 
+모든 상품의 사이즈는 XS, S, M, L, XL, 2XL, 3XL을 사용해줘. 
+최근 본 상품: 상세 페이지가 열리면 현재 상품을 recentViewedProducts localStorage에 저
+장해줘. 
+저장 데이터: id, brand: EASE FIT, title, price, image, url 최근 본 상품은 퀵메뉴에서 표시될 
+수 있어야 해. 
+※주의:  
+상품 상세 페이지는 메인 페이지와 같은 header/footer/quick-menu를 사용한다. 
+오른쪽 구매 옵션 영역은 sticky로 고정된다. 
+사이즈는 기본 선택하지 말고 사용자가 직접 선택해야 장바구니에 담을 수 있다. 
+컬러는 기본 컬러가 선택되어 있어도 된다. 
+장바구니는 localStorage 기반이다. 실제 DB는 사용하지 않는다. 
+위시리스트도 localStorage 기반이다. 
+
+
+[원본 49페이지]
+6-2. 장바구니 페이지 - cart 
+상품 상세 페이지에서 “장바구니 담기”를 누르면 이동하거나 확인할 수 있는 장바구니 페이지
+를 만들어줘. 이 페이지는 브라우저 localStorage의 cartItems 데이터를 읽어서 장바구니 상
+품을 보여주는 구조야. 상품 상세 페이지에서 저장한 cartItems 데이터를 그대로 사용해야 해. 
+공통 header, top-banner, footer, quick-menu는 메인 페이지와 같은 구조를 사용해줘. 
+h장바구니 페이지 전체 구조 
+cart-page 
+cart-container 
+cart-title 
+cart-layout 
+cart-list-area 
+cart-toolbar 
+cart-items 
+cart-empty 
+cart-summary 
+cart-guide 
+페이지 전체 배경은 흰색으로 해줘. 
+cart-container 
+- max-width: 1400px 
+- margin: 0 auto 
+- padding: 78px 76px 120px 
+페이지 제목: 장바구니 
+cart-title 스타일: 
+- margin: 0 0 54px 
+- color: #111 
+- font-size: 40px 
+- font-weight: 600 
+- line-height: 1 
+- text-align: center 
+- letter-spacing: -0.4px 
+장바구니 본문은 왼쪽 상품 목록과 오른쪽 결제정보 박스의 2단 layout으로 만들어줘. 
+cart-layout: 
+- display: grid 
+- grid-template-columns: minmax(0, 1fr) 360px 
+
+
+[원본 50페이지]
+- gap: 52px 
+- align-items: start 
+왼쪽 상품 목록 상단에는 toolbar를 넣어줘. 
+toolbar 구성: 
+- 전체 선택 체크박스 
+- 구분선 
+- 선택 삭제 버튼 
+cart-toolbar 스타일: 
+- display: ﬂex 
+- align-items: center 
+- min-height: 48px 
+- padding-bottom: 24px 
+- border-bottom: 1px solid #111 
+- color: #111 
+- font-size: 14px 
+체크박스: 
+- width: 18px 
+- height: 18px 
+- accent-color: #ﬀ5757 
+선택 삭제 버튼: 
+- border: 0 
+- background: transparent 
+- color: #333 
+- font-size: 14px 
+- hover 시 color: #ﬀ5757 
+장바구니 상품 목록은 cartItems라는 영역 안에 JS로 렌더링해줘. 
+localStorage key: cartItems 
+cartItems 데이터 구조: 
+id 
+brand 
+title 
+price 
+image 
+
+
+[원본 51페이지]
+color 
+size 
+quantity 
+url 
+discountRate 선택값 
+상품 하나의 고유 key는 id + color + size를 합쳐서 만들어줘. 
+예: EF001__아이보리__L 
+상품 카드 하나는 아래 구조로 렌더링해줘. 
+cart-item: 
+- 선택 체크박스 
+- 상품 이미지 
+- 상품 정보 
+- 옵션/수량 변경 버튼 
+- 바로구매 버튼 
+- 삭제 버튼 
+- 배송비 안내 박스 
+- 상품별 소계 박스 
+cart-item 스타일: 
+- position: relative 
+- display: grid 
+- grid-template-columns: 28px 148px minmax(0, 1fr) 170px 
+- gap: 22px 
+- padding: 28px 0 32px 
+- border-bottom: 1px solid #eee 
+상품 이미지 박스: 
+- width: 148px 
+- aspect-ratio: 3 / 4 
+- overﬂow: hidden 
+- background: #f5f5f5 
+상품 이미지: 
+- width: 100% 
+- height: 100% 
+- object-ﬁt: cover 
+- object-position: center 
+
+
+[원본 52페이지]
+상품 브랜드: 
+- color: #111 
+- font-size: 15px 
+- font-weight: 600 
+- margin-bottom: 8px 
+상품명: 
+- color: #222 
+- font-size: 15px 
+- font-weight: 500 
+- line-height: 1.45 
+- margin-bottom: 12px 
+옵션 문구: 
+옵션 컬러, 사이즈, 수량개 형태로 보여줘. 
+예: 옵션 아이보리, L, 1개 
+옵션 문구 스타일: 
+- color: #888 
+- font-size: 13px 
+- line-height: 1.4 
+- margin-bottom: 16px 
+가격 영역: 
+할인율이 있으면 빨간색으로 표시하고, 판매가는 검정색으로 보여줘. 
+가격은 price * quantity 기준으로 계산해줘. 
+할인율: 
+- color: #ﬀ5757 
+- font-size: 18px 
+- font-weight: 600 
+판매가: 
+- color: #111 
+- font-size: 18px 
+- font-weight: 600 
+수량 변경 영역: 
+
+
+[원본 53페이지]
+- - 버튼 
+- 현재 수량 
+- + 버튼 
+cart-quantity 스타일: 
+- display: inline-ﬂex 
+- align-items: center 
+- height: 34px 
+- border: 1px solid #ddd 
+- margin-top: 6px 
+수량 버튼: 
+- width: 32px 
+- height: 32px 
+- border: 0 
+- background: #ﬀf 
+- color: #111 
+- font-size: 17px 
+- cursor: pointer 
+수량 숫자: 
+- min-width: 34px 
+- font-size: 13px 
+- text-align: center 
+삭제 버튼: 
+- 상품 카드 오른쪽 위에 × 버튼으로 배치 
+- position: absolute 
+- top: 28px 
+- right: 0 
+- width: 28px 
+- height: 28px 
+- background: transparent 
+- border: 0 
+- color: #777 
+- font-size: 26px 
+- hover 시 color: #111 
+
+
+[원본 54페이지]
+오른쪽 액션 버튼: 옵션/수량 변경 바로구매 
+cart-item-actions: 
+- display: ﬂex 
+- ﬂex-direction: column 
+- gap: 8px 
+- width: 170px 
+- margin-top: 42px 
+옵션/수량 변경 버튼: 
+- height: 40px 
+- border: 1px solid #111 
+- background: #ﬀf 
+- color: #111 
+- font-size: 13px 
+바로구매 버튼: 
+- height: 40px 
+- border: 1px solid #111 
+- background: #111 
+- color: #ﬀf 
+- font-size: 13px 
+배송비 안내 박스: 
+- grid-column: 3 / 5 
+- min-height: 52px 
+- margin-top: 8px 
+- padding: 17px 24px 
+- border-radius: 4px 
+- background: #ﬀf1f1 
+- color: #ﬀ5757 
+- font-size: 14px 
+- font-weight: 500 
+문구: 배송비 | 39,900원 이상 무료배송 
+
+
+[원본 55페이지]
+배송비 계산: 상품별 금액이 39,900원 이상이면 0원 39,900원 미만이면 2,500원 
+상품별 소계 박스: 
+- grid-column: 3 / 5 
+- display: grid 
+- grid-template-columns: repeat(4, 1fr) 
+- gap: 16px 
+- margin-top: 12px 
+- padding: 24px 
+- border: 1px solid #e5e5e5 
+소계 항목: 상품가격/배송비/할인내역/예상 결제 금액 
+소계 라벨: 
+- color: #777 
+- font-size: 13px 
+소계 금액: 
+- color: #111 
+- font-size: 15px 
+- font-weight: 600 
+장바구니가 비어 있으면 cart-empty를 보여줘. 
+빈 상태 문구: 장바구니에 담긴 상품이 없습니다. 
+버튼: 쇼핑 계속하기 
+빈 상태 영역: 
+- min-height: 320px 
+- display: ﬂex 
+- ﬂex-direction: column 
+- align-items: center 
+- justify-content: center 
+- border-bottom: 1px solid #eee 
+- text-align: center 
+쇼핑 계속하기 버튼: 
+
+
+[원본 56페이지]
+- width: 160px 
+- height: 42px 
+- border: 1px solid #111 
+- color: #111 
+- font-size: 14px 
+- href: ./index.html 
+오른쪽 결제정보 박스는 sticky로 만들어줘. 
+cart-summary: 
+- position: sticky 
+- top: 112px 
+- width: 360px 
+- min-height: 420px 
+- padding: 34px 32px 36px 
+- border: 1px solid #111 
+- background: #ﬀf 
+결제정보 제목: 결제정보 
+제목 스타일: 
+- font-size: 20px 
+- font-weight: 600 
+- padding-bottom: 18px 
+- border-bottom: 1px solid #111 
+- margin-bottom: 24px 
+결제정보 항목: 상품금액/배송비/할인금액 
+각 항목: 
+- display: ﬂex 
+- justify-content: space-between 
+- margin-bottom: 18px 
+라벨: 
+- color: #888 
+- font-size: 14px 
+금액: 
+- color: #222 
+- font-size: 15px 
+- font-weight: 600 
+할인 박스: summary-discount-box를 넣어줘. 
+
+
+[원본 57페이지]
+항목: 상품할인 0원 / 즉시할인 0원 
+summary-discount-box: 
+- margin: 8px 0 22px 
+- padding: 18px 
+- border: 1px solid #eee 
+- color: #999 
+- font-size: 13px 
+총 구매 금액: 
+- border-top: 1px solid #111 
+- padding: 22px 0 26px 
+- display: ﬂex 
+- justify-content: space-between 
+총 구매 금액 라벨: 
+- color: #222 
+- font-size: 16px 
+- font-weight: 600 
+총 금액: 
+- color: #111 
+- font-size: 26px 
+- font-weight: 600 
+주문 버튼: 선택된 상품 수량 합계를 기준으로 “0건 주문하기”, “1건 주문하기”처럼 표시해줘. 
+summary-order-button: 
+- width: 100% 
+- height: 58px 
+- border: 0 
+- border-radius: 4px 
+- background: #ﬀ5757 
+- color: #ﬀf 
+- font-size: 17px 
+- font-weight: 500 
+선택 상품이 0개면 disabled 처리하고 배경은 #ddd로 해줘. 
+
+
+[원본 58페이지]
+계산 규칙: 
+선택된 상품만 결제정보에 반영해줘. 
+상품금액 = 선택된 상품들의 price * quantity 합계 
+배송비 = 상품금액이 0원이면 0원, 39,900원 미만이면 2,500원, 39,900원 이상이면 0원 
+할인금액 = 0원 
+총 구매 금액 = 상품금액 + 배송비 
+주문 건수 = 선택된 상품들의 quantity 합계 
+동작: 
+페이지 로드 시 localStorage의 cartItems를 읽어서 상품 목록을 렌더링해줘.상품이 없으면 
+빈 상태를 보여주고 전체 선택/선택 삭제 버튼은 disabled 처리해줘. 상품이 있으면 모든 상품
+을 기본 선택 상태로 보여줘. 개별 체크박스를 해제하면 결제정보에서 제외해줘. 
+전체 선택 체크박스를 누르면 모든 상품 체크 상태를 한 번에 바꿔줘. 선택 삭제를 누르면 선택
+된 상품들을 cartItems에서 제거해줘. 
+상품 삭제 × 버튼을 누르면 해당 상품만 제거해줘. 수량 + 버튼을 누르면 quantity를 1 증가시
+켜줘. 수량 - 버튼을 누르면 quantity를 1 감소시키되 최소 1 아래로 내려가지 않게 해줘. 
+삭제나 수량 변경 후에는 localStorage를 다시 저장하고 헤더 장바구니 숫자도 업데이트해줘. 
+주문하기 버튼을 누르면 현재는 alert로 “주문 기능은 준비 중입니다.”를 보여줘. 이용안내 섹
+션을 장바구니 아래에 넣어줘. 
+cart-guide: 
+- margin-top: 92px 
+- padding-top: 42px 
+- border-top: 1px solid #e5e5e5 
+- color: #777 
+제목: 이용안내 
+내용: 
+- 장바구니 상품은 최대 100개까지 담을 수 있고 30일간 저장됩니다. 
+- 배송비는 상품 금액과 주문 조건에 따라 별도로 부과될 수 있습니다. 
+- 39,900원 이상 구매 시 무료배송이 적용됩니다. 
+- First Fitting 적용 상품은 조건 충족 시 첫 주문 무료 반품 혜택을 받을 수 있습니다. 
+- cart-item grid-template-columns: 22px 92px minmax(0, 1fr) 
+- gap: 14px 
+- 액션 버튼, 배송비, 소계 박스는 전체 너비로 내려오게 grid-column: 1 / 4 
+
+
+[원본 59페이지]
+6-3. 위시리스트 페이지 - wishlist 
+상품 카드나 상품 상세 페이지에서 하트 버튼을 누르면 저장되는 위시리스트 페이지를 만들어
+줘. 브라우저 localStorage의 easeﬁt_wishlist 데이터를 읽어서 찜한 상품을 보여주는 구조야. 
+메인 상품 카드나 상품 상세 페이지에서 저장한 위시리스트 데이터와 연결되어야 해. 
+공통 header, top-banner, footer, quick-menu는 메인 페이지와 같은 구조를 사용해줘. 
+위시리스트 페이지 전체 구조: 
+wishlist-page 
+wishlist-container 
+wishlist-title 
+wishlist-tabs 
+wishlist-head 
+wishlist-count-text 
+wishlist-edit 
+wishlist-grid 
+wishlist-empty 
+페이지 전체 배경은 흰색으로 해줘. 
+wishlist-container: 
+- max-width: 1400px 
+- margin: 0 auto 
+- padding: 90px 76px 140px 
+페이지 제목: 위시리스트 
+wishlist-title 스타일: 
+- margin: 0 0 56px 
+- color: #111 
+- font-size: 34px 
+- font-weight: 700 
+- line-height: 1 
+- text-align: center 
+제목 아래에는 탭 영역을 넣어줘. 현재는 “상품” 탭 하나만 있으면 돼. 
+wishlist-tabs: 
+- display: ﬂex 
+- justify-content: center 
+- margin-bottom: 56px 
+wishlist-tab: 
+
+
+[원본 60페이지]
+- padding-bottom: 10px 
+- border-bottom: 2px solid #111 
+- color: #111 
+- font-size: 18px 
+- font-weight: 600 
+- line-height: 1 
+탭 아래에는 위시리스트 개수와 편집 버튼이 들어가는 head 영역을 만들어줘. 
+wishlist-head: 
+- display: ﬂex 
+- align-items: center 
+- justify-content: space-between 
+- margin-bottom: 28px 
+개수 텍스트: 0 Items/1 Item/2 Items 
+wishlist-count-text: 
+- margin: 0 
+- color: #111 
+- font-size: 14px 
+- font-weight: 600 
+편집 버튼: 
+- 텍스트: 편집 
+- border: 0 
+- background: transparent 
+- color: #111 
+- font-size: 14px 
+- cursor: pointer 
+상품 목록은 wishlist-grid 안에 JS로 렌더링해줘. 
+wishlist-grid: 
+- display: grid 
+- grid-template-columns: repeat(5, minmax(0, 1fr)) 
+- gap: 56px 16px 
+카드 하나의 크기 기준: 상품 카드 width는 고정하지 마. 
+1400px 컨테이너 안에서 좌우 padding 76px을 뺀 공간을 5등분해서 자동 계산되게 해줘. 
+카드 간 가로 간격은 16px 세로 간격은 56px로 해줘. 
+각 위시리스트 상품 카드는 메인 상품 카드 스타일을 기반으로 하되, 위시리스트용으로 조금 
+더 작고 정돈되게 보여줘. 
+
+
+[원본 61페이지]
+wishlist-card: 
+- min-width: 0 
+- cursor: pointer 
+상품 이미지 영역: 
+- aspect-ratio: 3 / 4 
+- background: #f5f5f5 
+- overﬂow: hidden 
+상품 이미지: 
+- width: 100% 
+- height: 100% 
+- object-ﬁt: cover 
+상품 이미지 오른쪽 위에는 active 상태의 하트 버튼을 올려줘. 하트는 항상 ♥ 로 표시하고 클
+릭하면 위시리스트에서 삭제되게 해줘. 
+하트 버튼 
+- class: wishlist-btn product-wish is-active 
+- aria-label: 위시리스트 삭제 
+- icon: ♥ 
+상품 정보 영역: 
+- padding: 16px 8px 0 
+브랜드/카테고리: 
+- margin-bottom: 8px 
+- font-size: 12px 
+- font-weight: 700 
+- color: #111 
+상품명: 
+- min-height: 38px 
+- margin-bottom: 8px 
+- color: #777 
+- font-size: 14px 
+- font-weight: 500 
+- 최대 2줄까지만 보이게 처리 
+가격 영역: 
+- 판매가를 먼저 보여줘 
+- 정가가 있으면 취소선으로 보여줘 
+- 할인율이 있으면 빨간색으로 보여줘 
+
+
+[원본 62페이지]
+가격 표시 순서: 판매가 / 정가 / 할인율 
+판매가: 
+- class: wishlist-sale-price 
+- color: #111 
+- font-size: 16px 
+- font-weight: 600 
+정가: 
+- del 태그 
+- color: #969696 
+- font-size: 13px 
+- text-decoration: line-through 
+할인율: 
+- color: #ﬀ5757 
+- font-size: 16px 
+- font-weight: 600 
+색상칩: 상품에 colors 배열이 있으면 원형 색상칩을 보여줘. 색상칩 영역은 가격 아래에 
+margin-top: 10px을 줘. 
+색상칩: 
+- width: 14px 
+- height: 14px 
+- border-radius: 50% 
+- border: 1px solid rgba(17, 17, 17, 0.08) 
+- background는 저장된 color 값 사용 
+사이즈 배지: 색상칩 아래에 사이즈 범위를 작게 보여줘. 기본값은 XS-3XL이야. 
+wishlist-size-badge: 
+- display: inline-ﬂex 
+- align-items: center 
+- justify-content: center 
+- min-width: 58px 
+- height: 24px 
+- margin-top: 12px 
+- padding: 0 9px 
+- background: #f2f2f2 
+- color: #777 
+- font-size: 12px 
+
+
+[원본 63페이지]
+- font-weight: 400 
+localStorage key:easeﬁt_wishlist 
+위시리스트 item 데이터 구조: 
+id/category/name/price/originalPrice/discount/image/colors/sizes 
+렌더링 규칙: 
+페이지 로드 시 easeﬁt_wishlist를 읽어와서 wishlist-grid에 렌더링해줘. 
+상품 개수는 wishlist-count-text에 표시해줘. 
+상품이 0개면 wishlist-grid는 숨기고 wishlist-empty를 보여줘. 
+상품이 1개면 “1 Item”, 그 외에는 “N Items”로 표시해줘. 
+상품이 0개면 편집 버튼도 숨겨줘. 
+빈 상태 
+문구: 아직 찜한 상품이 없습니다. 
+마음에 드는 상품을 하트로 저장해보세요. 
+버튼: 쇼핑하러 가기 
+wishlist-empty: 
+- padding: 120px 0 
+- text-align: center 
+- color: #999 
+빈 상태 문구: 
+- margin: 0 0 28px 
+- font-size: 16px 
+- line-height: 1.7 
+쇼핑하러 가기 버튼: 
+- href: ./index.html 
+- width: 180px 
+- height: 48px 
+- background: #111 
+- color: #ﬀf 
+- font-size: 14px 
+- font-weight: 600 
+- line-height: 48px 
+
+
+[원본 64페이지]
+동작: 위시리스트 상품 카드를 클릭하면 상품 상세 페이지로 이동하게 해줘. 
+이동 주소는 product-detail.html?id=상품ID 형식이야. 
+예: EF001 상품 클릭 시 ./product-detail.html?id=EF001 
+단, 하트 버튼을 클릭했을 때는 상세 페이지로 이동하지 말고 해당 상품을 위시리스트에서 삭
+제해줘. 삭제 후 localStorage를 다시 저장하고 위시리스트 목록을 다시 렌더링해줘. 
+편집 버튼: 
+현재 파일 기준으로는 실제 삭제 모드 UI를 따로 보여주지는 않고 wishlist-grid에 is-editing 
+클래스를 토글하고 버튼 텍스트만 바꿔줘. 
+편집 클릭 시 텍스트는 “완료” 
+완료 클릭 시 텍스트는 “편집” 
+주의: 
+편집 버튼은 전체 삭제 버튼이 아니라 편집 상태 토글 버튼처럼 동작한다. 
+위시리스트 삭제는 각 상품 카드의 하트 버튼으로 한다. 
+위시리스트는 DB가 아니라 localStorage 기반이다. 
+헤더의 위시리스트 숫자도 common.js의 updateWishlistCount 흐름과 연결되게 해줘. 
+전체 디자인은 현재 EASE FIT의 흰 배경, 얇은 라인, 검정 텍스트, 레드 하트 포인트 스타일을 
+유지해줘. 
+6-4. 로그인/회원가입 
+
+
+[원본 65페이지]

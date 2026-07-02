@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>3D Fitting Room — EASE FIT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#f7f5f3; --surface:#ffffff; --text:#111111; --muted:#777777;
+      --light:#aaaaaa; --border:#ece8e3; --accent:#8f8173;
+      --font:'Noto Sans KR',sans-serif; --font-brand:Georgia,serif; --hh:64px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;overflow:hidden;}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;} button{cursor:pointer;font:inherit;border:none;background:none;} ul{list-style:none;}
+
+    /* ── HEADER ── */
+    .hd{position:fixed;top:0;left:0;right:0;z-index:300;height:var(--hh);
+      display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 36px;
+      background:rgba(247,245,243,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+    .hd-nav{display:flex;gap:24px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+    .hd-nav a:hover{color:var(--text);}
+    .hd-nav a.cur{color:var(--text);border-bottom:1.5px solid var(--text);padding-bottom:1px;}
+    .hd-brand{font-family:var(--font-brand);font-size:20px;letter-spacing:.06em;text-align:center;}
+    .hd-r{display:flex;justify-content:flex-end;gap:18px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+    .hd-r a:hover{color:var(--text);}
+
+    /* ── APP LAYOUT ── */
+    .app{position:fixed;top:var(--hh);left:0;right:0;bottom:0;
+      display:grid;grid-template-columns:272px 1fr 372px;}
+
+    /* ──────────────── LEFT PANEL (unchanged) ──────────────── */
+    .lp{border-right:1px solid var(--border);background:var(--surface);
+      display:flex;flex-direction:column;overflow:hidden;}
+    .lp-head{padding:22px 22px 16px;border-bottom:1px solid var(--border);flex-shrink:0;}
+    .lp-title{font-family:var(--font-brand);font-size:20px;font-weight:400;margin-bottom:2px;}
+    .lp-sub{font-size:12px;color:var(--muted);}
+
+    .fitbox{padding:14px 22px 12px;border-bottom:1px solid var(--border);flex-shrink:0;}
+    .fitbox-lbl{font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
+    .fitbox-cur{font-size:12px;color:var(--text);margin-bottom:9px;}
+    .fitbox-cur strong{font-weight:700;}
+    .sz-grid{display:flex;flex-wrap:wrap;gap:5px;}
+    .sz-b{min-width:40px;height:32px;padding:0 8px;border:1px solid var(--border);
+      background:var(--bg);font-size:11px;font-weight:600;border-radius:6px;transition:all .14s;}
+    .sz-b:hover{border-color:#999;}
+    .sz-b.on{border-color:var(--text);background:var(--text);color:#fff;}
+
+    .tab-bar{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;}
+    .tab-b{flex:1;height:40px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--light);border-bottom:2px solid transparent;transition:all .14s;}
+    .tab-b.on{color:var(--text);border-bottom-color:var(--text);}
+
+    .prod-list{flex:1;overflow-y:auto;padding:6px;}
+    .prod-list::-webkit-scrollbar{width:3px;}
+    .prod-list::-webkit-scrollbar-thumb{background:#d8d4cf;border-radius:2px;}
+    .pc{display:grid;grid-template-columns:48px 1fr 26px;align-items:center;gap:8px;
+      padding:9px 8px;border:1px solid transparent;border-radius:8px;cursor:pointer;transition:all .14s;}
+    .pc:hover{background:var(--bg);}
+    .pc.sel{border-color:var(--text);background:var(--bg);}
+    .pc-thumb{width:48px;height:60px;border-radius:5px;display:flex;align-items:center;
+      justify-content:center;flex-shrink:0;}
+    .pc-lbl{font-size:7px;font-weight:800;letter-spacing:.07em;opacity:.4;}
+    .pc-name{font-size:12px;font-weight:600;line-height:1.3;white-space:nowrap;
+      overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
+    .pc-meta{font-size:10px;color:var(--muted);}
+    .wbtn{font-size:14px;color:var(--light);display:flex;align-items:center;justify-content:center;transition:color .14s;}
+    .wbtn:hover{color:var(--text);}
+    .wbtn.on{color:var(--text);}
+
+    /* ──────────────── CENTER PANEL ──────────────── */
+    .cp{background:#f2f0ed;display:flex;flex-direction:column;align-items:center;
+      position:relative;overflow:hidden;padding:22px 0 18px;}
+
+    /* Toggle */
+    .av-toggle{display:flex;background:#e4e2de;border-radius:100px;padding:3px;gap:2px;
+      margin-bottom:18px;flex-shrink:0;}
+    .tgl-btn{padding:7px 24px;border-radius:100px;font-size:12px;font-weight:600;
+      color:var(--muted);transition:all .2s;}
+    .tgl-btn.on{background:var(--surface);color:var(--text);box-shadow:0 1px 5px rgba(0,0,0,.1);}
+
+    /* Avatar stage */
+    .av-stage{flex:1;width:100%;display:flex;align-items:center;justify-content:center;position:relative;}
+    .av-view,.mv-view{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;}
+    .mv-view{display:none;flex-direction:column;gap:12px;color:var(--muted);font-size:14px;text-align:center;}
+    .mv-icon{font-size:52px;opacity:.25;}
+
+    /* Avatar SVG */
+    .av-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+    .av-svg{height:calc(100vh - var(--hh) - 120px);max-height:450px;min-height:310px;width:auto;
+      filter:drop-shadow(0 8px 28px rgba(0,0,0,.11));
+      transition:filter .5s;}
+    .av-svg.glow{filter:drop-shadow(0 0 20px rgba(143,129,115,.5));}
+
+    /* Clothing preview card */
+    .cl-preview{position:absolute;right:18px;top:50%;transform:translateY(-50%);
+      display:flex;flex-direction:column;align-items:center;gap:6px;}
+    .cl-card{background:var(--surface);border:1.5px dashed #cdc8c2;border-radius:14px;
+      padding:12px;width:104px;display:flex;flex-direction:column;align-items:center;gap:7px;
+      cursor:pointer;transition:all .22s;}
+    .cl-card:hover{border-color:var(--accent);transform:translateY(-3px);
+      box-shadow:0 6px 18px rgba(0,0,0,.08);}
+    .cl-card.applied{border-style:solid;border-color:var(--text);}
+    .cl-thumb{width:76px;height:94px;border-radius:8px;display:flex;align-items:center;
+      justify-content:center;font-size:8px;font-weight:800;letter-spacing:.08em;
+      color:rgba(0,0,0,.25);transition:all .3s;}
+    .cl-apply{width:30px;height:30px;border-radius:50%;background:var(--text);color:#fff;
+      font-size:18px;font-weight:300;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 2px 8px rgba(0,0,0,.2);transition:all .2s;flex-shrink:0;}
+    .cl-apply:hover{background:var(--accent);transform:scale(1.1);}
+    .cl-apply.done{background:#4a8a5a;}
+    .cl-pname{font-size:10px;font-weight:600;text-align:center;color:var(--muted);line-height:1.35;}
+
+    /* Curved arrow SVG between clothing and avatar */
+    .cl-arrow{position:absolute;right:130px;top:50%;transform:translateY(-50%);
+      width:52px;height:72px;pointer-events:none;opacity:.32;}
+
+    /* Drag hint */
+    .drag-hint{background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.06);
+      border-radius:100px;padding:9px 18px;display:flex;align-items:center;gap:7px;
+      font-size:11px;color:var(--muted);box-shadow:0 2px 8px rgba(0,0,0,.06);
+      flex-shrink:0;margin-top:6px;}
+    .hint-ic{font-size:13px;}
+
+    /* ──────────────── RIGHT PANEL ──────────────── */
+    .rp{border-left:1px solid var(--border);background:var(--surface);
+      display:flex;flex-direction:column;overflow:hidden;}
+    .rp-scroll{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;}
+    .rp-scroll::-webkit-scrollbar{width:3px;}
+    .rp-scroll::-webkit-scrollbar-thumb{background:#d8d4cf;border-radius:2px;}
+    .rp-footer{padding:14px 18px;border-top:1px solid var(--border);background:var(--surface);flex-shrink:0;}
+
+    /* Card */
+    .rcard{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:16px 18px;}
+    .rcard-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;}
+    .rcard-ttl{font-size:13px;font-weight:700;}
+    .rcard-act{font-size:11px;color:var(--muted);text-decoration:underline;cursor:pointer;}
+    .rcard-act:hover{color:var(--text);}
+
+    /* Size info pills */
+    .sz-pills{display:flex;flex-wrap:wrap;gap:7px;}
+    .sz-pill{background:#f5f3f0;border-radius:100px;padding:6px 13px;
+      font-size:12px;display:flex;gap:5px;align-items:center;}
+    .sz-pill-k{color:var(--muted);}
+    .sz-pill-v{font-weight:700;}
+
+    /* Product detail card */
+    .pd-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+    .pd-ttl{font-size:13px;font-weight:700;}
+    .pd-wish{font-size:19px;color:var(--muted);cursor:pointer;transition:color .14s;}
+    .pd-wish:hover,.pd-wish.on{color:var(--text);}
+    .pd-inner{display:flex;gap:12px;margin-bottom:16px;}
+    .pd-img{width:80px;height:100px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;
+      justify-content:center;font-size:8px;font-weight:800;letter-spacing:.08em;color:rgba(0,0,0,.22);}
+    .pd-info{flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;}
+    .pd-name{font-size:14px;font-weight:700;line-height:1.4;}
+    .pd-price{font-size:17px;font-weight:700;}
+    .pd-code{font-size:10px;color:var(--muted);}
+
+    /* Options */
+    .opt-sec{margin-bottom:14px;}
+    .opt-lbl{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--muted);margin-bottom:9px;}
+    .clr-row{display:flex;gap:9px;}
+    .clr-sw{width:26px;height:26px;border-radius:50%;cursor:pointer;
+      border:2px solid transparent;transition:all .15s;position:relative;}
+    .clr-sw.on{border-color:var(--text);box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px var(--text);}
+    .sz-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px;}
+    .sz-pill-btn{min-width:42px;height:36px;padding:0 9px;border:1px solid var(--border);
+      background:var(--surface);border-radius:100px;font-size:12px;font-weight:600;transition:all .14s;}
+    .sz-pill-btn:hover{border-color:var(--text);}
+    .sz-pill-btn.on{border-color:var(--text);background:var(--text);color:#fff;}
+    .sz-rec-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;}
+    .sz-rec{color:var(--muted);}
+    .sz-rec strong{color:var(--text);}
+    .sz-guide{font-size:11px;color:var(--muted);text-decoration:underline;cursor:pointer;}
+    .sz-guide:hover{color:var(--text);}
+
+    /* Fit chips */
+    .fit-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
+    .fchip{background:#f5f3f0;border-radius:100px;padding:5px 11px;font-size:11px;font-weight:600;color:var(--muted);}
+    .fchip.hi{background:#f0ede8;color:var(--accent);}
+
+    /* Accordion */
+    .acc-list{border-top:1px solid var(--border);}
+    .acc-it{border-bottom:1px solid var(--border);}
+    .acc-tr{width:100%;padding:13px 0;display:flex;justify-content:space-between;align-items:center;
+      font-size:13px;font-weight:600;text-align:left;color:var(--text);transition:color .14s;}
+    .acc-tr:hover{color:var(--accent);}
+    .acc-ic{font-size:16px;color:var(--light);transition:transform .2s;display:inline-block;}
+    .acc-tr.open .acc-ic{transform:rotate(45deg);}
+    .acc-body{display:none;padding:0 0 14px;font-size:13px;color:var(--muted);line-height:1.75;}
+    .acc-body.open{display:block;}
+    .acc-body li{padding-left:2px;margin-bottom:2px;}
+    .acc-body li::before{content:"·";margin-right:6px;color:var(--accent);}
+
+    /* CTA */
+    .cta-row{display:flex;gap:8px;align-items:center;}
+    .cart-btn{flex:1;height:56px;background:var(--text);color:#fff;border-radius:100px;
+      font-size:14px;font-weight:700;letter-spacing:.04em;transition:background .2s;}
+    .cart-btn:hover{background:var(--accent);}
+    .bm-btn{width:56px;height:56px;border:1.5px solid var(--border);border-radius:100px;
+      font-size:20px;color:var(--muted);display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;transition:all .14s;}
+    .bm-btn:hover{border-color:var(--text);color:var(--text);}
+    .bm-btn.on{border-color:var(--text);color:var(--text);}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(16px);
+      background:var(--text);color:#fff;padding:13px 26px;border-radius:100px;
+      font-size:13px;font-weight:600;opacity:0;pointer-events:none;z-index:9999;
+      transition:opacity .28s,transform .28s;white-space:nowrap;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    @keyframes clothingPop{0%{transform:scale(1);}50%{transform:scale(1.12);}100%{transform:scale(1);}}
+    .pop{animation:clothingPop .4s ease;}
+
+    /* Responsive */
+    @media(max-width:1200px){.app{grid-template-columns:240px 1fr 340px;}}
+    @media(max-width:900px){
+      html,body{overflow:auto;}
+      .app{position:static;grid-template-columns:1fr;height:auto;}
+      .lp,.rp{height:auto;}
+      .cp{height:520px;}
+      .hd{position:sticky;}
+      .hd-nav{display:none;}
+      .cl-preview{display:none;}
+      .cl-arrow{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hd">
+  <nav class="hd-nav">
+    <a href="index.html">HOME</a>
+    <a href="#">TOP</a>
+    <a href="#">BOTTOM</a>
+    <a href="my-clothes.html" class="cur">MY CLOTHES</a>
+  </nav>
+  <a class="hd-brand" href="index.html">EASE FIT</a>
+  <div class="hd-r">
+    <a href="#">MY FIT</a>
+    <a href="#">♡</a>
+    <a href="#">BAG</a>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- ════ LEFT PANEL (기존 유지) ════ -->
+  <aside class="lp">
+    <div class="lp-head">
+      <h1 class="lp-title">MY CLOTHES</h1>
+      <p class="lp-sub">상의와 하의를 골라 입혀보세요</p>
+    </div>
+
+    <div class="fitbox">
+      <p class="fitbox-lbl">✦ My Fit View</p>
+      <p class="fitbox-cur">현재 기준: <strong id="curSzTxt">XL</strong></p>
+      <div class="sz-grid" role="group">
+        <button class="sz-b" data-sz="XS">XS</button>
+        <button class="sz-b" data-sz="S">S</button>
+        <button class="sz-b" data-sz="M">M</button>
+        <button class="sz-b" data-sz="L">L</button>
+        <button class="sz-b on" data-sz="XL">XL</button>
+        <button class="sz-b" data-sz="2XL">2XL</button>
+        <button class="sz-b" data-sz="3XL">3XL</button>
+      </div>
+    </div>
+
+    <div class="tab-bar" role="tablist">
+      <button class="tab-b on" data-tab="top" role="tab" aria-selected="true">상의</button>
+      <button class="tab-b" data-tab="bottom" role="tab" aria-selected="false">하의</button>
+    </div>
+    <ul class="prod-list" id="prodList"></ul>
+  </aside>
+
+  <!-- ════ CENTER PANEL (3D Avatar) ════ -->
+  <section class="cp">
+    <!-- Avatar / Model toggle -->
+    <div class="av-toggle">
+      <button class="tgl-btn on" id="tglAv">아바타</button>
+      <button class="tgl-btn" id="tglMv">모델</button>
+    </div>
+
+    <!-- Stage -->
+    <div class="av-stage">
+
+      <!-- Avatar view -->
+      <div class="av-view" id="avView">
+        <div class="av-wrap">
+          <!-- ── 3D Avatar SVG ── -->
+          <svg class="av-svg" id="avSvg" viewBox="0 0 260 490" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="fG" cx="42%" cy="38%" r="66%">
+                <stop offset="0%" stop-color="#f6cfa8"/>
+                <stop offset="100%" stop-color="#d49060"/>
+              </radialGradient>
+              <radialGradient id="bG" cx="36%" cy="28%" r="78%">
+                <stop offset="0%" stop-color="#f0c49a"/>
+                <stop offset="100%" stop-color="#c87848"/>
+              </radialGradient>
+              <linearGradient id="lG" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#c87848"/>
+                <stop offset="40%" stop-color="#eabb88"/>
+                <stop offset="100%" stop-color="#c07040"/>
+              </linearGradient>
+              <linearGradient id="laG" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#c47848"/>
+                <stop offset="55%" stop-color="#eabb88"/>
+                <stop offset="100%" stop-color="#d0906a"/>
+              </linearGradient>
+              <linearGradient id="raG" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#d0906a"/>
+                <stop offset="45%" stop-color="#eabb88"/>
+                <stop offset="100%" stop-color="#c47848"/>
+              </linearGradient>
+              <linearGradient id="hG" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3d2210"/>
+                <stop offset="100%" stop-color="#1a0c05"/>
+              </linearGradient>
+              <filter id="aShad" x="-20%" y="-4%" width="140%" height="112%">
+                <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(0,0,0,.13)"/>
+              </filter>
+              <filter id="cShad">
+                <feDropShadow dx="1" dy="2" stdDeviation="2.5" flood-color="rgba(0,0,0,.28)"/>
+              </filter>
+            </defs>
+
+            <!-- HAIR BACK -->
+            <path d="M130,14 C102,16 84,28 80,46 L74,90 L70,180 C68,214 68,248 72,278 L76,298 L80,300 C76,268 74,234 76,200 L80,120 L86,58 C90,36 106,22 130,18 C154,22 170,36 174,58 L180,120 L184,200 C186,234 184,268 180,300 L184,298 L188,278 C192,248 192,214 190,180 L186,90 L180,46 C176,28 158,16 130,14Z" fill="url(#hG)"/>
+
+            <!-- LEFT ARM -->
+            <path d="M50,164 C42,182 36,210 34,238 L32,272 C32,290 34,308 38,328 L42,358 C43,368 45,376 50,378 L56,378 C61,376 62,368 61,358 L56,328 C53,308 52,290 54,272 L56,238 C58,210 62,182 68,164Z" fill="url(#laG)" filter="url(#aShad)"/>
+
+            <!-- RIGHT ARM -->
+            <path d="M210,164 C218,182 224,210 226,238 L228,272 C228,290 226,308 222,328 L218,358 C217,368 215,376 210,378 L204,378 C199,376 198,368 199,358 L204,328 C207,308 208,290 206,272 L204,238 C202,210 198,182 192,164Z" fill="url(#raG)" filter="url(#aShad)"/>
+
+            <!-- BODY (torso + hips) -->
+            <path d="M112,126 C88,130 62,144 48,164 C38,180 38,208 42,232 C46,254 58,268 76,276 C84,280 93,286 98,298 L102,312 L130,318 L158,312 L162,298 C167,286 176,280 184,276 C202,268 214,254 218,232 C222,208 222,180 212,164 C198,144 172,130 148,126Z" fill="url(#bG)" filter="url(#aShad)"/>
+
+            <!-- LEFT LEG -->
+            <path d="M90,312 L122,312 C125,342 124,368 122,390 C120,406 118,422 118,440 L118,466 C118,476 114,483 108,484 L102,484 C96,483 92,476 92,466 L92,440 C92,422 90,406 88,390 C86,368 85,342 90,312Z" fill="url(#lG)" filter="url(#aShad)"/>
+
+            <!-- RIGHT LEG -->
+            <path d="M138,312 L170,312 C175,342 175,368 172,390 C170,406 168,422 168,440 L168,466 C168,476 164,483 158,484 L152,484 C146,483 142,476 142,466 L142,440 C142,422 140,406 138,390 C136,368 135,342 138,312Z" fill="url(#lG)" filter="url(#aShad)"/>
+
+            <!-- BIKER SHORTS (black, hips to mid-thigh) -->
+            <path d="M76,276 C72,285 70,296 72,310 L76,338 C78,356 82,370 86,380 L114,382 C116,370 118,356 118,338 L118,322 L124,314 L130,318 L136,314 L142,322 L142,338 C142,356 144,370 146,382 L174,380 C178,370 182,356 184,338 L188,310 C190,296 188,285 184,276 C176,288 160,296 130,298 C100,296 84,288 76,276Z" fill="#1c1c1c" filter="url(#cShad)"/>
+            <!-- Shorts waistband detail -->
+            <path d="M76,276 C84,285 100,291 130,292 C160,291 176,285 184,276 L182,280 C174,290 158,296 130,298 C102,296 86,290 78,280Z" fill="#2a2a2a"/>
+
+            <!-- SPORTS BRA (black) -->
+            <!-- Left cup -->
+            <path d="M112,144 C102,148 90,162 88,178 C86,192 88,204 96,212 C104,218 114,220 124,218 L130,216 L130,144Z" fill="#1c1c1c" filter="url(#cShad)"/>
+            <!-- Right cup -->
+            <path d="M148,144 C158,148 170,162 172,178 C174,192 172,204 164,212 C156,218 146,220 136,218 L130,216 L130,144Z" fill="#1c1c1c" filter="url(#cShad)"/>
+            <!-- Center bridge -->
+            <rect x="128" y="194" width="4" height="24" fill="#1c1c1c"/>
+            <!-- Under band -->
+            <path d="M88,212 C88,224 98,230 114,232 L146,232 C162,230 172,224 172,212 L172,216 C172,228 162,234 146,236 L114,236 C98,234 88,228 88,216Z" fill="#1c1c1c"/>
+            <!-- Left strap -->
+            <path d="M98,144 L103,144 L81,128 L76,130 L78,135Z" fill="#1c1c1c"/>
+            <!-- Right strap -->
+            <path d="M162,144 L157,144 L179,128 L184,130 L182,135Z" fill="#1c1c1c"/>
+
+            <!-- TOP GARMENT OVERLAY (selected item) -->
+            <path id="avTop"
+              d="M112,126 C88,130 62,144 48,164 C38,180 38,208 42,232 C46,254 58,268 76,276 C84,280 93,286 98,298 L102,312 L158,312 L162,298 C167,286 176,280 184,276 C202,268 214,254 218,232 C222,208 222,180 212,164 C198,144 172,130 148,126Z"
+              fill="transparent" opacity="0.82" style="transition:fill .35s ease;"/>
+            <!-- BOTTOM GARMENT OVERLAY -->
+            <path id="avBot"
+              d="M76,276 C72,285 70,296 72,310 L76,338 C78,356 82,370 86,384 L114,386 L118,340 L122,314 L130,318 L138,314 L142,340 L146,386 L174,384 C178,370 182,356 184,338 L188,310 C190,296 188,285 184,276 C176,288 160,296 130,298 C100,296 84,288 76,276Z M90,312 L122,312 C122,342 122,368 120,390 L118,440 L118,468 L102,468 L92,440 L92,390 C90,368 88,342 90,312Z M138,312 L170,312 C172,342 172,368 170,390 L168,440 L168,468 L152,468 L142,440 L142,390 C140,368 138,342 138,312Z"
+              fill="transparent" opacity="0.82" style="transition:fill .35s ease;"/>
+
+            <!-- NECK -->
+            <path d="M116,98 L144,98 C146,110 146,122 146,126 L114,126 C114,122 114,110 116,98Z" fill="url(#bG)"/>
+
+            <!-- HEAD -->
+            <ellipse cx="130" cy="56" rx="40" ry="46" fill="url(#fG)" filter="url(#aShad)"/>
+
+            <!-- EARS -->
+            <ellipse cx="91" cy="64" rx="7" ry="9" fill="#dda870"/>
+            <ellipse cx="169" cy="64" rx="7" ry="9" fill="#dda870"/>
+
+            <!-- HAIR FRONT (top/sides) -->
+            <path d="M130,12 C108,12 92,22 90,36 L88,52 L92,52 C92,38 102,26 130,22 C158,26 168,38 168,52 L172,52 L170,36 C168,22 152,12 130,12Z" fill="url(#hG)"/>
+            <!-- Left side hair -->
+            <path d="M90,36 L88,80 L84,130 C82,150 82,170 84,190 L86,192 C84,170 84,150 86,130 L90,72 L94,38Z" fill="url(#hG)"/>
+            <!-- Right side hair -->
+            <path d="M170,36 L172,80 L176,130 C178,150 178,170 176,190 L174,192 C176,170 176,150 174,130 L170,72 L166,38Z" fill="url(#hG)"/>
+
+            <!-- EYEBROWS -->
+            <path d="M108,44 C112,40 118,39 122,41" stroke="#5a3010" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <path d="M138,41 C142,39 148,40 152,44" stroke="#5a3010" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+
+            <!-- EYES -->
+            <ellipse cx="115" cy="56" rx="8.5" ry="5.5" fill="#1e1008"/>
+            <ellipse cx="145" cy="56" rx="8.5" ry="5.5" fill="#1e1008"/>
+            <ellipse cx="113" cy="54.5" rx="3" ry="2.5" fill="#5a3820"/>
+            <ellipse cx="143" cy="54.5" rx="3" ry="2.5" fill="#5a3820"/>
+            <ellipse cx="117" cy="53.5" rx="2.2" ry="1.8" fill="rgba(255,255,255,.38)"/>
+            <ellipse cx="147" cy="53.5" rx="2.2" ry="1.8" fill="rgba(255,255,255,.38)"/>
+
+            <!-- NOSE (subtle) -->
+            <path d="M128,64 C127,69 127,72 129,75 L131,76 L133,75 C135,72 133,69 132,64" stroke="#c08060" stroke-width="1" fill="none" opacity=".45"/>
+
+            <!-- LIPS -->
+            <path d="M119,85 C123,82 127,81 130,81 C133,81 137,82 141,85 C138,90 133,93 130,93 C127,93 122,90 119,85Z" fill="#c47878"/>
+            <path d="M119,85 C123,87 127,88 130,88 C133,88 137,87 141,85" stroke="#b06060" stroke-width=".8" fill="none"/>
+
+            <!-- Collarbone subtle -->
+            <path d="M100,132 C110,127 120,126 130,128" stroke="#d0906a" stroke-width="1.2" fill="none" opacity=".3"/>
+            <path d="M160,132 C150,127 140,126 130,128" stroke="#d0906a" stroke-width="1.2" fill="none" opacity=".3"/>
+          </svg>
+        </div>
+
+        <!-- Clothing preview card (right of avatar) -->
+        <div class="cl-preview">
+          <!-- Curved arrow -->
+          <svg class="cl-arrow" viewBox="0 0 52 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M46,4 C30,4 10,20 10,40 C10,55 22,68 36,68" stroke="#8f8173" stroke-width="2" fill="none" stroke-dasharray="5 3" stroke-linecap="round"/>
+            <path d="M30,62 L36,68 L30,74" stroke="#8f8173" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <div class="cl-card" id="clCard">
+            <div class="cl-thumb" id="clThumb" style="background:#c8b48a;">JACKET</div>
+            <button class="cl-apply" id="clApplyBtn" aria-label="아바타에 입히기">+</button>
+            <p class="cl-pname" id="clPname">오버핏 싱글 자켓</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Model view -->
+      <div class="mv-view" id="mvView">
+        <div class="mv-icon">👗</div>
+        <p>모델 착용컷</p>
+        <p style="font-size:12px;color:var(--light);">준비 중입니다</p>
+      </div>
+    </div>
+
+    <!-- Drag hint -->
+    <div class="drag-hint">
+      <span class="hint-ic">👆</span>
+      <span>+ 버튼을 눌러 아바타에 입혀보세요</span>
+    </div>
+  </section>
+
+  <!-- ════ RIGHT PANEL ════ -->
+  <aside class="rp">
+    <div class="rp-scroll">
+
+      <!-- 내 사이즈 정보 카드 -->
+      <div class="rcard">
+        <div class="rcard-hd">
+          <span class="rcard-ttl">내 사이즈 정보</span>
+          <span class="rcard-act">수정하기</span>
+        </div>
+        <div class="sz-pills">
+          <div class="sz-pill"><span class="sz-pill-k">가슴</span><span class="sz-pill-v">82 cm</span></div>
+          <div class="sz-pill"><span class="sz-pill-k">허리</span><span class="sz-pill-v">64 cm</span></div>
+          <div class="sz-pill"><span class="sz-pill-k">엉덩이</span><span class="sz-pill-v">91 cm</span></div>
+          <div class="sz-pill"><span class="sz-pill-k">키</span><span class="sz-pill-v">168 cm</span></div>
+        </div>
+      </div>
+
+      <!-- 선택한 상품 카드 -->
+      <div class="rcard">
+        <div class="pd-hd">
+          <span class="pd-ttl">선택한 상품</span>
+          <button class="pd-wish" id="pdWish" aria-label="찜하기" aria-pressed="false">♡</button>
+        </div>
+
+        <div class="pd-inner">
+          <div class="pd-img" id="pdImg" style="background:#c8b48a;">JACKET</div>
+          <div class="pd-info">
+            <p class="pd-name" id="pdName">오버핏 싱글 자켓</p>
+            <p class="pd-price" id="pdPrice">₩89,000</p>
+            <p class="pd-code" id="pdCode">상품코드 EFJK-2403-01</p>
+          </div>
+        </div>
+
+        <!-- 색상 -->
+        <div class="opt-sec">
+          <p class="opt-lbl">색상</p>
+          <div class="clr-row">
+            <div class="clr-sw on" style="background:#c8b48a;" data-clr="베이지" data-bg="#c8b48a" role="button" tabindex="0" aria-label="베이지"></div>
+            <div class="clr-sw" style="background:#1a1a1a;" data-clr="블랙" data-bg="#1a1a1a" role="button" tabindex="0" aria-label="블랙"></div>
+            <div class="clr-sw" style="background:#ede8e0; border:1px solid #d8d4cc;" data-clr="아이보리" data-bg="#ede8e0" role="button" tabindex="0" aria-label="아이보리"></div>
+          </div>
+        </div>
+
+        <!-- 사이즈 -->
+        <div class="opt-sec">
+          <p class="opt-lbl">사이즈</p>
+          <div class="sz-row">
+            <button class="sz-pill-btn" data-s="XS">XS</button>
+            <button class="sz-pill-btn on" data-s="S">S</button>
+            <button class="sz-pill-btn" data-s="M">M</button>
+            <button class="sz-pill-btn" data-s="L">L</button>
+            <button class="sz-pill-btn" data-s="XL">XL</button>
+          </div>
+          <div class="sz-rec-row">
+            <span class="sz-rec">추천 사이즈: <strong>S</strong></span>
+            <button class="sz-guide">사이즈 가이드</button>
+          </div>
+        </div>
+
+        <!-- 핏 칩 -->
+        <div class="fit-chips">
+          <span class="fchip hi">오버핏</span>
+          <span class="fchip">어깨 여유 있음</span>
+          <span class="fchip">힙 중간 덮음</span>
+        </div>
+
+        <!-- 아코디언 -->
+        <div class="acc-list" style="margin-top:14px;">
+          <div class="acc-it">
+            <button class="acc-tr" data-acc="a1">핏 정보 <span class="acc-ic">+</span></button>
+            <div class="acc-body" id="a1">
+              <ul>
+                <li>오버핏 실루엣</li>
+                <li>어깨선이 자연스럽게 처지는 디자인</li>
+                <li>힙 중간 정도 덮는 기장</li>
+                <li>가벼운 이너와 레이어드하기 좋음</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acc-it">
+            <button class="acc-tr" data-acc="a2">상품 정보 <span class="acc-ic">+</span></button>
+            <div class="acc-body" id="a2">
+              <ul>
+                <li>상품명: 오버핏 싱글 자켓</li>
+                <li>시즌: Spring / Fall</li>
+                <li>핏: Relaxed Oversized Fit</li>
+                <li>클로징: 싱글 버튼</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acc-it">
+            <button class="acc-tr" data-acc="a3">소재 및 케어 <span class="acc-ic">+</span></button>
+            <div class="acc-body" id="a3">
+              <ul>
+                <li>폴리에스터 68% / 레이온 28% / 스판 4%</li>
+                <li>드라이클리닝 권장</li>
+                <li>고온 건조 금지</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acc-it">
+            <button class="acc-tr" data-acc="a4">배송 및 반품 <span class="acc-ic">+</span></button>
+            <div class="acc-body" id="a4">
+              <ul>
+                <li>평균 배송 1~3 영업일</li>
+                <li>단순 변심 반품 가능</li>
+                <li>수령 후 7일 이내 신청</li>
+                <li>사용 흔적·택 제거 시 반품 불가</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /rp-scroll -->
+
+    <!-- CTA -->
+    <div class="rp-footer">
+      <div class="cta-row">
+        <button class="cart-btn" id="cartBtn">장바구니 담기</button>
+        <button class="bm-btn" id="bmBtn" aria-label="저장">🔖</button>
+      </div>
+    </div>
+  </aside>
+
+</div><!-- /app -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── DATA ────────────────────────────────────────────────────────────
+  const PRODUCTS = [
+    { id:'top01', type:'top',    name:'Relax Cotton Shirt',  sz:'XL',  price:'39,000원', color:'#e4ddd4', label:'SHIRT', fit:'루즈핏' },
+    { id:'top02', type:'top',    name:'Stripe Linen Shirt',  sz:'M',   price:'45,000원', color:'#9e9891', label:'SHIRT', fit:'레귤러핏' },
+    { id:'top03', type:'top',    name:'Essential Knit',      sz:'L',   price:'52,000원', color:'#222222', label:'KNIT',  fit:'레귤러핏' },
+    { id:'top04', type:'top',    name:'Cozy Oversized Tee',  sz:'XL',  price:'29,000원', color:'#cac5be', label:'TEE',   fit:'오버핏' },
+    { id:'top05', type:'top',    name:'Linen Boxy Top',      sz:'2XL', price:'42,000원', color:'#d4c8b4', label:'TOP',   fit:'박시핏' },
+    { id:'bot01', type:'bottom', name:'Wide Banding Pants',  sz:'XL',  price:'49,000원', color:'#c0a87a', label:'PANTS', fit:'와이드핏' },
+    { id:'bot02', type:'bottom', name:'Slim Straight Denim', sz:'M',   price:'69,000원', color:'#2c3c58', label:'DENIM', fit:'슬림스트레이트' },
+    { id:'bot03', type:'bottom', name:'Midi Flare Skirt',    sz:'L',   price:'55,000원', color:'#1c1c1c', label:'SKIRT', fit:'플레어핏' },
+    { id:'bot04', type:'bottom', name:'Linen Wide Pants',    sz:'2XL', price:'59,000원', color:'#ccc0a6', label:'PANTS', fit:'와이드핏' },
+    { id:'bot05', type:'bottom', name:'Banding Shorts',      sz:'XL',  price:'35,000원', color:'#7a7a6a', label:'SHORTS',fit:'루즈핏' },
+  ];
+
+  const SZ_CLS = { XS:'xs',S:'s',M:'m',L:'l',XL:'xl','2XL':'xxl','3XL':'xxxl' };
+
+  function luma(hex){ const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16); return (r*299+g*587+b*114)/1000; }
+  function txFor(hex){ return luma(hex)>140?'rgba(0,0,0,0.28)':'rgba(255,255,255,0.7)'; }
+  function getP(id){ return PRODUCTS.find(p=>p.id===id)||null; }
+
+  // ── STATE ────────────────────────────────────────────────────────────
+  const S = {
+    sz: 'XL',
+    top: null, bottom: null,
+    wishlist: [], tab: 'top',
+    selColor: '베이지', selSize: 'S',
+    rightProduct: {
+      name:'오버핏 싱글 자켓', price:'₩89,000', code:'EFJK-2403-01',
+      color:'#c8b48a', label:'JACKET', type:'top', fit:'오버핏'
+    },
+    bookmarked: false,
+  };
+
+  function load() {
+    try {
+      S.sz      = localStorage.getItem('preferredSize') || 'XL';
+      S.top     = localStorage.getItem('mc3_top') || 'top01';
+      S.bottom  = localStorage.getItem('mc3_bottom') || 'bot01';
+      S.wishlist= JSON.parse(localStorage.getItem('mc3_wl') || '[]');
+    } catch(e){}
+  }
+  function save(k,v){ try{ localStorage.setItem(k, typeof v==='string'?v:JSON.stringify(v)); }catch(e){} }
+
+  // ── DOM REFS ─────────────────────────────────────────────────────────
+  const avSvg    = document.getElementById('avSvg');
+  const avTop    = document.getElementById('avTop');
+  const avBot    = document.getElementById('avBot');
+  const clThumb  = document.getElementById('clThumb');
+  const clPname  = document.getElementById('clPname');
+  const clCard   = document.getElementById('clCard');
+  const clApplyBtn = document.getElementById('clApplyBtn');
+  const curSzTxt = document.getElementById('curSzTxt');
+  const pdImg    = document.getElementById('pdImg');
+  const pdName   = document.getElementById('pdName');
+  const pdWish   = document.getElementById('pdWish');
+
+  // ── SIZE (LEFT PANEL) ────────────────────────────────────────────────
+  const SZ_SCALE = { XS:0.78,S:0.86,M:0.92,L:1.00,XL:1.08,'2XL':1.17,'3XL':1.27 };
+
+  function applySize(sz) {
+    S.sz = sz;
+    save('preferredSize', sz);
+    curSzTxt.textContent = sz;
+    avSvg.style.transform = `scaleX(${SZ_SCALE[sz]||1.08})`;
+    avSvg.style.transformOrigin = '50% 18%';
+    avSvg.style.transition = 'transform .42s cubic-bezier(.22,1,.36,1)';
+    document.querySelectorAll('.sz-b').forEach(b=>b.classList.toggle('on', b.dataset.sz===sz));
+  }
+
+  // ── GARMENT OVERLAYS ─────────────────────────────────────────────────
+  function applyTopColor(color) {
+    avTop.setAttribute('fill', color || 'transparent');
+  }
+  function applyBotColor(color) {
+    avBot.setAttribute('fill', color || 'transparent');
+  }
+
+  // ── PRODUCT LIST (LEFT) ──────────────────────────────────────────────
+  function renderList() {
+    const list = document.getElementById('prodList');
+    list.innerHTML = '';
+    PRODUCTS.filter(p=>p.type===S.tab).forEach(p=>{
+      const sel = S.tab==='top'?S.top===p.id:S.bottom===p.id;
+      const wl  = S.wishlist.includes(p.id);
+      const li  = document.createElement('li');
+      li.className = `pc${sel?' sel':''}`;
+      li.setAttribute('tabindex','0');
+      li.setAttribute('role','button');
+      li.innerHTML = `
+        <div class="pc-thumb" style="background:${p.color};">
+          <span class="pc-lbl" style="color:${txFor(p.color)};">${p.label}</span>
+        </div>
+        <div>
+          <p class="pc-name">${p.name}</p>
+          <p class="pc-meta">${p.sz} · ${p.price}</p>
+        </div>
+        <button class="wbtn${wl?' on':''}" type="button" aria-label="${wl?'찜 해제':'찜하기'}">${wl?'♥':'♡'}</button>
+      `;
+      li.querySelector('.wbtn').addEventListener('click', e=>{
+        e.stopPropagation();
+        const idx = S.wishlist.indexOf(p.id);
+        if(idx===-1) S.wishlist.push(p.id); else S.wishlist.splice(idx,1);
+        save('mc3_wl', S.wishlist);
+        showToast(idx===-1?'찜 목록에 추가했습니다.':'찜 목록에서 제거했습니다.');
+        renderList();
+      });
+      li.addEventListener('click', e=>{ if(e.target.closest('.wbtn')) return; selectProd(p); });
+      li.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectProd(p); } });
+      list.appendChild(li);
+    });
+  }
+
+  function selectProd(p) {
+    if(p.type==='top'){
+      S.top = p.id; save('mc3_top', p.id);
+      applyTopColor(p.color);
+    } else {
+      S.bottom = p.id; save('mc3_bottom', p.id);
+      applyBotColor(p.color);
+    }
+    // Update clothing preview card
+    clThumb.style.background = p.color;
+    clThumb.textContent = p.label;
+    clThumb.style.color = txFor(p.color);
+    clPname.textContent = p.name;
+    clCard.classList.remove('applied');
+    clApplyBtn.classList.remove('done');
+    clApplyBtn.textContent = '+';
+
+    // Update right panel product info
+    pdImg.style.background = p.color;
+    pdImg.textContent = p.label;
+    pdImg.style.color = txFor(p.color);
+    pdName.textContent = p.name;
+    document.getElementById('pdPrice').textContent = '₩' + p.price.replace('원','');
+    document.getElementById('pdCode').textContent  = '상품코드 EF' + p.id.toUpperCase().replace(/\d/g,'') + '-' + p.id.slice(-2).padStart(2,'0') + '01';
+
+    // Update fit chips
+    const chips = document.querySelector('.fit-chips');
+    chips.innerHTML = `<span class="fchip hi">${p.fit}</span>`;
+
+    renderList();
+  }
+
+  // ── TABS ─────────────────────────────────────────────────────────────
+  document.querySelectorAll('.tab-b').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      S.tab = b.dataset.tab;
+      document.querySelectorAll('.tab-b').forEach(t=>{
+        t.classList.toggle('on', t.dataset.tab===S.tab);
+        t.setAttribute('aria-selected', t.dataset.tab===S.tab?'true':'false');
+      });
+      renderList();
+    });
+  });
+
+  // ── SIZE BUTTONS (LEFT) ──────────────────────────────────────────────
+  document.querySelectorAll('.sz-b').forEach(b=>{
+    b.addEventListener('click', ()=> applySize(b.dataset.sz));
+  });
+
+  // ── AVATAR / MODEL TOGGLE ────────────────────────────────────────────
+  document.getElementById('tglAv').addEventListener('click', ()=>{
+    document.getElementById('tglAv').classList.add('on');
+    document.getElementById('tglMv').classList.remove('on');
+    document.getElementById('avView').style.display = 'flex';
+    document.getElementById('mvView').style.display = 'none';
+  });
+  document.getElementById('tglMv').addEventListener('click', ()=>{
+    document.getElementById('tglMv').classList.add('on');
+    document.getElementById('tglAv').classList.remove('on');
+    document.getElementById('mvView').style.display = 'flex';
+    document.getElementById('avView').style.display = 'none';
+  });
+
+  // ── APPLY CLOTHING TO AVATAR ──────────────────────────────────────────
+  clApplyBtn.addEventListener('click', ()=>{
+    const color = clThumb.style.background;
+    const isDone = clApplyBtn.classList.contains('done');
+    if(isDone){
+      // Remove clothing
+      clApplyBtn.classList.remove('done');
+      clApplyBtn.textContent = '+';
+      clCard.classList.remove('applied');
+      if(S.tab==='top') applyTopColor('transparent');
+      else applyBotColor('transparent');
+      showToast('옷을 벗었습니다.');
+      return;
+    }
+    // Apply clothing
+    clApplyBtn.classList.add('done');
+    clApplyBtn.innerHTML = '✓';
+    clCard.classList.add('applied');
+    clCard.classList.add('pop');
+    setTimeout(()=>clCard.classList.remove('pop'), 400);
+    avSvg.classList.add('glow');
+    setTimeout(()=>avSvg.classList.remove('glow'), 700);
+    if(S.tab==='top') applyTopColor(color);
+    else applyBotColor(color);
+    showToast('아바타에 입혔습니다 ✓');
+  });
+
+  // ── COLOR SELECTION (RIGHT PANEL) ────────────────────────────────────
+  document.querySelectorAll('.clr-sw').forEach(sw=>{
+    sw.addEventListener('click', ()=>{
+      document.querySelectorAll('.clr-sw').forEach(s=>{ s.classList.remove('on'); s.setAttribute('aria-pressed','false'); });
+      sw.classList.add('on'); sw.setAttribute('aria-pressed','true');
+      S.selColor = sw.dataset.clr;
+      pdImg.style.background = sw.dataset.bg;
+      clThumb.style.background = sw.dataset.bg;
+      if(clApplyBtn.classList.contains('done')){
+        if(S.tab==='top') applyTopColor(sw.dataset.bg);
+        else applyBotColor(sw.dataset.bg);
+      }
+    });
+  });
+
+  // ── SIZE SELECTION (RIGHT PANEL) ─────────────────────────────────────
+  document.querySelectorAll('.sz-pill-btn').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('.sz-pill-btn').forEach(p=>p.classList.remove('on'));
+      b.classList.add('on'); S.selSize = b.dataset.s;
+    });
+  });
+
+  // ── ACCORDION ────────────────────────────────────────────────────────
+  document.querySelectorAll('.acc-tr').forEach(tr=>{
+    tr.addEventListener('click', ()=>{
+      const body = document.getElementById(tr.dataset.acc);
+      const open = body.classList.toggle('open');
+      tr.classList.toggle('open', open);
+    });
+  });
+
+  // ── WISHLIST (right panel) ───────────────────────────────────────────
+  pdWish.addEventListener('click', ()=>{
+    const on = pdWish.classList.toggle('on');
+    pdWish.textContent = on ? '♥' : '♡';
+    pdWish.setAttribute('aria-pressed', on ? 'true' : 'false');
+    showToast(on ? '찜 목록에 추가했습니다.' : '찜 목록에서 제거했습니다.');
+  });
+
+  // ── BOOKMARK ─────────────────────────────────────────────────────────
+  document.getElementById('bmBtn').addEventListener('click', ()=>{
+    S.bookmarked = !S.bookmarked;
+    document.getElementById('bmBtn').classList.toggle('on', S.bookmarked);
+    showToast(S.bookmarked ? '저장했습니다.' : '저장을 해제했습니다.');
+  });
+
+  // ── CART ─────────────────────────────────────────────────────────────
+  document.getElementById('cartBtn').addEventListener('click', ()=>{
+    showToast(`${pdName.textContent} (${S.selSize} · ${S.selColor}) 장바구니에 담았습니다.`);
+  });
+
+  // ── SIZE GUIDE ───────────────────────────────────────────────────────
+  document.querySelector('.sz-guide').addEventListener('click', ()=>{
+    showToast('사이즈 가이드 페이지로 이동합니다.');
+  });
+
+  // ── TOAST ────────────────────────────────────────────────────────────
+  let toastTmr;
+  function showToast(msg){
+    const t=document.getElementById('toast');
+    t.textContent=msg; t.classList.add('show');
+    clearTimeout(toastTmr);
+    toastTmr=setTimeout(()=>t.classList.remove('show'),3000);
+  }
+
+  // ── INIT ─────────────────────────────────────────────────────────────
+  load();
+  applySize(S.sz);
+  if(S.top)    applyTopColor(getP(S.top)?.color||'transparent');
+  if(S.bottom) applyBotColor(getP(S.bottom)?.color||'transparent');
+  renderList();
+
+  // Pre-select default state
+  clThumb.style.background = S.rightProduct.color;
+  clThumb.textContent = S.rightProduct.label;
+  pdImg.style.background = S.rightProduct.color;
+</script>
+</body>
+</html>

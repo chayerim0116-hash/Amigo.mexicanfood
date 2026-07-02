@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EASE FIT — 핏을 찾는 쇼핑</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- ======================== HEADER ======================== -->
+  <header class="site-header">
+    <a href="#" class="brand">EASE FIT</a>
+    <nav class="main-nav" aria-label="주요 메뉴">
+      <a href="#">WOMEN</a>
+      <a href="#">NEW</a>
+      <a href="#">BEST</a>
+      <a href="#">MY FIT</a>
+      <a href="#">MY CLOTHES</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" aria-label="검색">⌕</button>
+      <button type="button" aria-label="로그인">Login</button>
+      <button type="button" aria-label="찜 목록">♡</button>
+      <button type="button" aria-label="장바구니">Bag</button>
+    </div>
+  </header>
+
+  <!-- ======================== HERO ======================== -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">XS — 3XL · 올-사이즈 미니멀 SPA</p>
+      <h1 class="hero-headline">
+        사이즈를 찾는 쇼핑이 아니라,<br>핏을 찾는 쇼핑.
+      </h1>
+      <p class="hero-sub">XS부터 3XL까지, 나의 기준 사이즈로 먼저 보는 올-사이즈 미니멀 SPA</p>
+      <button class="cta-btn" id="heroCtaBtn" type="button">내 핏 기준 설정하기</button>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-model-grid">
+        <figure class="hero-model-card">
+          <img src="./assets/xs-s.png" alt="XS/S 사이즈 모델 착용컷"
+               onerror="this.parentElement.classList.add('no-img')" />
+          <figcaption>XS / S</figcaption>
+        </figure>
+        <figure class="hero-model-card">
+          <img src="./assets/m-l.png" alt="M/L 사이즈 모델 착용컷"
+               onerror="this.parentElement.classList.add('no-img')" />
+          <figcaption>M / L</figcaption>
+        </figure>
+        <figure class="hero-model-card">
+          <img src="./assets/xl-2xl.png" alt="XL/2XL 사이즈 모델 착용컷"
+               onerror="this.parentElement.classList.add('no-img')" />
+          <figcaption>XL / 2XL</figcaption>
+        </figure>
+        <figure class="hero-model-card">
+          <img src="./assets/3xl.png" alt="3XL 사이즈 모델 착용컷"
+               onerror="this.parentElement.classList.add('no-img')" />
+          <figcaption>3XL</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== MY FIT VIEW ======================== -->
+  <section class="my-fit-view" id="myFitView">
+    <div class="section-inner">
+      <div class="fit-view-header">
+        <p class="section-label">My Fit View</p>
+        <p class="section-desc">내 기준 사이즈로 먼저 볼 수 있어요.</p>
+        <p class="current-basis">현재 기준: <span id="currentBasisLabel">M</span></p>
+      </div>
+      <div class="size-selector" role="group" aria-label="기준 사이즈 선택">
+        <button class="size-pill" type="button" data-size="XS">XS</button>
+        <button class="size-pill" type="button" data-size="S">S</button>
+        <button class="size-pill active" type="button" data-size="M">M</button>
+        <button class="size-pill" type="button" data-size="L">L</button>
+        <button class="size-pill" type="button" data-size="XL">XL</button>
+        <button class="size-pill" type="button" data-size="2XL">2XL</button>
+        <button class="size-pill" type="button" data-size="3XL">3XL</button>
+        <button class="size-pill size-pill--all" type="button" data-size="ALL">전체</button>
+      </div>
+      <div class="fit-view-message" aria-live="polite">
+        <p class="fit-msg-main" id="fitMsgMain">M 기준으로 보여드릴게요.</p>
+        <p class="fit-msg-sub" id="fitMsgSub">M 착용컷과 구매 가능한 상품을 먼저 확인해보세요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOR YOUR FIT ======================== -->
+  <section class="product-section">
+    <div class="section-inner">
+      <div class="product-section-header">
+        <p class="section-label">For Your Fit</p>
+        <p class="section-desc" id="productSectionDesc">M 기준으로 먼저 보는 추천 상품</p>
+      </div>
+      <div class="product-grid" id="productGrid">
+        <!-- JS로 렌더링 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FIT COMPARE ======================== -->
+  <section class="fit-compare">
+    <div class="section-inner">
+      <p class="section-label">Same Style, Different Fit</p>
+      <p class="section-desc">같은 옷도 사이즈와 체형에 따라 다르게 보입니다.</p>
+      <div class="compare-grid">
+        <figure class="compare-card">
+          <div class="compare-img-wrap">
+            <img src="./assets/xs-s.png" alt="XS/S 착용컷"
+                 onerror="this.parentElement.classList.add('no-img')" />
+          </div>
+          <figcaption>XS / S</figcaption>
+        </figure>
+        <figure class="compare-card">
+          <div class="compare-img-wrap">
+            <img src="./assets/m-l.png" alt="M/L 착용컷"
+                 onerror="this.parentElement.classList.add('no-img')" />
+          </div>
+          <figcaption>M / L</figcaption>
+        </figure>
+        <figure class="compare-card">
+          <div class="compare-img-wrap">
+            <img src="./assets/xl-2xl.png" alt="XL/2XL 착용컷"
+                 onerror="this.parentElement.classList.add('no-img')" />
+          </div>
+          <figcaption>XL / 2XL</figcaption>
+        </figure>
+        <figure class="compare-card">
+          <div class="compare-img-wrap">
+            <img src="./assets/3xl.png" alt="3XL 착용컷"
+                 onerror="this.parentElement.classList.add('no-img')" />
+          </div>
+          <figcaption>3XL</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== MY CLOTHES ======================== -->
+  <section class="my-clothes-section">
+    <div class="section-inner">
+      <p class="section-label">MY CLOTHES</p>
+      <p class="section-desc">찜한 상품과 장바구니 상품을 나의 기준 사이즈로 조합해보세요.</p>
+      <ul class="feature-pills" aria-label="MY CLOTHES 기능 목록">
+        <li>최근 본 상품 모아보기</li>
+        <li>찜한 상품 모아보기</li>
+        <li>3D 아바타 기반 코디 미리보기</li>
+        <li>조합 저장</li>
+        <li>조합 장바구니 담기</li>
+      </ul>
+      <button class="cta-btn cta-btn--light" id="myClothesBtn" type="button">
+        MY CLOTHES 보러가기
+      </button>
+    </div>
+  </section>
+
+  <!-- ======================== FIRST FITTING ======================== -->
+  <section class="first-fitting">
+    <div class="section-inner">
+      <p class="section-label">First Fitting Service</p>
+      <p class="fitting-headline">첫 주문은 입어보고 결정하세요.</p>
+      <p class="fitting-sub">첫 구매 고객은 무료 반품 혜택으로 부담 없이 핏을 확인할 수 있습니다.</p>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-logo">EASE FIT</p>
+        <p class="footer-tagline">Modern Minimal SPA Platform for Every Silhouette</p>
+      </div>
+      <nav class="footer-nav" aria-label="푸터 메뉴">
+        <a href="#">Customer Center</a>
+        <a href="#">About</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

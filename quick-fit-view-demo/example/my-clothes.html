@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MY CLOTHES — EASE FIT</title>
+  <link rel="stylesheet" href="./css/my-clothes.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <a class="brand" href="../index.html">EASE FIT</a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#">NEW</a>
+      <a href="#">BEST</a>
+      <a href="#">TOP</a>
+      <a href="#">BOTTOM</a>
+      <a href="#" class="nav-current" aria-current="page">MY CLOTHES</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" aria-label="검색">⌕</button>
+      <button type="button" aria-label="찜 목록">♡</button>
+      <button type="button" aria-label="장바구니">bag</button>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <h1>MY CLOTHES</h1>
+    <p class="page-desc">최근 본 옷과 찜한 옷을 모아봤어요.</p>
+    <p class="page-subdesc">내 핏 기준으로 상의와 하의를 조합해보세요.</p>
+  </section>
+
+  <!-- MAIN 3-COLUMN -->
+  <main class="clothes-main">
+
+    <!-- LEFT: Product List -->
+    <aside class="product-panel" aria-label="상품 목록">
+      <div class="tab-bar" role="tablist" aria-label="상품 유형 선택">
+        <button class="tab-btn tab-active" role="tab" aria-selected="true" data-tab="top" type="button">상의</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="bottom" type="button">하의</button>
+      </div>
+      <ul class="product-list" id="productList" aria-label="상품 선택 목록"></ul>
+    </aside>
+
+    <!-- CENTER: 2D Fit Preview -->
+    <section class="preview-panel" aria-label="2D 핏 미리보기">
+      <div class="fit-stage body-size-xl" id="fitStage">
+        <!-- SVG Silhouette -->
+        <svg
+          class="silhouette-svg"
+          id="silhouetteSvg"
+          viewBox="0 0 120 370"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <!-- HEAD -->
+          <ellipse cx="60" cy="28" rx="20" ry="24" fill="#c2bdb6"/>
+
+          <!-- NECK -->
+          <path d="M52 50 L68 50 L70 64 L50 64 Z" fill="#c2bdb6"/>
+
+          <!-- TORSO (shoulders → waist) -->
+          <path d="
+            M50 64
+            C36 68 22 78 18 92
+            C14 106 16 148 20 188
+            C22 208 26 222 60 225
+            C94 222 98 208 100 188
+            C104 148 106 106 102 92
+            C98 78 84 68 70 64 Z
+          " fill="#c2bdb6"/>
+
+          <!-- HIPS -->
+          <path d="
+            M20 188
+            C14 204 12 226 14 248
+            L46 248 L46 225
+            C50 225 55 225 60 225
+            C65 225 70 225 74 225
+            L74 248 L106 248
+            C108 226 106 204 100 188
+            C92 200 78 208 60 208
+            C42 208 28 200 20 188 Z
+          " fill="#c2bdb6"/>
+
+          <!-- LEFT LEG -->
+          <path d="M14 244 L46 244 L44 366 L18 366 Z" fill="#c2bdb6"/>
+
+          <!-- RIGHT LEG -->
+          <path d="M74 244 L106 244 L102 366 L76 366 Z" fill="#c2bdb6"/>
+
+          <!-- TOP GARMENT OVERLAY (torso) -->
+          <path
+            id="svgTopLayer"
+            d="
+              M50 64
+              C36 68 22 78 18 92
+              C14 106 16 148 20 182
+              C22 200 26 214 60 217
+              C94 214 98 200 100 182
+              C104 148 106 106 102 92
+              C98 78 84 68 70 64 Z
+            "
+            fill="transparent"
+            style="transition: fill 0.3s ease;"
+          />
+
+          <!-- BOTTOM GARMENT OVERLAY (hips + legs) -->
+          <path
+            id="svgBottomLayer"
+            d="
+              M20 182
+              C14 200 12 224 14 246
+              L46 246 L46 217
+              C50 218 55 218 60 217
+              C65 217 70 218 74 217
+              L74 246 L106 246
+              C108 224 106 200 100 182
+              C92 196 78 204 60 204
+              C42 204 28 196 20 182 Z
+              M14 243 L46 243 L44 366 L18 366 Z
+              M74 243 L106 243 L102 366 L76 366 Z
+            "
+            fill="transparent"
+            style="transition: fill 0.3s ease;"
+          />
+        </svg>
+
+        <p class="size-badge" id="sizeBadge" aria-live="polite">XL</p>
+      </div>
+
+      <!-- Current combination text -->
+      <div class="combo-info" aria-live="polite" aria-label="현재 선택 조합">
+        <p><span class="combo-label">상의</span><span id="topComboText">—</span></p>
+        <p><span class="combo-label">하의</span><span id="bottomComboText">—</span></p>
+      </div>
+    </section>
+
+    <!-- RIGHT: My Fit View + Controls -->
+    <aside class="fit-panel" aria-label="핏 설정 및 조합 관리">
+
+      <!-- Size selector -->
+      <div class="fit-section">
+        <h2 class="fit-section-title">My Fit View</h2>
+        <p class="current-size-text">현재 기준: <strong id="currentSizeLabel">XL</strong></p>
+        <div class="size-buttons" role="group" aria-label="사이즈 선택">
+          <button class="size-btn" data-size="XS" type="button">XS</button>
+          <button class="size-btn" data-size="S"  type="button">S</button>
+          <button class="size-btn" data-size="M"  type="button">M</button>
+          <button class="size-btn" data-size="L"  type="button">L</button>
+          <button class="size-btn size-btn-active" data-size="XL"  type="button">XL</button>
+          <button class="size-btn" data-size="2XL" type="button">2XL</button>
+          <button class="size-btn" data-size="3XL" type="button">3XL</button>
+        </div>
+      </div>
+
+      <!-- Current combination summary -->
+      <div class="fit-section">
+        <h2 class="fit-section-title">현재 조합</h2>
+        <div class="combo-detail" aria-live="polite">
+          <p class="combo-row">
+            <span class="combo-label">기준 사이즈</span>
+            <span id="comboSize">XL</span>
+          </p>
+          <p class="combo-row">
+            <span class="combo-label">상의</span>
+            <span id="comboTopText">선택 전</span>
+          </p>
+          <p class="combo-row">
+            <span class="combo-label">하의</span>
+            <span id="comboBottomText">선택 전</span>
+          </p>
+        </div>
+        <button class="cart-combo-btn" id="cartComboBtn" type="button">
+          조합 장바구니 담기
+        </button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- BOTTOM: Collections -->
+  <section class="my-collections" aria-label="내 상품 목록">
+
+    <div class="collection-block">
+      <h2 class="collection-title">최근 본 상품</h2>
+      <ul class="collection-list" id="recentList" aria-label="최근 본 상품 목록"></ul>
+    </div>
+
+    <div class="collection-block">
+      <h2 class="collection-title">찜한 상품</h2>
+      <ul class="collection-list" id="wishlistList" aria-label="찜한 상품 목록"></ul>
+    </div>
+
+    <div class="collection-block">
+      <h2 class="collection-title">장바구니 상품</h2>
+      <ul class="collection-list" id="cartList" aria-label="장바구니 상품 목록"></ul>
+    </div>
+
+  </section>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="./js/my-clothes.js"></script>
+</body>
+</html>

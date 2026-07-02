@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relax Cotton Shirt — EASE FIT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f6f2;
+      --surface: #ffffff;
+      --text: #111111;
+      --muted: #555555;
+      --light: #999999;
+      --border: #e0ddd8;
+      --accent: #8f8173;
+      --font: 'Noto Sans KR', -apple-system, sans-serif;
+      --font-brand: Georgia, 'Times New Roman', serif;
+      --header-h: 64px;
+      --radius: 20px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; }
+    ul { list-style: none; }
+
+    /* HEADER */
+    .header {
+      position: sticky; top: 0; z-index: 200;
+      height: var(--header-h);
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 0 40px;
+      background: rgba(247,246,242,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-nav { display: flex; gap: 32px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .header-nav a:hover { color: var(--text); }
+    .header-brand { font-family: var(--font-brand); font-size: 20px; letter-spacing: 0.06em; text-align: center; }
+    .header-actions { display: flex; justify-content: flex-end; gap: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .header-actions a:hover { color: var(--text); }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      display: flex; gap: 8px; align-items: center;
+      font-size: 12px; color: var(--light);
+    }
+    .breadcrumb a { color: var(--light); }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb span { color: var(--text); }
+
+    /* PRODUCT LAYOUT */
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1fr 520px;
+      min-height: calc(100vh - var(--header-h));
+    }
+
+    /* LEFT: Gallery */
+    .gallery {
+      background: #e8e4dd;
+      position: sticky; top: var(--header-h);
+      height: calc(100vh - var(--header-h));
+      display: flex; flex-direction: column; gap: 2px;
+      overflow: hidden;
+    }
+    .gallery-main {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: rgba(0,0,0,0.2);
+      text-transform: uppercase; position: relative;
+    }
+    .gallery-thumb-row {
+      display: flex; gap: 2px; height: 90px; padding: 0;
+    }
+    .gallery-thumb {
+      flex: 1; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.08em; color: rgba(0,0,0,0.25);
+      text-transform: uppercase; transition: opacity 0.15s;
+    }
+    .gallery-thumb:hover { opacity: 0.8; }
+    .color-swatch-main {
+      width: 200px; height: 260px; border-radius: 12px;
+      background: #e4ddd4; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: rgba(0,0,0,0.25);
+    }
+
+    /* RIGHT: Detail */
+    .detail {
+      background: var(--surface);
+      padding: 0;
+      overflow-y: auto;
+    }
+
+    /* ── FIT FIRST BLOCK (appears first, above fold) ── */
+    .fit-first-block {
+      background: #f0ede8;
+      padding: 28px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .fit-first-label {
+      font-size: 9px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .fit-type-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    }
+    .fit-type-badge {
+      padding: 4px 12px; background: var(--accent); color: #fff;
+      border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+    }
+    .fit-recommend {
+      font-size: 13px; color: var(--muted);
+    }
+    .fit-measures {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;
+    }
+    .fit-measure-item {
+      background: var(--surface); border-radius: 10px; padding: 12px 14px;
+    }
+    .fit-measure-key {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--light); margin-bottom: 4px;
+    }
+    .fit-measure-val {
+      font-size: 16px; font-weight: 600; color: var(--text);
+    }
+    .fit-notes {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .fit-note-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 13px; color: var(--muted);
+    }
+    .fit-note-dot {
+      width: 4px; height: 4px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0;
+    }
+
+    /* PRODUCT INFO */
+    .product-info {
+      padding: 36px 40px 0;
+    }
+    .product-category {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--light); margin-bottom: 8px;
+    }
+    .product-name {
+      font-family: var(--font-brand); font-size: 28px; font-weight: 400;
+      line-height: 1.2; margin-bottom: 12px;
+    }
+    .product-price {
+      font-size: 22px; font-weight: 600; margin-bottom: 4px;
+    }
+    .product-shipping {
+      font-size: 12px; color: var(--light); margin-bottom: 32px;
+    }
+    .product-shipping span { color: var(--accent); font-weight: 600; }
+
+    /* Color selector */
+    .selector-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 14px; display: flex; justify-content: space-between;
+    }
+    .color-options {
+      display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .color-opt {
+      width: 42px; height: 42px; border-radius: 50%;
+      cursor: pointer; position: relative;
+      border: 2px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .color-opt.active {
+      border-color: var(--text);
+      outline: 2px solid var(--bg);
+      outline-offset: 2px;
+    }
+    .color-opt:hover { border-color: var(--muted); }
+
+    /* Size selector */
+    .size-options {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;
+    }
+    .size-opt {
+      min-width: 52px; height: 44px; padding: 0 12px;
+      border: 1px solid var(--border); background: var(--surface);
+      font-size: 13px; font-weight: 600; color: var(--text);
+      transition: all 0.15s; cursor: pointer;
+    }
+    .size-opt:hover { border-color: var(--text); }
+    .size-opt.active { border-color: var(--text); background: var(--text); color: #fff; }
+    .size-opt.my-size { border-color: var(--accent); }
+    .size-opt.my-size.active { background: var(--accent); border-color: var(--accent); }
+    .size-my-label {
+      font-size: 11px; color: var(--accent); font-weight: 600;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 6px;
+    }
+
+    /* Size guide table */
+    .size-table-wrap {
+      margin-bottom: 28px;
+    }
+    .size-table-toggle {
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      text-decoration: underline; cursor: pointer; background: none; border: none;
+      padding: 0; margin-bottom: 12px;
+    }
+    .size-table {
+      width: 100%; border-collapse: collapse; font-size: 12px;
+      display: none;
+    }
+    .size-table.open { display: table; }
+    .size-table th, .size-table td {
+      padding: 8px 10px; text-align: center;
+      border: 1px solid var(--border);
+    }
+    .size-table th { background: var(--bg); font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+    .size-table tr.highlight-row td { background: #f0ede8; font-weight: 600; color: var(--text); }
+
+    /* CTAs */
+    .cta-row {
+      display: grid; grid-template-columns: 52px 1fr; gap: 8px; margin-bottom: 28px;
+    }
+    .wish-big-btn {
+      height: 52px; border: 1px solid var(--border); background: var(--surface);
+      font-size: 20px; color: var(--muted);
+      transition: all 0.18s; display: flex; align-items: center; justify-content: center;
+    }
+    .wish-big-btn:hover { border-color: var(--text); color: var(--text); }
+    .wish-big-btn.active { color: var(--text); border-color: var(--text); }
+    .add-bag-btn {
+      height: 52px; background: var(--text); color: #fff;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .add-bag-btn:hover { background: var(--accent); }
+    .buy-now-btn {
+      width: 100%; height: 52px; border: 1px solid var(--text);
+      background: var(--surface); color: var(--text);
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 28px; transition: all 0.2s;
+    }
+    .buy-now-btn:hover { background: var(--text); color: #fff; }
+
+    /* first fitting badge */
+    .first-fitting-badge {
+      background: #f0ede8; border-radius: 12px;
+      padding: 16px 20px; margin-bottom: 32px;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .first-fitting-badge-icon {
+      font-size: 20px; flex-shrink: 0;
+    }
+    .first-fitting-badge-text h4 {
+      font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px;
+    }
+    .first-fitting-badge-text p {
+      font-size: 12px; color: var(--muted); line-height: 1.5;
+    }
+
+    /* MY CLOTHES link */
+    .my-clothes-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 32px; cursor: pointer; transition: border-color 0.18s;
+    }
+    .my-clothes-link:hover { border-color: var(--accent); }
+    .my-clothes-link-left h4 { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+    .my-clothes-link-left p { font-size: 12px; color: var(--muted); }
+    .my-clothes-link-arrow { font-size: 18px; color: var(--light); }
+
+    /* Accordion details */
+    .accordion {
+      border-top: 1px solid var(--border);
+    }
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .accordion-trigger {
+      width: 100%; padding: 20px 40px; display: flex; justify-content: space-between;
+      align-items: center; font-size: 13px; font-weight: 600;
+      background: none; text-align: left;
+    }
+    .accordion-trigger:hover { color: var(--accent); }
+    .accordion-icon { font-size: 18px; color: var(--light); transition: transform 0.2s; }
+    .accordion-trigger.open .accordion-icon { transform: rotate(45deg); }
+    .accordion-body {
+      display: none; padding: 0 40px 24px;
+      font-size: 14px; color: var(--muted); line-height: 1.75;
+    }
+    .accordion-body.open { display: block; }
+    .material-row {
+      display: flex; justify-content: space-between; padding: 8px 0;
+      border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .material-row:last-child { border-bottom: none; }
+    .material-key { color: var(--muted); }
+    .material-val { font-weight: 600; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .product-layout { grid-template-columns: 1fr; }
+      .gallery { position: static; height: 60vw; max-height: 480px; }
+      .breadcrumb { padding: 14px 20px; }
+      .product-info { padding: 24px 20px 0; }
+      .fit-first-block { padding: 24px 20px; }
+      .accordion-trigger { padding: 18px 20px; }
+      .accordion-body { padding: 0 20px 20px; }
+    }
+    @media (max-width: 640px) {
+      .header { padding: 0 20px; }
+      .header-nav { display: none; }
+      .fit-measures { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <nav class="header-nav">
+      <a href="index.html">← 홈</a>
+      <a href="#">TOP</a>
+      <a href="#">BOTTOM</a>
+    </nav>
+    <a class="header-brand" href="index.html">EASE FIT</a>
+    <div class="header-actions">
+      <a href="my-clothes.html">MY CLOTHES</a>
+      <a href="#">♡</a>
+      <a href="#">BAG</a>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="index.html">홈</a>
+    <span>›</span>
+    <a href="#">상의</a>
+    <span>›</span>
+    <span>Relax Cotton Shirt</span>
+  </nav>
+
+  <!-- PRODUCT LAYOUT -->
+  <div class="product-layout">
+
+    <!-- LEFT: Gallery -->
+    <div class="gallery">
+      <div class="gallery-main">
+        <div class="color-swatch-main" id="galleryMain" style="background:#e4ddd4;">SHIRT</div>
+      </div>
+      <div class="gallery-thumb-row">
+        <div class="gallery-thumb" style="background:#e4ddd4;">FRONT</div>
+        <div class="gallery-thumb" style="background:#d8d2c8;">BACK</div>
+        <div class="gallery-thumb" style="background:#ccc8be;">DETAIL</div>
+        <div class="gallery-thumb" style="background:#e4ddd4;">착용</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Detail -->
+    <div class="detail">
+
+      <!-- FIT FIRST BLOCK — 페이지 최상단에 위치 (스크롤 전 핏 정보) -->
+      <div class="fit-first-block">
+        <p class="fit-first-label">✦ Fit First — 핏 정보를 먼저 확인하세요</p>
+        <div class="fit-type-row">
+          <span class="fit-type-badge">루즈핏</span>
+          <span class="fit-recommend" id="fitRecommend">내 사이즈 XL 기준 → XL 또는 2XL 권장</span>
+        </div>
+        <div class="fit-measures">
+          <div class="fit-measure-item">
+            <p class="fit-measure-key">어깨</p>
+            <p class="fit-measure-val" id="measureShoulder">48 cm</p>
+          </div>
+          <div class="fit-measure-item">
+            <p class="fit-measure-key">가슴</p>
+            <p class="fit-measure-val" id="measureChest">112 cm</p>
+          </div>
+          <div class="fit-measure-item">
+            <p class="fit-measure-key">총장</p>
+            <p class="fit-measure-val" id="measureLength">72 cm</p>
+          </div>
+        </div>
+        <div class="fit-notes">
+          <div class="fit-note-item">
+            <span class="fit-note-dot"></span>
+            <span>소재가 두껍지 않아 안에 레이어드 가능</span>
+          </div>
+          <div class="fit-note-item">
+            <span class="fit-note-dot"></span>
+            <span>비침 없음 · 약한 신축성</span>
+          </div>
+          <div class="fit-note-item">
+            <span class="fit-note-dot"></span>
+            <span>모델 신장 168cm, 착용 사이즈 XL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT INFO -->
+      <div class="product-info">
+        <p class="product-category">TOPS · SHIRT</p>
+        <h1 class="product-name">Relax Cotton Shirt</h1>
+        <p class="product-price">39,000원</p>
+        <p class="product-shipping">무료배송 · <span>첫 주문 교환 무료</span></p>
+
+        <!-- Color selector -->
+        <div style="margin-bottom: 28px;">
+          <p class="selector-label">
+            <span>COLOR</span>
+            <span id="colorName" style="font-weight:400; text-transform:none; letter-spacing:0;">Oat</span>
+          </p>
+          <div class="color-options">
+            <div class="color-opt active" style="background:#e4ddd4;" data-color="Oat" data-bg="#e4ddd4" title="Oat" tabindex="0" role="button" aria-pressed="true"></div>
+            <div class="color-opt" style="background:#c5bdb5;" data-color="Stone" data-bg="#c5bdb5" title="Stone" tabindex="0" role="button" aria-pressed="false"></div>
+            <div class="color-opt" style="background:#222222;" data-color="Black" data-bg="#222222" title="Black" tabindex="0" role="button" aria-pressed="false"></div>
+            <div class="color-opt" style="background:#9e9891;" data-color="Sage" data-bg="#9e9891" title="Sage" tabindex="0" role="button" aria-pressed="false"></div>
+          </div>
+        </div>
+
+        <!-- Size selector -->
+        <div>
+          <p class="selector-label">
+            <span>SIZE</span>
+            <span id="selectedSizeLabel" style="font-weight:400; text-transform:none; letter-spacing:0;">XL 선택됨</span>
+          </p>
+          <div class="size-options" role="group" aria-label="사이즈 선택">
+            <button class="size-opt" data-size="XS" type="button">XS</button>
+            <button class="size-opt" data-size="S"  type="button">S</button>
+            <button class="size-opt" data-size="M"  type="button">M</button>
+            <button class="size-opt" data-size="L"  type="button">L</button>
+            <button class="size-opt my-size active" data-size="XL" type="button">XL</button>
+            <button class="size-opt" data-size="2XL" type="button">2XL</button>
+            <button class="size-opt" data-size="3XL" type="button">3XL</button>
+          </div>
+          <p class="size-my-label" id="mySizeHint">✦ 내 핏 기준 사이즈: XL</p>
+        </div>
+
+        <!-- Size table -->
+        <div class="size-table-wrap">
+          <button class="size-table-toggle" id="sizeTableToggle" type="button">사이즈 표 보기 ↓</button>
+          <table class="size-table" id="sizeTable">
+            <thead>
+              <tr>
+                <th>SIZE</th>
+                <th>어깨 (cm)</th>
+                <th>가슴 (cm)</th>
+                <th>총장 (cm)</th>
+                <th>소매 (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>XS</td><td>41</td><td>96</td><td>65</td><td>59</td></tr>
+              <tr><td>S</td><td>43</td><td>100</td><td>67</td><td>60</td></tr>
+              <tr><td>M</td><td>45</td><td>104</td><td>69</td><td>61</td></tr>
+              <tr><td>L</td><td>46</td><td>108</td><td>71</td><td>62</td></tr>
+              <tr class="highlight-row"><td>XL</td><td>48</td><td>112</td><td>72</td><td>63</td></tr>
+              <tr><td>2XL</td><td>50</td><td>118</td><td>74</td><td>64</td></tr>
+              <tr><td>3XL</td><td>52</td><td>124</td><td>76</td><td>65</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CTAs -->
+        <div class="cta-row">
+          <button class="wish-big-btn" id="wishBtn" type="button" aria-label="찜하기" aria-pressed="false">♡</button>
+          <button class="add-bag-btn" type="button" id="addBagBtn">장바구니 담기</button>
+        </div>
+        <button class="buy-now-btn" type="button">바로 구매하기</button>
+
+        <!-- First Fitting Badge -->
+        <div class="first-fitting-badge">
+          <span class="first-fitting-badge-icon">🔄</span>
+          <div class="first-fitting-badge-text">
+            <h4>First Fitting — 첫 주문 교환 무료</h4>
+            <p>사이즈가 맞지 않을 경우 첫 번째 주문에 한해 교환 배송비를 지원합니다.</p>
+          </div>
+        </div>
+
+        <!-- MY CLOTHES Link -->
+        <a class="my-clothes-link" href="my-clothes.html">
+          <div class="my-clothes-link-left">
+            <h4>MY CLOTHES에서 입어보기</h4>
+            <p>2D 실루엣으로 상의 + 하의 조합 확인하기</p>
+          </div>
+          <span class="my-clothes-link-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- ACCORDION DETAILS -->
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-trigger" type="button" id="acc1">
+            소재 · 세탁
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body" id="acc1-body">
+            <div class="material-row"><span class="material-key">소재</span><span class="material-val">면 100%</span></div>
+            <div class="material-row"><span class="material-key">두께감</span><span class="material-val">보통</span></div>
+            <div class="material-row"><span class="material-key">신축성</span><span class="material-val">없음</span></div>
+            <div class="material-row"><span class="material-key">비침</span><span class="material-val">없음</span></div>
+            <div class="material-row"><span class="material-key">세탁</span><span class="material-val">30°C 이하 손세탁 · 드라이클리닝</span></div>
+            <div class="material-row"><span class="material-key">원산지</span><span class="material-val">대한민국</span></div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" type="button" id="acc2">
+            배송 · 교환 · 반품
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body" id="acc2-body">
+            <div class="material-row"><span class="material-key">배송비</span><span class="material-val">무료 (3만원 이상)</span></div>
+            <div class="material-row"><span class="material-key">배송기간</span><span class="material-val">2–4 영업일</span></div>
+            <div class="material-row"><span class="material-key">교환</span><span class="material-val">수령 후 7일 이내</span></div>
+            <div class="material-row"><span class="material-key">첫 주문 교환</span><span class="material-val">배송비 무료 지원</span></div>
+            <div class="material-row"><span class="material-key">반품불가</span><span class="material-val">착용, 세탁, 택 제거 시</span></div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" type="button" id="acc3">
+            핏 가이드 전체 보기
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body" id="acc3-body">
+            <p style="margin-bottom:12px;">루즈핏 셔츠로 어깨가 약간 처지고 박시한 실루엣입니다.</p>
+            <p style="margin-bottom:8px;"><strong>평소 XS–S</strong> → S 권장 (타이트하게 입고 싶다면 XS)</p>
+            <p style="margin-bottom:8px;"><strong>평소 M–L</strong> → M 또는 L (레이어드 시 한 사이즈 업)</p>
+            <p style="margin-bottom:8px;"><strong>평소 XL–2XL</strong> → XL (여유롭게) 또는 2XL (빅 실루엣)</p>
+            <p><strong>평소 3XL</strong> → 3XL 권장 (가슴 여유 확보)</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /detail -->
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" style="
+    position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(16px);
+    background:#111; color:#fff; padding:14px 24px; font-size:13px; font-weight:500;
+    opacity:0; pointer-events:none; z-index:9999; transition:opacity .28s,transform .28s;
+    white-space:nowrap; font-family:var(--font);
+  "></div>
+
+  <script>
+    // Size data per size
+    const sizeData = {
+      XS:  { shoulder:41, chest:96,  length:65, recommend:'XS 권장 (타이트)' },
+      S:   { shoulder:43, chest:100, length:67, recommend:'S 권장' },
+      M:   { shoulder:45, chest:104, length:69, recommend:'M 권장' },
+      L:   { shoulder:46, chest:108, length:71, recommend:'L 권장' },
+      XL:  { shoulder:48, chest:112, length:72, recommend:'XL 또는 2XL 권장' },
+      '2XL': { shoulder:50, chest:118, length:74, recommend:'2XL 권장' },
+      '3XL': { shoulder:52, chest:124, length:76, recommend:'3XL 권장' },
+    };
+
+    let preferredSize = 'XL';
+    try { preferredSize = localStorage.getItem('preferredSize') || 'XL'; } catch(e){}
+    let selectedSize = preferredSize;
+
+    function updateSizeUI(size) {
+      selectedSize = size;
+      const data = sizeData[size];
+      document.getElementById('measureShoulder').textContent = data.shoulder + ' cm';
+      document.getElementById('measureChest').textContent    = data.chest    + ' cm';
+      document.getElementById('measureLength').textContent   = data.length   + ' cm';
+      document.getElementById('fitRecommend').textContent    = `내 사이즈 ${preferredSize} 기준 → ${sizeData[preferredSize].recommend}`;
+      document.getElementById('selectedSizeLabel').textContent = `${size} 선택됨`;
+      document.querySelectorAll('.size-opt').forEach(btn => {
+        const isThis = btn.dataset.size === size;
+        const isMy   = btn.dataset.size === preferredSize;
+        btn.classList.toggle('active', isThis);
+        btn.classList.toggle('my-size', isMy);
+      });
+    }
+
+    // Restore preferred size highlight
+    document.getElementById('mySizeHint').textContent = `✦ 내 핏 기준 사이즈: ${preferredSize}`;
+    updateSizeUI(preferredSize);
+
+    document.querySelectorAll('.size-opt').forEach(btn => {
+      btn.addEventListener('click', () => updateSizeUI(btn.dataset.size));
+    });
+
+    // Color selector
+    document.querySelectorAll('.color-opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.color-opt').forEach(o => { o.classList.remove('active'); o.setAttribute('aria-pressed','false'); });
+        opt.classList.add('active'); opt.setAttribute('aria-pressed','true');
+        document.getElementById('colorName').textContent = opt.dataset.color;
+        document.getElementById('galleryMain').style.background = opt.dataset.bg;
+      });
+    });
+
+    // Size table toggle
+    document.getElementById('sizeTableToggle').addEventListener('click', function() {
+      const table = document.getElementById('sizeTable');
+      const isOpen = table.classList.toggle('open');
+      this.textContent = isOpen ? '사이즈 표 닫기 ↑' : '사이즈 표 보기 ↓';
+    });
+
+    // Accordion
+    document.querySelectorAll('.accordion-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const body = document.getElementById(btn.id + '-body');
+        const isOpen = body.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+      });
+    });
+
+    // Wishlist
+    let wishlisted = false;
+    const wishBtn = document.getElementById('wishBtn');
+    wishBtn.addEventListener('click', () => {
+      wishlisted = !wishlisted;
+      wishBtn.textContent = wishlisted ? '♥' : '♡';
+      wishBtn.classList.toggle('active', wishlisted);
+      wishBtn.setAttribute('aria-pressed', wishlisted ? 'true' : 'false');
+      showToast(wishlisted ? '찜 목록에 추가했습니다.' : '찜 목록에서 제거했습니다.');
+    });
+
+    // Add to bag
+    document.getElementById('addBagBtn').addEventListener('click', () => {
+      showToast(`Relax Cotton Shirt (${selectedSize}) 장바구니에 담았습니다.`);
+    });
+
+    // Toast
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(16px)'; }, 3000);
+    }
+  </script>
+</body>
+</html>

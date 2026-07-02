@@ -1,0 +1,303 @@
+--- PAGE 1 ---
+5. 콘텐츠 내용 (메인페이지) 
+ 
+한글 폰트 : Pretendard 
+영문 폰트 : Cormorant Garamond 
+포인트 컬러 : #FF5757 (지정한 곳 외에 사용금지) 
+5-1. 헤더 
+구조 
+① 최상단 top banner 
+② header 
+1) Top Banner 
+페이지 최상단에 검정색 프로모션 바를 넣어줘. 
+h스타일 
+- 높이: 40px 
+- 배경색: #111 
+- 글자색: #ﬀf 
+- 글자 크기: 13px 
+- 가운데 정렬 
+- 문구는 2개가 위아래로 부드럽게 슬라이드되는 느낌 
+h문구: 
+첫 번째: FIRST FITTING SERVICE / 첫 주문 고객 한정 1회 무료 반품 
+두 번째: SUMMER ESSENTIALS / 최대 20% 특별 핏 컬렉션 진행 중 
+h동작 
+- 세로 방향으로 자동 슬라이드되게 해줘. 
+- 너무 빠르지 않게 5초 정도 주기로 자연스럽게 움직이게 해줘. 
+2) Main Header 
+Top Banner 아래에 sticky header를 만들어줘. 
+h스타일 
+- position: sticky 
+- top: 0 
+- z-index: 100 
+- height: 72px 
+- background: rgba(255, 255, 255, 0.94) 
+- backdrop-ﬁlter: blur(14px) 
+--- PAGE 2 ---
+- border-bottom: 1px solid rgba(17, 17, 17, 0.08) 
+- 전체 너비를 쓰되 내부 콘텐츠는 max-width 1400px 안에 정렬 
+- 좌우 padding은 데스크톱 기준 76px 
+hHeader 내부 구조 
+왼쪽: 로고 
+가운데: 네비게이션 메뉴 
+오른쪽: 아이콘 메뉴 
+3) Logo 
+로고는 텍스트로 만들지 말고 반드시 이미지로 넣어줘. 
+h사용 이미지 
+./img/header/logo.png 
+h스타일 
+- 로고 영역 width: 158px 
+- 실제 이미지 width: 132px 
+- header 높이 72px 안에서 세로 가운데 정렬 
+4) Navigation 
+로고 오른쪽에 메뉴를 배치해줘. 
+h메뉴 
+여성 / 베스트 / 신상 / 세일 / 매거진 / 이벤트 
+h스타일 
+- 로고와 메뉴 사이 간격: 52px 
+- 메뉴 글자 크기: 15px 
+- font-weight: 400 
+- color: #111 계열 
+- 메뉴 사이 gap: 10px 
+- 각 메뉴는 height 72px 안에서 세로 가운데 정렬 
+- hover 또는 focus 시 font-weight를 600으로 바꿔줘 
+- 과한 underline이나 배경 효과는 넣지 말아줘 
+5) 여성 메뉴 Dropdown 
+“여성” 메뉴에만 드롭다운을 넣어줘. 
+h드롭다운 스타일 
+- header 바로 아래에 full-width로 펼쳐지게 해줘. 
+- position: ﬁxed 
+- top: 72px 
+- left: 0 
+- width: 100% 
+--- PAGE 3 ---
+- background: #ﬀf 
+- border-top: 1px solid rgba(17, 17, 17, 0.08) 
+- border-bottom: 1px solid rgba(17, 17, 17, 0.12) 
+- 처음에는 opacity 0, pointer-events none, translateY(-8px) 
+- hover/focus 시 opacity 1, pointer-events auto, translateY(0) 
+- transition은 180ms 정도로 자연스럽게 
+h드롭다운 내부 
+- 내부 max-width: 1400px 
+- min-height: 300px 
+- padding-top: 30px 
+- padding-bottom: 38px 
+- 왼쪽 시작 위치는 여성 메뉴 시작 위치와 맞춰줘. 
+- 3개 컬럼으로 구성해줘. 
+h컬럼 1: 
+전체상품 
+BEST 
+ESSENTIAL 
+아우터 
+니트 
+티셔츠 
+h컬럼 2: 
+셔츠·블라우스 
+원피스 
+팬츠 
+스커트 
+ACC 
+h컬럼 3: 
+Fit Guide 
+체형별 착용컷 
+핵심 실측 보기 
+First Fitting Service 
+h컬럼 3 스타일 
+- 왼쪽에 얇은 구분선 
+- padding-left: 40px 
+- Fit Guide는 strong으로 표시 
+- 전체적으로 고급스럽고 여백 있는 느낌 
+h드롭다운 링크 스타일: 
+- font-size: 14px 
+--- PAGE 4 ---
+- color: #555 
+- line-height: 1.4 
+- min-height: 32px 
+- hover 시 color: #111, font-weight: 500 
+6) Header Icons 
+오른쪽에는 아이콘 4개를 넣어줘. 
+h아이콘 순서: 검색 / 마이페이지 / 위시리스트 / 장바구니 
+h사용 이미지: 
+검색: ./img/header/icon1.png 
+마이페이지: ./img/header/icon2_mypage.png 
+위시리스트: ./img/header/icon3_heart.png 
+장바구니: ./img/header/icon4_bag.png 
+h링크: 
+검색: # 
+마이페이지: ./login.html 
+위시리스트: ./wishlist.html 
+장바구니: ./cart.html 
+h스타일: 
+- 아이콘 버튼 크기: 40px x 40px 
+- 실제 아이콘 이미지: 24px x 24px 
+- 아이콘 간격: 4px 
+- 전체 아이콘 묶음은 margin-left: auto로 오른쪽 정렬 
+7) Cart Count 
+장바구니 아이콘 오른쪽 위에 작은 숫자 배지를 넣어줘. 
+h스타일 
+- position: absolute 
+- top: 5px 
+- right: 3px 
+- min-width: 16px 
+- height: 16px 
+- border-radius: 999px 
+- background: #111 
+- color: #ﬀf 
+- font-size: 10px 
+- font-weight: 500 
+- 기본 숫자는 0 
+위시리스트 count는 화면에 보이지 않게 숨겨줘. 
+--- PAGE 5 ---
+※주의사항 
+- header가 hero/banner 영역을 밀거나 깨뜨리면 안 됨. 
+- 드롭다운은 header 아래에 자연스럽게 겹쳐서 떠야 함. 
+- 로고는 반드시 이미지 사용. 
+- 전체 스타일은 흰색 배경, 검정 텍스트 중심의 미니멀 여성 패션몰 느낌. 
+- 불필요한 그림자, 과한 애니메이션, 진한 색상 포인트는 넣지 말아줘. 
+※절대 하지 말 것 
+- 요청하지 않은 underline 추가 금지 
+- 요청하지 않은 hover 효과 추가 금지 
+- 아이콘 hover 배경 추가 금지 
+- 임의로 색상 변경 금지 
+- 임의로 폰트 굵기 변경 금지 
+ 
+  
+5-2. Hero Banner 
+Hero 배너는 메인 페이지의 헤더 아래에 위치한다. 
+메인 페이지의 헤더 바로 아래에 가로로 긴 Hero 배너 영역을 만들어줘. 
+이 배너는 화면 전체 높이를 꽉 채우는 풀스크린 Hero가 아니라 쇼핑몰 메인 페이지 상단에 들
+어가는 와이드한 메인 비주얼 배너야. 전체 분위기는 깔끔하고 차분한 여성 패션 쇼핑몰 느낌
+으로 만들어줘. 
+hHero 배너는 총 3장의 이미지로 구성해줘. 
+사용 이미지: 
+./img/banner/banner1.png 
+./img/banner/banner2.png 
+./img/banner/banner3.png 
+각 이미지는 하나의 슬라이드로 배치하고 슬라이드 전체를 감싸는 track 요소를 가로 방향으
+로 움직여서 다음 배너로 전환해줘. 
+h구조는 아래처럼 만들어줘 
+main-visual: 전체 Hero 배너 영역 
+visual-track: 3개의 슬라이드를 가로로 나열하는 영역 
+visual-slide: 각각의 배너 이미지와 텍스트가 들어가는 개별 슬라이드 
+visual-indicator: 배너 아래에 들어가는 진행 바와 현재 순서 표시 영역 
+hHero 배너 전체 영역은 이렇게 잡아줘. 
+main-visual은 position: relative로 두고 높이는 40.3vw로 설정해줘. 최소 높이는 360px로 
+유지하고 넘치는 영역은 보이지 않게 overﬂow: hidden 처리해줘. 배경색은 #f4f1ed로 해줘.
+슬라이드 이미지는 배너 영역을 꽉 채우게 보여줘. 현재 결과와 동일하게 이미지가 배너 프레
+임 안을 가득 채우는 방식이어야 하므로 object-ﬁt은 cover를 사용해줘. 이미지 위치는 중앙 
+기준으로 맞춰줘. 
+--- PAGE 6 ---
+h이미지 스타일: 
+- display: block 
+- width: 100% 
+- height: 100% 
+- object-ﬁt: cover 
+- object-position: center 
+visual-track은 가로 슬라이드가 되도록 만들어줘. 
+hvisual-track 스타일 
+- display: ﬂex 
+- width: 100% 
+- height: 100% 
+- transform: translateX(0) 
+- transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1) 
+- will-change: transform 
+각 visual-slide는 한 화면을 꽉 차지하게 만들어줘. 
+hvisual-slide 스타일 
+- position: relative 
+- ﬂex: 0 0 100% 
+- width: 100% 
+- height: 100% 
+- overﬂow: hidden 
+각 슬라이드 위에는 텍스트 가독성을 위해 검정색 반투명 오버레이를 얇게 깔아줘. 
+h오버레이 스타일: 
+- position: absolute 
+- inset: 0 
+- z-index: 1 
+- background: rgba(0, 0, 0, 0.22) 
+- pointer-events: none 
+h각 배너에는 중앙 텍스트를 넣어줘. 텍스트는 이미지의 정중앙에 배치하고 흰색으로 보여줘. 
+- 첫 번째 배너: 
+이미지: ./img/banner/banner1.png 
+큰 문구: EVERY BODY, EVERY FIT 
+작은 문구: 체형에 구애받지 않고 나답게 편안한 핏 
+링크 문구: SHOP 
+링크 이동: #best-ﬁt-title 
+- 두 번째 배너: 
+이미지: ./img/banner/banner2.png 
+--- PAGE 7 ---
+큰 문구: LIGHT AND EASE 
+작은 문구: 산뜻하게 입고 탄탄하게 오래 입는 이즈핏 티셔츠 
+링크 문구: SHOP 
+링크 이동: #new-arrival-title 
+- 세 번째 배너: 
+이미지: ./img/banner/banner3.pn 
+큰 문구: FIND YOUR BLUE 
+작은 문구: 내 몸에 자연스럽게 맞는 데님 핏을 만나보세요 
+링크 문구: SHOP 
+링크 이동: #best-ﬁt-title 
+텍스트 영역은 배너 중앙에 오게 해줘. 
+h텍스트 영역 스타일: 
+- position: absolute 
+- top: 50% 
+- left: 50% 
+- transform: translate(-50%, -50%) 
+- z-index: 2 
+- width: 100% 
+- max-width: 1400px 
+- padding: 0 76px 
+- text-align: center 
+- color: #ﬀf 
+h큰 영문 문구는 고급스러운 세리프 폰트 느낌으로 보여줘. Cormorant Garamond를 사용해
+줘. 
+큰 문구 스타일 
+- font-family: "Cormorant Garamond", serif 
+- font-size: 56px 
+- font-weight: 600 
+- line-height: 1.08 
+- letter-spacing: -0.01em 
+- color: #ﬀf 
+- white-space: nowrap 
+h작은 한글 문구 스타일 
+- margin-top: 18px 
+- font-size: 18px 
+- font-weight: 400 
+- line-height: 1.5 
+- color: rgba(255, 255, 255, 0.94) 
+- word-break: keep-all 
+--- PAGE 8 ---
+hSHOP 링크는 박스 버튼이 아니라 흰색 텍스트 아래에 밑줄이 있는 링크처럼 만들어줘. 
+SHOP 링크 스타일 
+- display: inline-block 
+- margin-top: 34px 
+- padding-bottom: 5px 
+- border-bottom: 2px solid #ﬀf 
+- color: #ﬀf 
+- font-size: 16px 
+- font-weight: 500 
+- hover 시 opacity: 0.72 
+h 배너 아래에는 진행 상태를 보여주는 visual-indicator를 넣어줘. 
+visual-indicator는 배너 이미지 안쪽 오른쪽 하단이 아니라, 배너 아래 별도 영역에 배치해줘. 
+전체 max-width는 1400px이고 가운데 정렬되며 좌우 padding은 76px로 맞춰줘. 
+visual-indicator 스타일: 
+- position: relative 
+- display: ﬂex 
+- align-items: center 
+- justify-content: ﬂex-start 
+- gap: 24px 
+- width: 100% 
+- max-width: 1400px 
+- height: 24px 
+- margin: 18px auto 0 
+- padding: 0 76px 
+h진행 바는 얇은 2px 라인으로 만들어줘. 
+전체 진행 바 
+- width: 100% 
+- height: 2px 
+- background: rgba(17, 17, 17, 0.16) 
+채워지는 진행 바 
+- width: 33.3333% 
+- height: 100% 
+- background: #111 
+- 현재 슬라이드에 따라 translateX로 이동 
+- transition은 배너와 동일하게 700ms cubic-bezier(0.22, 1, 0.36, 1) 
+오른쪽에는 페이지 표시와 이전/다음 버튼을 넣어줘. 
+표시 형태: < 1 | 3 > 
